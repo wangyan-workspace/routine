@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画放大缩小文本框</title>
+    <style>
+        * {
+           margin:0;
+           padding:0;
+           font:normal 12px/17px Arial;
+       }
+       .msg {
+           width:300px;
+           margin:100px;
+       }
+       .msg_caption {
+           width:100%;
+           overflow:hidden;
+           margin-bottom:1px;
+       }
+       .msg_caption span {
+           display:block;
+           float:left;
+           margin:0 2px;
+           padding:4px 10px;
+           background:#898989;
+           /* 鼠标样式 */
+           cursor:pointer;
+           color:white;
+       }
+       .msg textarea{
+           width:300px;
+           height:100px;
+           border:1px solid #000;
+       }
+   </style>
+</head>
+<body>
+    <form action="" method="post">
+        <div class="msg">
+            <div class="msg_caption">
+                <span class="bigger" >放大</span>
+                <span class="smaller" >缩小</span>
+            </div>
+            <div>
+                <textarea id="comment" rows="8" cols="20">多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.</textarea>
+            </div>
+        </div>
+    </form>
+
+    <script src="../jquery-1.12.2.js"></script>
+    <script>
+        $(function(){
+            var $comment = $('#comment');
+            $('.bigger').click(function(){
+                /* 
+                    is(":animated"):返回bool值，表示对象是否是动画元素
+                    也就是这个var $comment = $('#comment');对象是不是动画
+
+                    var $comment = $('#comment'); 不是一个动画，
+                    返回false，加一个！取反，判断条件变为true
+                 */
+                if(!$comment.is(":animated")){
+                    if($comment.height() < 500){
+                        $comment.animate({height:"+=50"},400);
+                    }
+                }
+            })
+
+            $('.smaller').click(function(){
+                /* 
+                    is(":animated"):返回bool值，表示对象是否是动画元素
+                    也就是这个var $comment = $('#comment');对象是不是动画
+
+                    var $comment = $('#comment'); 不是一个动画，
+                    返回false，加一个！取反，判断条件变为true
+                 */
+                if(!$comment.is(":animated")){
+                    if($comment.height() > 50){
+                        $comment.animate({height:"-=50"},400);
+                    }
+                }
+            })
+        });
+    </script>
+</body>
+</html>

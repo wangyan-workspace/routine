@@ -1,0 +1,109 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#container{
+    max-width: 980px;
+    /* 块级元素居中的方法 */
+    margin: 0 auto;
+    /* 文本居中的方法 */
+    text-align: center;
+}
+
+/* 分组选择器 */
+header,nav,footer{
+    height: 80px;
+    background: #ccc;
+    /* line-height的属性值等于height属性值时，文本垂直居中 */
+    line-height: 80px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.wrapper{
+    width:100%;
+}
+
+.wrapper>img{
+    width: 100%;
+}
+
+.wrapper>img:nth-child(1){
+    display: block;
+}
+
+.wrapper>img:nth-child(2){
+    display: none;
+}
+
+.wrapper>img:nth-child(3){
+    display: none;
+}
+
+main{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+article{
+    width: 63%;
+    background: cadetblue;
+}
+
+aside{
+    width: 35%;
+    background: coral;
+}
+
+h3,p{
+    padding: 30px;
+}
+
+@media screen and (max-width:960px){
+    .wrapper>img:nth-child(1){
+        display: none;
+    }
+    
+    .wrapper>img:nth-child(2){
+        display: block;
+    }
+    
+    .wrapper>img:nth-child(3){
+        display: none;
+    }
+}
+
+@media screen and (max-width:500px){
+    .wrapper>img:nth-child(1){
+        display: none;
+    }
+    
+    .wrapper>img:nth-child(2){
+        display: none;
+    }
+    
+    .wrapper>img:nth-child(3){
+        display: block;
+    }
+
+    header,nav,footer{
+        height: 40px;
+        background: #ccc;
+        /* line-height的属性值等于height属性值时，文本垂直居中 */
+        line-height: 40px;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    main{
+        margin: 5px 0;
+        flex-direction: column;
+    }
+
+    article,aside{
+        width: 100%;
+        margin: 5px 0;
+    }
+}

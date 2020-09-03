@@ -1,0 +1,700 @@
+/* ------------------------------------------------------------------------- *
+ *  基本 Styles
+/* ------------------------------------------------------------------------- */
+body {
+	font-family: "Roboto", Arial, sans-serif;
+	background: #eee;
+	font-size: 15px;
+	line-height: 1.5em;
+	color: #444;
+	font-weight: 300;
+	/* 显示滚动条 */
+	height: 2000px;
+}
+
+/* 在文本上选中时，背景和字体颜色变化，应用于整个页面 */
+::selection {
+	background: #333;
+	color: #fff;
+}
+/* 适应火狐浏览器 */
+::-moz-selection {
+	background: #333;
+	color: #fff;
+}
+
+a {
+	color: #333;
+	/* 去掉a标签的下划线 */
+	text-decoration: none;
+	/* 
+	outline 与 border 的区别：
+						border 可应用于几乎所有有形的html元素，而 outline 是针对链接、表单控件和ImageMap等元素设计。
+						从而另一个区别也可以推理出，那就是： outline 的效果将随元素的 focus 而自动出现，
+						相应的由 blur 而自动消失。这些都是浏览器的默认行为，无需JavaScript配合CSS来控制。 
+						outline 不会像border那样影响元素的尺寸或者位置。
+    去除焦点虚线：
+            style="outline:medium none;" hidefocus="true"
+	*/
+	outline: 0;
+	/* a元素或者div元素下有一个匿名文本，这个文本外有一个匿名的行级盒子，这个匿名盒子会往下撑开一些距离，所以把a撑高了 */
+	/* 解决办法：消除匿名盒子的高度  给a设置line-height：0；或者font-size:0 */
+	line-height: 0;
+}
+
+a:hover {
+	color: #333;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* a标签的动画效果 */
+a,
+a:before,
+a:after {
+	transition-property: background color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease;
+}
+
+/* a标签里的img的动画效果 */
+a img {
+	transition: opacity 0.2s ease;
+}
+
+#container{
+	/* 因为会有响应式的变动，首先主体页面设置一个最大宽度 */
+	max-width: 1200px;
+	margin: 40px auto;
+	background: #f5f5f5;
+	/* 
+		 box-shadow: h-shadow v-shadow blur spread color inset;
+         注意：boxShadow 属性把一个或多个下拉阴影添加到框上。该属性是一个用逗号分隔阴影的列表，每个阴影由 2-4 个长度值、一个可选的颜色值和一个可选的 inset 关键字来规定。省略长度的值是 0。
+            值 	            说明
+          h-shadow 	        必需的。水平阴影的位置。允许负值
+          v-shadow 	        必需的。垂直阴影的位置。允许负值
+          blur 	            可选。模糊距离
+          spread 	        可选。阴影的大小
+          color 	        可选。阴影的颜色。在CSS颜色值寻找颜色值的完整列表
+          inset 	        可选。从外层的阴影（开始时）改变阴影内侧阴影
+	*/
+	box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	/* 使得子元素不用设置边框圆角了 */
+	overflow: hidden;
+	/* 可以使块级元素占一行，高度可以占满整个容器 */
+	display: flex;
+}
+/* ------------------------------------------------------------------------- *
+ *  header开始
+/* ------------------------------------------------------------------------- */
+header{
+	width: 320px;
+	border-top: 10px solid #32c1fb;
+	padding: 20px 50px;
+	background: #ffffff;
+	/* 怪异盒模型，固定边框大小，不会被内容大小撑开 */
+	box-sizing: border-box;
+}
+
+/* 网站开始介绍 */
+.site-title{
+	font-size: 36px;
+	font-weight: 600;
+	line-height: 1.2em;
+	padding: 20px 0;
+}
+
+.site-img{
+	display: block;
+	width: 100%;
+}
+
+.site-img img{
+	max-height: 60px;
+}
+
+.site-description{
+	font-size: 16px;
+	line-height: 1.6em;
+	font-weight: 300;
+	color: #888888;
+	padding-bottom: 20px;
+}
+
+/* 网站介绍结束 */
+
+/* nav头部导航开始 */
+#nav-header .menu-item>a{
+	color: #666666;
+	font-size: 18px;
+	font-weight: 600;
+	padding: 16px 50px;
+	/* a是行级元素，设置inline-block属性值，a标签就可以设置宽高 */
+	display: inline-block;
+	width: 220px;
+	height: 20px;
+	/* 文本垂直居中 */
+	line-height: 20px;
+	margin: 0 -50px;
+}
+
+/* 选中的是a标签且类名为active的a标签 */
+#nav-header .menu-item>a.active{
+	color: #333;
+	position: relative;
+}
+
+#nav-header .menu-item>a:hover{
+	background: #f5f5f5;
+	color: #333;
+}
+
+/* Home前的小三角形样式 */
+#nav-header .menu-item>a.active::before{
+	content: '';
+	display: block;
+	width: 14px;
+	height: 14px;
+	background: #e3e3e3;
+	position: absolute;
+	top: 19px;
+	left: -7px;
+	transform: rotate(45deg);
+}
+
+/* 带有类名为sub的a标签在后面添加伪元素，小三角形样式 */
+#nav-header .menu-item>a.sub::after{
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	display: inline-block;
+	content: "\f0d7";
+	margin-left: 6px;
+	font-size: 14px;
+	line-height: 1.2em;
+	opacity: 0.35;
+}
+
+/* 相邻选择器 :"+"  只能选中相邻且在下方的元素*/
+/* 选中的是带有sub类名的a标签在hover状态下，给他的子元素ul设置 */
+#nav-header .menu-item>a.sub:hover+.sub-menu{
+	display: block;
+}
+
+/* 给下拉菜单ul设置样式 */
+#nav-header .menu-item .sub-menu{
+	display: none;
+	padding: 10px 0;
+	width: 220px;
+	background: #ffffff;
+	border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.05);
+	position: absolute;
+	z-index: 1;
+}
+
+/* 在滑到ul（.sub-menu）上的时候也要展示出来 */
+#nav-header .menu-item .sub-menu:hover{
+	display: block;
+}
+
+/* 给ul内，最前面加一个伪元素，小三角形样式 */
+#nav-header .menu-item .sub-menu::before{
+	content: '';
+	display: block;
+	border-top: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	top: -6px;
+	left: 20px;
+	background: #fff;
+	transform: rotate(45deg);
+}
+
+#nav-header .menu-item .sub-menu a{
+	/* a是行级元素，设置inline-block属性值，a标签就可以设置宽高 */
+	display: inline-block;
+	width: 220px;
+	height: 20px;
+	line-height: 20px;
+	color: #666666;
+	font-size: 16px;
+	padding: 8px 20px;
+	font-weight: 400;
+	margin: 0;
+}
+
+/* 滑入a标签的时候，字体颜色的变化 */
+#nav-header .menu-item .sub-menu a:hover{
+	color: #333;
+}
+/* nav结束 */
+
+/* profile开始 */
+#profile{
+	margin-top: 30px;
+}
+#profile .profile-img{
+	border: 10px solid #8c53ff;
+	border-top-color: #32c1fb;
+	border-bottom-color: #dddddd;
+	border-left: 0;
+	border-radius: 0 150px 150px 0;
+	width: 260px;
+	height: 270px;
+	/* 在前面header有50px的内边距，向左移动50px外边距即可达到效果 */
+	margin-left: -50px;
+	margin-bottom: 10px;
+}
+#profile .profile-img img{
+	border: 10px solid #fff;
+	border-left: 0;
+	border-radius: 0 240px 240px 0;
+	width: 250px;
+	height: 250px;
+}
+#profile .profile-name{
+	color: #333;
+	font-size: 22px;
+	font-weight: 600;
+	line-height: 1.2em;
+	padding: 20px 0;
+}
+#profile .profile-description{
+	font-size: 16px;
+	line-height: 1.6em;
+	font-weight: 300;
+	color: #888888;
+}
+/* profile结束 */
+
+/* sidebar开始 */
+#sidebar{
+	/* 将文本内容扩大到整个容器宽度 既要向左移动50px又要向右移动50px，元素大小被迫撑开*/
+	margin: 0 -50px;
+}
+#sidebar .sidebar-item{
+	padding: 30px 50px;
+	border-top: 1px solid #eee;
+	font-size: 14px;
+}
+#sidebar h3{
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+#sidebar li{
+	padding: 7px 0;
+	color: #999;
+}
+/* a标签（固执）要特别设置一遍 */
+#sidebar a{
+	color: #999999;
+	font-size: 14px;
+}
+#sidebar a:hover{
+	color: #333;
+}
+/* sidebar小图标的共有样式 */
+#sidebar  li::before{
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 12px;
+	margin-right: 6px;
+	color: #cccccc;
+	display: inline-block;
+	width: 1em;
+	text-align: center;
+}
+/* comment前的小图标 */
+#sidebar .comment li::before{
+	content: "\f075";
+}
+/* post前的小图标 */
+#sidebar .post li::before{
+	content: "\f017";
+}
+/* 滑入li，li前小图标的变化 */
+#sidebar .post li:hover::before{
+	color: #999999;
+	transition: all ease 0.2s;
+}
+
+#sidebar .search input{
+	border: 2px solid #e5e5e5;
+	padding: 9px 8px 9px 26px;
+	width: 100%;
+	box-sizing: border-box;
+	/* 
+	outline 与 border 的区别：
+						border 可应用于几乎所有有形的html元素，而 outline 是针对链接、表单控件和ImageMap等元素设计。
+						从而另一个区别也可以推理出，那就是： outline 的效果将随元素的 focus 而自动出现，
+						相应的由 blur 而自动消失。这些都是浏览器的默认行为，无需JavaScript配合CSS来控制。 
+						outline 不会像border那样影响元素的尺寸或者位置。
+    去除焦点虚线：
+            style="outline:medium none;" hidefocus="true"
+	*/
+	outline: none;
+}
+/* 输入框聚焦 */
+#sidebar .search input:focus{
+	border-color: #dddddd;
+	color: #333333;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+#sidebar .search .form-item {
+	position: relative;
+}
+/* 输入框内加入搜索小图标样式 */
+#sidebar .search .form-item::before{
+	font-size: 14px;
+	line-height: 24px;
+	color: #cccccc;
+	content: "\f002";
+	/* 相对于父元素进行绝对定位 */
+	position: absolute;
+	left: 10px;
+	top: 6px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+/* sidebar结束 */
+
+
+
+/* ------------------------------------------------------------------------- *
+ *  header结束
+/* ------------------------------------------------------------------------- */
+
+
+
+/* move-sidebar开始 */
+#move-sidebar {
+	background: #fff;
+	border-top: 10px solid #8c53ff;
+	width: 80px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* 对引入的（搜索）小图标设置样式 */
+#move-sidebar .toggle-search {
+	background: #fff;
+	border: 1px solid #eee;
+	color: #333;
+	text-align: center;
+	font-size: 20px;
+	line-height: 24px;
+	border-radius: 10px;
+	padding: 18px 0;
+	margin: 10px;
+	display: block;
+}
+
+#move-sidebar .social-links {
+	margin-top: 30px;
+}
+
+/* 对引入小图标设置共同样式 */
+#move-sidebar .social-tooltip {
+	font-size: 20px;
+	padding: 18px 10px;
+	margin: 0 20px;
+	color: rgba(0, 0, 0, 0.7);
+	display: block;
+	position: relative;
+}
+
+/* 滑入小图标时变化的样式 */
+#move-sidebar .social-tooltip:hover {
+	background: rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	color: #333;
+}
+
+
+/* 气泡小三角 */
+#move-sidebar .social-tooltip:hover::before {
+	content: '';
+	display: block;
+	border: solid;
+	border-width: 5px 5px 5px 0;
+	border-color: transparent #333;
+	position: absolute;
+	left: 45px;
+	top: 24px;
+}
+
+/* 气泡小正方形*/
+#move-sidebar .social-tooltip:hover::after {
+	/* 小正方形里的内容为a标签里的标题（title），
+	   这样可以同时设置多个不同的有相同含义的title样式 */
+	content: attr(title);
+	display: block;
+	background: #333;
+	color: #fff;
+	padding: 8px 10px;
+	font-size: 14px;
+	line-height: 14px;
+	border-radius: 3px;
+	position: absolute;
+	top: 14px;
+	left: 50px;
+}
+
+#move-sidebar .social-links-item {
+	position: relative;
+	text-align: center;
+	padding: 4px 0;
+}
+
+/* 短横线 */
+#move-sidebar .social-links-item::before {
+	content: "";
+	height: 1px;
+	background: rgba(0, 0, 0, 0.06);
+	position: absolute;
+	left: 30px;
+	right: 30px;
+	top: 0;
+}
+
+#move-sidebar .social-links-item:first-child::before {
+	display: none;
+}
+
+/* move-sidebar结束 */
+
+
+/* ------------------------------------------------------------------------- *
+ *  main开始
+/* ------------------------------------------------------------------------- */
+main {
+	padding: 40px;
+	/* 弹性盒模型 自适应 */
+	flex: 1;
+	border-top: 10px solid #eee;
+}
+
+main section article {
+	background: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	border-radius: 10px;
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+
+main .content-box {
+	position: relative;
+	padding: 34px 40px 20px;
+}
+
+main .content-title {
+
+	font-weight: 600;
+	font-size: 38px;
+	line-height: 1.3em;
+	/* 字母与字母之间的空间 */
+	letter-spacing: -1px;
+}
+
+main .content-meta,
+main .content-meta a {
+	font-weight: 300;
+	font-size: 15px;
+	color: #999;
+}
+
+main .content-meta {
+	margin: 20px 0;
+}
+
+main .content-meta span {
+	margin-right: 10px;
+}
+
+main .content-meta span i {
+	margin-right: 6px;
+}
+
+main .content-meta .meta-category a {
+	display: inline-block;
+	background: #eee;
+	padding: 4px 10px;
+	margin-bottom: 3px;
+	border-radius: 10px;
+	height: 22px;
+	line-height: 22px;
+}
+
+main .content-meta .meta-category a:hover {
+	background: #e5e5e5;
+	color: #777;
+}
+
+main .content-description {
+	font-size: 19px;
+	line-height: 1.6em;
+	margin-bottom: 32px;
+}
+
+main .content {
+	padding-bottom: 20px;
+}
+
+/* article右下角 */
+main .content .more-link {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 17px;
+	color: #333;
+	font-weight: 600;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 10px 20px;
+	border-radius: 30px 0 0 0;
+	border-left: 10px solid #32c1fb;
+	border-top: 10px solid #8c53ff;
+}
+
+main .content .more-link:hover {
+	padding-right: 30px;
+}
+
+/* 分页开始 */
+/* 标页码 */
+.pagination {
+	margin-bottom: 50px;
+}
+
+/* 引入小图标 */
+.pagination h5::before {
+	content: "\f15c";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	margin-right: 6px;
+
+}
+
+.pagination h5 {
+	color: #aaa;
+	font-size: 16px;
+	font-weight: 400;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+/* 给ul设置弹性盒模型，水平居中排列 */
+.pagination ul {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination ul .page-item a {
+	background: #e5e5e5;
+	border-radius: 20px;
+	color: #333;
+	box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05);
+	font-size: 16px;
+	display: inline-block;
+	height: 38px;
+	width: 38px;
+	text-align: center;
+	line-height: 38px;
+	margin-right: 1px;
+	font-weight: 600;
+}
+
+.pagination ul .page-item a:hover,
+.pagination ul .page-item a.active {
+	background: #fff;
+}
+/* 分页结束 */
+
+/* footer-sidebar开始 */
+.footer-sidebar {
+	display: flex;
+	/* justify-content: space-between; */
+	margin: 0 -40px;
+	padding: 50px 40px;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.footer-sidebar .sidebar-item {
+	width: 48.4%;
+	flex: 1;
+	padding: 0;
+	border: none;
+	margin-right: 3.2%;
+}
+
+
+/* footer-sidebar结束 */
+
+/* footer开始 */
+#back-to-top {
+	border: 1px solid #e5e5e5;
+	border-top: 0;
+	color: #333;
+	padding: 10px 0;
+	/* overflow: hidden; */
+	text-align: center;
+	display: block;
+	width: 60px;
+	height: 30px;
+	margin: 0 auto;
+	border-radius: 0 0 10px 10px;
+}
+
+/* 向上小三角图标样式 */
+#back-to-top i {
+	font-size: 38px;
+	position: relative;
+	top: -7px;
+}
+
+footer img {
+	display: block;
+	max-height: 60px;
+	margin: 20px auto;
+
+}
+
+#copyright,
+#credit {
+	color: #666;
+	font-weight: 300;
+	line-height: 1.6em;
+	text-align: center;
+}
+
+footer .social-links {
+	padding-top: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+footer .social-tooltip {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	font-weight: 400;
+	margin-left: 8px;
+}
+
+/* footer结束 */
+
+/* ------------------------------------------------------------------------- *
+ *  main结束
+/* ------------------------------------------------------------------------- */

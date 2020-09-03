@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>generator</title>
+</head>
+<body>
+    <script>
+        //函数的特别之处是有一个*
+        function* fn1() {
+            //第一次next()后才执行函数中的内容
+            console.log('start');
+            //代码遇到yield，就会停止执行（yield后面的内容会执行，yield下一行内容不会执行）
+            yield 
+            console.log('end');
+        }
+        // 函数调用必须用这样的方式，否则不生效 => 给调用函数定义一个变量名，变量名.next()执行函数中的内容
+        // 变量名.next()执行函数中的内容的第一步，当函数中有yield时，要进行多次变量名.next()执行函数中的内容的下一步
+        // let f1 = fn1();
+        // f1.next();    //start
+        // f1.next();    //end
+
+        //顺序aaa bbb同时打印 1s后 111 222同时打印
+        /* setTimeout(() => {
+            console.log(111);
+        },1000)
+        console.log('aaa');
+        setTimeout(() => {
+            console.log(222);
+        },1000)
+        console.log('bbb'); */
+
+        /* function* fn2(){
+            console.log('开始发送请求1');
+            yield request(2000);
+            console.log('请求结束');
+        }
+        function request(time) {
+            setTimeout(() => {
+                console.log('请求成功');
+                f2.next();  //继续向下执行
+            },time)
+        }
+        let f2 = fn2(); //会返回一个指针对象，需要调用next()继续执行
+        f2.next(); */
+
+        /*　function request(time) {
+            setTimeout(() => {
+                console.log('请求成功');
+                f3.next();  //继续向下执行
+            },time)
+        }
+        function* fn3() {
+            console.log('开始发送请求1');
+            yield request(2000);
+            yield request(1000);
+            console.log('请求结束');
+        }
+        let f3 = fn3();
+        f3.next();　*/
+        
+
+        /* function* fn2() {
+            console.log('开始发送请求1');
+            yield request(2000);
+            console.log('请求结束');    //{value: undefined, done: true}
+        }
+
+        function request(time) {
+            setTimeout(() => {
+                console.log('请求成功');
+                console.log(f2.next());
+            },time)
+            return '请求1成功';
+        }
+        let f2 = fn2();     //会返回一个指针对象，需要调用next()继续执行
+        console.log(f2.next()); */   //{value: "请求1成功", done: false}:value表示yield后面的表达式的返回结果（return后面的返回结果），done表示这个函数有没有执行完
+
+        function* fn4() {
+            console.log('开始发送请求1');       //1. 开始发送请求1
+            yield request1();
+
+            console.log('开始发送请求2');       //4. 开始发送请求2
+            yield request2();
+
+            console.log('请求结束');        //7.请求结束
+        }
+
+        function request1() {
+            setTimeout(() => {
+                console.log('请求1成功');   //3. 请求1成功
+                console.log(f4.next());     //5. {value: "请求2成功", done: false}
+            },2000)
+            return '请求1成功';
+        }
+
+        function request2() {
+            setTimeout(() => {
+                console.log('请求2成功');   //6. 请求2成功
+                console.log(f4.next());     //8. {value: undefined, done: true}
+            },2000)
+            return '请求2成功';
+        }
+        let f4 = fn4();
+        console.log(f4.next());      //2. {value: "请求1成功", done: false}
+    </script>
+</body>
+</html>

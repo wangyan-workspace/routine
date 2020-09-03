@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello World</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- 用来编译jsx语法 -->
+    <script src="./browser.min.js"></script>
+    <!-- react的核心库，用来管理组件和状态的 -->
+    <script src="./react.development.js"></script>
+    <!-- 用来渲染组件的，它依赖于react.js 所以必须在react.js的下面引用 -->
+    <script src="./react-dom.development.js"></script>
+
+    <!-- 必须要加type="text/babel" ，表示这里写的是jsx语法 -->
+    <script type="text/babel">
+      // 如果挂载的元素比较复杂，可以先定义一个变量，后面可以通过变量名调用
+      let root=document.getElementById('app');
+      // ReactDOM.render(html结构，挂载的元素)
+      //   ReactDOM.render(<h1>hello World</h1>,document.getElementById('app'))
+      ReactDOM.render(<h1>hello World</h1>,root)
+
+    </script>
+</body>
+</html>

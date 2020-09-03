@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表循环</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- 
+      列表渲染：
+        map遍历数组
+        渲染时需要添加一个key，key是帮助react识别具体哪些元素改变
+        key一定是唯一的 通常会选择使用数据库的id 数组的话会选择index
+        key 帮助React识别哪些元素改变了，比如被添加或删除，因此应当给数组中的每一个元素赋予一个确定的标识
+     -->
+
+    <!-- 用来编译jsx语法 -->
+    <script src="./browser.min.js"></script>
+    <!-- react的核心库，用来管理组件和状态的 -->
+    <script src="./react.development.js"></script>
+    <!-- 用来渲染组件的，它依赖于react.js 所以必须在react.js的下面引用 -->
+    <script src="./react-dom.development.js"></script>
+
+    <!-- 必须要加type="text/babel" ，表示这里写的是jsx语法 -->
+    <script type="text/babel">
+      let root=document.getElementById('app');
+      class Com extends React.Component{
+        constructor(props){
+          super(props)
+
+          this.state={
+            // arr:[1,2,3,4,5]
+          }
+        }
+        render(){
+          let arr = [1,2,3,4,5];
+          let a1 = [];
+          //for循环可以实现，但是不推荐，推荐用map
+          for(let i=0;i<arr.length;i++){
+            // 一定要写key
+            a1[i] = <li key={i}> {arr[i]} </li>
+          }
+
+          let list = [
+            {
+              name:'lisi',
+              age: 10
+            },
+            {
+              name:'wangwu',
+              age: 14
+            },
+            {
+              name:'zhangsan',
+              age: 70
+            },
+          ]
+          let _list = list.map((value,index) => (
+            <li key={index}>
+              <p>姓名：{value.name}</p>
+              <p>年龄：{value.age}</p>
+            </li>
+          ))
+          // let _list = list.map(value => value)  //箭头函数的简写方式
+          // let _list = list.map((value) => {return value})
+          return (
+            <div>
+              <ul>
+                {a1}
+              </ul>
+
+              <ul>
+                {_list}
+              </ul>
+
+              <ul>
+                {
+                  list.map((value,index) => (
+                    <li key={index}>姓名：{value.name} ,年龄：{value.age}</li>
+                  ))
+                }
+              </ul>
+            </div>
+          )
+        }
+      }
+    
+    ReactDOM.render(
+      <Com/>
+    ,root)
+
+    </script>
+</body>
+</html>

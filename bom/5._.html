@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>页面三</h1>
+    <button id = "btn1">回到上两个页面</button>
+
+    <script>
+        console.log(history);
+        var oBtn1 = document.getElementById('btn1');
+        oBtn1.onclick = function() {
+            // go() 方法可加载历史列表中的某个具体的页面。
+            //该参数可以是数字，使用的是要访问的 URL 在 History 的 URL 列表中的相对位置。
+            //（-1上一个页面，1前进一个页面)。或一个字符串，字符串必须是局部或完整的URL，
+            //该函数会去匹配字符串的第一个URL。
+            history.go(-2);
+        }
+    </script>
+</body>
+</html>

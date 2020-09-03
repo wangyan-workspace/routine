@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成随机整数</title>
+    <style>
+        span{
+            display: inline-block;
+            width: 110px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        使用Math对象的random()方法编制一个产生0~100之间（含0,100）的随机整数的函数。
+     -->
+    <script>
+        function GetRandom()
+        {//产生0～100之间(含0,100)的随机整数
+            return Math.floor(Math.random()*101);
+        }
+
+        var i;
+	    for(i=0;i<101;i++)
+	    {
+	    	if (i%10==0) document.write("<br>");
+	    	document.write('<span>' + GetRandom()+'</span>');
+	    }
+    </script>
+
+    <script>
+        function rand100(){
+            return Math.floor(Math.random()*101);
+        }
+        console.log(rand100());;
+    </script>
+</body>
+
+</html>

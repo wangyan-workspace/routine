@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot</title>
+</head>
+
+<body>
+    <div id="app">
+        <com></com>
+        <my-com title="weather">
+            啦啦啦
+            <p slot="slot1">今天是一个好天气1</p>
+            <p slot="slot2">今天是一个好天气2</p>
+        </my-com>
+        <button v-on:click="increase">加加</button>
+        {{a}}
+    </div>
+
+    <!-- 在外面定义组件 <template> </template> 里一定要套一个<div></div>否则报错 -->
+    <template id="my-com">
+        <div>
+            {{title}}
+            <!-- 通过元素的属性值，<slot></slot>可将指定元素指定放到某个位置 -->
+            <slot name="slot1"></slot>
+            <h1>组件</h1>
+            <p>组件666</p>
+            <slot name="slot2"></slot>
+            <!-- <slot></slot> : 可以将使用组件时，内部的元素全部接收保存下来  slot：插槽 -->
+            <!-- <slot></slot> -->
+            {{msg}}
+            <button @click="add">点我点我点我</button>
+            {{count}}
+            <button @click="sub">减减</button>
+            {{number}}
+        </div>
+    </template>
+
+    <script src="./vue.js"></script>
+    <script>
+        let tpl = ` <div>
+                      <h1>hello world!</h1>
+                    </div>`
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                a: 10,
+            },
+            // 放局部组件，局部组件中可放入用到的数据和方法
+            components: {
+                //通过变量名将需要的内容放到模板template里，引入到局部组件中
+                'com': {
+                    template: tpl,
+                },
+                //通过id名将外面定义好的内容引入到局部组件中
+                'myCom': {
+                    template: '#my-com',
+                    props: ['title'],
+                    // 组件是复用的，为了让组件间的数据不互相干扰
+                    data() {
+                        //组件中绑定的数据一定要return {}
+                        return {
+                            msg: '我好开心呀！！！',
+                            count: 0,
+                            number: 99,
+                        }
+                    },
+                    //methods里的方法和data里的数据一定要配套使用
+                    methods: {
+                        add() {
+                            //此时的this不再是挂载到#app上Vue实例化的对象，而是局部组件
+                            this.count++;
+                        },
+                        sub() {
+                            this.number--;
+                        }
+                    }
+                }
+            },
+             //methods里的方法和data里的数据一定要配套使用
+            methods: {
+               increase () {
+                //    this.a++;
+                    vm.a++;
+               }
+            }
+        })
+    </script>
+</body>
+
+</html>

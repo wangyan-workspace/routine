@@ -1,0 +1,11 @@
+h1 {
+    color: red;
+}
+#div1 {
+    background: url(./imag/GitHub2.jpg);
+    height: 500px;
+    transform: rotate(45deg);
+}
+#student {
+    padding: 30px;
+}

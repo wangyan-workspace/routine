@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo1</title>
+    <style>
+        body{
+            font: normal 12px/7px Arial;
+        }
+        div{
+            padding: 2px;
+        }
+
+        input,textarea{
+            width: 12em;
+            border:1px solid #888;
+        }
+
+        .focus{
+            background: #fcc;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <!-- 
+            一、fieldset标签定义及用法
+            在html中，fieldset标签内容的周围将绘制边框，
+            通常使用来将表单内的相关元素分组，在相关表单元素周围绘制边框。
+            我们还可以使用legend标签来为fieldset元素设置标题；
+
+            二、fieldset标签语法格式
+            <fieldset 属性1="属性值1" 属性2="属性值2"……>内容</fieldset>
+            说明：
+            fieldset标签为双标签，成对出现，如<fieldset></fieldset >；
+                fieldset标签中的第一个元素一般是legend标签，用来为fieldset元素设置标题；
+                fieldset标签一般是出现在表单中，为表单内的相关元素分组，并绘制边框；
+         -->
+        <fieldset>
+            <legend>个人基本信息</legend>
+            <!-- 
+                label中的for属性值要与input标签中id属性值一致
+             -->
+            <div>
+                <label for="username">名称：</label>
+                <input type="text"  id="username" value="名称"><br />
+            </div>
+            <div>
+                <label for="password">密码：</label>
+                <input type="text" id="password" value="密码"><br />
+            </div>
+            <div>
+                <label for="msg">详细信息：</label>
+                <textarea id="msg" cols="30" rows="5">详细信息</textarea>
+            </div>
+        </fieldset>
+    </form>
+
+    <script src="../jquery-1.12.2.js"></script>
+
+    <script>
+        $(function(){
+            $('form :input').focus(function(){
+                $(this).addClass('focus');
+                if(this.value == this.defaultValue) {
+                    this.value = "";
+                }
+            }).blur(function(){
+                $(this).removeClass('focus');
+                if(this.defaultValue == ""){
+                    this.value = this.defaultValue
+                }
+            })
+        });
+    </script>
+</body>
+</html>

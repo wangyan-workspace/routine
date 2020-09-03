@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html&<v-text></v-text></title>
+</head>
+<body>
+    <!-- 引入vue -->
+    <script src="./vue.js"></script>
+    <div id="app">
+        <p>{{msg}}</p>
+        <p v-text="msg"></p>
+        <p v-html="msg"></p>
+    </div>
+
+    <!-- 
+        v-html:可以插入一段html代码，并且可以正常执行，返回执行后的结果
+        {{}}和v-text：都可以正常显示data数据绑定的字符串
+        {{}}和v-text的区别：渲染方式有区别，{{}}能看到改变的过程
+
+        v-html和v-text的区别  <=>  innerHTML与textContent的区别
+     -->
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                // msg: 'hello',
+                msg: '<a href="">百度一下</a>',
+            }
+        })
+    </script>
+</body>
+</html>

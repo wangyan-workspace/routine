@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+</head>
+<body>
+    <!-- 引入vue -->
+    <script src="./vue.js"></script>
+    <div id="app">
+        <ul>
+            <!-- 参数的顺序不可以变的，参数的名字可以随便取 -->
+            <!-- v-for=() in 数组  ：有两个参数，第一个参数（必写）：代表循环数组里的对象的名字 
+                                     第二个参数（可选）：代表循环数组里的对象的索引（下标）
+            -->
+            <li v-for="(student,index) in students">
+                <span>序号：{{index+1}}</span>
+                <span>姓名：{{student.name}}</span>
+                <span>年纪：{{student.age}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                students: [
+                    {
+                        name: 'lisi',
+                        age: 18
+                    },
+                    {
+                        name: 'wangwu',
+                        age: 26
+                    },
+                    {
+                        name: 'zhaoliu',
+                        age: 39
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

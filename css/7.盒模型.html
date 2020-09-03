@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒模型</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        /* 块级盒子
+           1.默认宽度与父元素相同
+           2.每个块级盒子都会换行
+           3.宽度可以发挥作用把
+           4.padding，margin，border 会将其它元素从当前盒子周围推开 */
+           div:nth-child(1) {
+               background: salmon;
+               width: 100px;
+               height: 100px;
+               /* padding 会把元素中的内容向内挤，盒子所占的空间会增大 */
+               /* padding:10px; */
+               /* margin 会将其他元素推离当前元素 */
+               margin: 20px;
+               border: 5px solid skyblue;
+
+               /* 怪异盒模型 */
+               /* 为元素设定的宽度和高度决定了元素的边框盒。就是说，为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。
+                  通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。 */
+               /* box-sizing: border-box; */
+               /* 宽度和高度分别应用到元素的内容框。在宽度和高度之外绘制元素的内边距和边框。 */
+               /* box-sizing: content-box; */
+               /* 规定应从父元素继承 box-sizing 属性的值 */
+               /* box-sizing: inherit; */
+           }
+           div:nth-child(2) {
+               background: yellow;
+               width: 100px;
+               height: 100px;
+               /* 上下外边距合并 */
+               margin: 40px;
+           }
+
+           div:nth-child(3) {
+               /* 上下外边据合并了为20px */
+               margin: 20px;
+           }
+
+           div:nth-child(4) {
+               background: orangered;
+               width: 100px;
+               height: 110px;
+               /* 上下外边距合并 */
+               margin: 80px;
+           }
+
+           div:nth-child(1) span:nth-child(1) {
+               background: white;
+           }
+    </style>
+</head>
+<body>
+    <div>div1<span>span1</span><span>span2 span2 span2 span2 span2 span2</span></div>
+    <div>div2</div>
+    <div></div>
+    <div>div4</div>
+</body>
+</html>

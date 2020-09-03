@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继承</title>
+</head>
+<body>
+    <script>
+        /* 
+            类：是具有相同属性和方法的对象的集合
+                1.构造函数的名字要大写（为了和普通函数区分开）
+                2.属性写在构造函数里
+                3.方法写到原型里
+        */
+
+        //es5
+        function Person(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.sleep = function() {
+            console.log(this.name + ' is sleeping...');
+        }
+
+        /* 
+            原型到底是什么？ 
+                原型被设计出来的目的就是为了实现继承的功能，在原型下面添加的所有属性和方法都会被实例化对象所继承
+                当访问一个对象中的属性或者方法的时候，会先去这个对象的构造函数中去找有没有这个属性和方法：
+                  有 => 就返回找到的值
+                  没有 => 就到这个对象的原型中去找有没有那个属性和方法
+                    没有 => 就到他的上一级（也就是他的父类）的构造函数和原型中去找
+                      ...
+                      => Object
+                        最后实在是没找到： 没有 => 属性：undefined
+                                                 方法：xx is not a function 
+        */
+
+        /* 
+            为什么属性不写在原型里？
+                1.如果属性的值还是一个对象的话，那可能出现原型中的属性的值被篡改
+                2.不能通过传参给属性赋值
+        */
+
+        Person.prototype.gender = 'male';
+        Person.prototype.borther = {
+            name: 'lisi',
+            age: 88
+        }
+
+        let p1 = new Person('p1',23);
+        let p2 = new Person('p2',66);
+        console.log(p1);
+        console.log(p2);
+        p1.gender = 'female';       //赋值 相当于在实例化对象p1的构造函数中添加一个gender属性 => female
+        console.log(p1.gender);     //female   在实例化对象p1的构造函数中找到了gender的属性值，返回female
+        console.log(p2.gender);     //male      在实例化对象p2的构造函数中没有gender属性，返回原型中的gender属性值male
+
+        //(p1.borther).age  与 （p1）.（borther）.（age）意义是不同的
+        // (p1.borther).age 主要是改变borther的age
+        p1.borther.age = 55;        //改变了实例化对象p1的原型中borther对象的age的属性值
+        console.log(p2.borther.age);    //55    => 原型中的属性被修改了，因为原型中borther是一个对象，通过其他实例化对象更改原型中对象的属性，会出现原型中的属性的值被篡改
+        console.log(p1.borther.age);    //55    返回实例化对象p1的原型中borther对象的age的属性值
+        console.log(p1.constructor == Person);  //true
+        console.log(p2.constructor == Person);  //true
+
+        /* 
+            继承：
+                1.在子类的构造函数中，要用call()继承父类的属性
+                2.子类的prototype = 父类的实例化对象，用来继承父类中的方法
+                3.让子类的constructor指回子类
+        */
+
+        /* function Student(name,age,grade) {
+            //在这个类中this指向实例化处的对象s1
+            // this.name = name;
+            // this.age = age;
+            //通过这个方式可以继承父元素name和age的属性，并且可以给实例化的对象s1赋值
+            Person.call(this,name,age);     //改变person中的this指向，使其指向Student的实例化对象
+            this.grade = grade;  //其他不能继承的属性，要自己通过这个方式，定义属性
+        }
+
+        Student.prototype = new Person();       //实例化对象，继承Person里面的所有的方法，属性也会继承但不会影响Student的属性
+        Student.prototype.constructor = Student;    //为了将Student的构造函数改回来
+        // Student.prototype = Person.prototype;   //给Student添加的方法也会添加到Person中 相当于Student类和Person类指向同一个原型
+        // console.log(Student.prototype);
+
+        //给Student在原型中添加方法
+        Student.prototype.code = function() {
+            console.log(this.name + ' is codeing...');
+        }
+        let s1 = new Student('wangwu',23,'20级');
+        // console.log(s1.constructor == Student);     //false  因为继承了父类的属性和方法，实例化对象s1的构造函数变成了Person的构造函数 => 83行，要将Student的构造函数改过来
+        // console.log(s1.constructor == Person);      //true
+
+        s1.sleep();     //wangwu is sleeping...  <=82行继承了Person的方法，Student的实例化对象可以调用
+        // p1.code();      //p1 is codeing...   <= 如果通过84行的方式把Person的原型，赋给Student的原型，那么给Student添加的方法也会添加到Person中，导致Person的实例化对象也能调用
+        // p1.code();      //p1.code is not a function <= 83行把Student的构造函数改回来，Person就无法使用Student原型中的方法
+        */
+
+        //完整结构
+        function Student (name,age,grade) {
+            Person.call(this,name,age);
+            this.grade = grade;
+        }
+
+        Student.prototype = new Person();
+        Student.prototype.constructor = Student;
+
+        Student.prototype.code = function() {
+            console.log(this.name + ' is codeing...');
+        }
+
+        let s1 = new Student('zhaoliu',28,'18级');
+        s1.sleep();     //zhaoliu is sleeping...
+        s1.code();      //zhaoliu is codeing...
+    </script>
+</body>
+</html>

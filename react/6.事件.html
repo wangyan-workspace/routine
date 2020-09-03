@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- 
+      State（状态）
+       1.如果组件内的属性需要修改，需要把属性存储为state中，状态一旦变化，组件就会重新渲染
+       2.修改状态时不可以直接修改，需要调用setState()方法
+       3.状态的初始化只能在constructor中
+      Props
+        是只读的不可以修改（只能读取 不能写入）
+      事件
+        1.事件的命名需要采用小驼峰式，不能是纯小写 eg:onclick => onClick  onblur => onBlur
+        2.使用jsx语法时需要传入一个函数{}作为事件的处理函数而不能是一个字符串
+        3.需注意自定义实件中的this的指向问题，通过bind()方法修改this
+        4.如果需要阻止浏览器的默认行为需要使用preventDefault()方法，而不能使用 return false
+     -->
+
+    <!-- 用来编译jsx语法 -->
+    <script src="./browser.min.js"></script>
+    <!-- react的核心库，用来管理组件和状态的 -->
+    <script src="./react.development.js"></script>
+    <!-- 用来渲染组件的，它依赖于react.js 所以必须在react.js的下面引用 -->
+    <script src="./react-dom.development.js"></script>
+
+    <!-- 
+      绑定事件：
+        事件名要用小驼峰式来书写（onclick => onClick）
+        在组件的自定义当中，必须要改变this的指向（bind）
+     -->
+
+    <!-- 必须要加type="text/babel" ，表示这里写的是jsx语法 -->
+    <script type="text/babel">
+      let root=document.getElementById('app');
+      class Com extends React.Component{
+        constructor(props){
+          super(props)
+          this.num = 1
+
+          // 和小程序当中的data一样
+          // 组件状态初始化
+          this.state={
+            number:0
+          }
+
+          // 改变自定义事件里的this指向
+          this.add = this.add.bind(this);
+        }
+        fn1(){
+          console.log('fn1');
+          console.log(this.num);
+        }
+        add(){
+          // props接受的属性是只读的，不可以修改，会报错
+          // this.props.age++
+          console.log(this.props.age)
+          // 通过this.setState()来修改state中的属性。视图层才会跟着改变
+          // this.state.number += 1;
+          this.setState({
+            number: this.state.number + 1
+          })
+          console.log(this.state.number)
+        }
+        jump(e){
+          // 向方法里传递参数，对象.preventDefault() 的方式，也可阻止浏览器的默认行为
+          e.preventDefault();
+          // event:事件对象 直接event.preventDefault();即可阻止浏览器的默认行为
+          // event.preventDefault();
+          // 在react中 return false 不能阻止浏览器的默认行为
+          return false;
+        }
+        render(){
+          return (
+            <div>
+              <button onClick={this.fn1.bind(this)}>点击</button>
+              <p>num:{this.num}</p>
+
+              <button onClick={this.add}>点击number +1</button>
+              <p>number: {this.state.number}</p>
+
+              <button onClick={this.add}>age + 1</button>
+              <p>age:{this.props.age}</p>
+
+              <a onClick={this.jump.bind(this)} href="https://www.baidu.com">百度一下</a>
+            </div>
+          )
+        }
+      }
+    
+    ReactDOM.render(
+      <Com age={12}></Com>
+    ,root)
+
+    </script>
+</body>
+</html>

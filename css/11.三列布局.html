@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三列布局</title>
+    <style>
+        #container{
+            height: 600px;
+            border:  paleturquoise 2px solid;
+            display: flex;
+        }
+        /* 用浮动的方式完成  */
+    /* #left{
+        width: 200px;
+        height: 100%;
+        background: purple;
+        float: left;
+    }
+    #middle{
+        height: 100%;
+        margin: 0 210px;
+        background: chartreuse;
+    }
+    #right{
+        width: 200px;
+        height: 100%;
+        background: burlywood;
+        float: right;
+    } */
+
+    /* 用弹性盒模型的方式实现 */
+    #left{
+        width: 200px;
+        background: purple;
+    }
+    #middle{
+        margin: 0 10px;
+        flex: 1;
+        background: chartreuse;
+    }
+    #right{
+        width: 200px;
+        background: burlywood;
+    }
+    </style>
+</head>
+<body>
+    <!-- 用float的结构 -->
+    <!-- 元素排列必须right在middle上方因为左浮动，右浮动后空间释放 middle充满了整个空间，外边距也是占用空间的 -->
+    <!-- 如果middle在right的上方，右浮动不会上去，因为middle充满了整个空间 -->
+    <!-- <div id="container">
+        <div id="left"></div>
+        <div id="right"></div>
+        <div id="middle"></div>
+    </div> -->
+
+    <!-- 用弹性盒模型 元素可正常排列-->
+    <div id="container">
+        <div id="left"></div>
+        <div id="middle"></div>
+        <div id="right"></div>
+    </div> 
+</body>
+</html>

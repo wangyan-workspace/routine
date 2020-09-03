@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>页面二</h1>
+    <a href="./5._.html">下一个页面</a>
+    <button id = "btn1">回到上一个页面</button>
+
+    <script>
+        console.log(history);
+        var oBtn1 = document.getElementById('btn1');
+        oBtn1.onclick = function() {
+            // back() 方法可加载历史列表中的前一个 URL（如果存在）。
+            //调用该方法的效果等价于点击后退按钮或调用 history.go(-1)。
+            history.back();
+        }
+    </script>
+</body>
+</html>

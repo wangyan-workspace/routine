@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: palevioletred;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+
+    <script>
+        var oDiv1 = document.getElementById('div1');
+        // 给oDiv1绑定鼠标按下事件
+        oDiv1.onmousedown = function(e) {
+            //初始值oDiv1被触发时鼠标指针相对于浏览器页面（或客户区）的水平坐标
+            var x = e.clientX;
+            //初始值oDiv1被触发时鼠标指针相对于浏览器页面（或客户区）的垂直坐标
+            var y = e.clientY;
+            // （oDiv1左边相对于body左边的距离） 相对于最近已定位父元素距左的距离
+            var lx = oDiv1.offsetLeft;
+             // （oDiv1上边相对于body上边的距离） 相对于最近已定位父元素距上的距离
+            var ly = oDiv1.offsetTop;
+            // 鼠标在文档中的移动都算移动，document表示在文档中
+            document.onmousemove = function(e) {
+                // style属性为字符串型，后要拼接字符串'px'
+                // oDiv1移动后的距左的距离（小方块就会跟着鼠标移动）
+                oDiv1.style.left = e.clientX - x + lx +'px';
+                // oDiv1移动后的距上的距离（小方块就会跟着鼠标移动）
+                oDiv1.style.top = e.clientY - y + ly +'px';
+            }
+        }
+        oDiv1.onmouseup = function() {
+            // 取消鼠标移动的事件
+            document.onmousemove = null;
+        }
+    </script>
+</body>
+</html>

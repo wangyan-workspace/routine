@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            重点解析：
+              1.第一个函数没有返回值（return），第二个函数有返回值（return）
+              2.在一个函数里返回（return）一个函数赋值给 对象.onclick 那可以实现调用功能
+                如果就是一个函数里面什么都没返回，被他赋值的变量就是undefined，只是在
+                赋值的过程中把那个函数调用了一次，但是变量就是undefined，因为函数什么都没返回给他
+              3.这个函数要是想留下什么给别人就得设置个返回值
+        */
+        function fn1(){
+            console.log(111);  //111
+
+        }
+        var aa = fn1();
+        console.log(aa);      //undefined
+
+        function fn2(){
+          return 666;
+        }
+        var bb = fn2();
+        console.log(bb);     //666
+
+        // 第一个函数没有返回值，但是还想调用它给变量赋值，可以将函数名赋值个这个变量
+        // 他就相当于是 aa = function(){
+        //                             console.log(111);
+        //                            }
+        // 需要用的时候可以aa();
+        function fn1(){
+            console.log(111);  //111
+        }
+        var aa = fn1;
+        console.log(aa);   //ƒ fn1(){
+                           //          console.log(111);  //111
+                           //       }
+    </script>
+</body>
+</html>

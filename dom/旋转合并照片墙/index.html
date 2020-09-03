@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旋转照片墙</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* 当给容器设置高度设置不上时，继续往上找父元素，设置宽高 */
+        html,
+        body {
+            height: 100%;
+        }
+
+        #container {
+            height: 100%;
+            background: url(./img/bg.jpg);
+            position: relative;
+        }
+
+        .thumbs {
+            width: 125px;
+            height: 125px;
+            border: 5px solid #fff;
+            position: absolute;
+            top: -135px;
+            left: -135px;
+            transition: all ease 2s;
+        }
+
+        .thumbs span {
+            /* 将span撑开为整个父元素大小 */
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /* 未点击时，隐藏起来不展示，只有点击时才展示出来 */
+            display: none;
+        }
+
+        #prev {
+            width: 50px;
+            height: 100px;
+            background: url(./img/prev.png) #fff no-repeat center;
+            border-radius: 0 15px 15px 0;
+            /* 定位到窗口左边中间位置上 */
+            position: absolute;
+            top: 50%;
+            left: 0;
+            /* 返回自身高度的50% */
+            transition: translateY(-50%);
+            transition: ease 1s all;
+            opacity: 0;
+        }
+
+        #next {
+            width: 50px;
+            height: 100px;
+            background: url(./img/next.png) #fff no-repeat center;
+            border-radius: 15px 0 0 15px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            transition: ease 1s all;
+            opacity: 0;
+        }
+
+        #prev:hover,
+        #next:hover {
+            background-color: #ccc;
+            transition: ease 0.5s all;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <!-- 动态创建img -->
+        <div id="prev"></div>
+        <div id="next"></div>
+    </div>
+
+    <script>
+        //函数立即调用：将代码分装到一个局部环境里，避免全局（window）污染（防止变量名命名冲突，达不到想要的效果）
+        (function () {
+            var oContainer = document.getElementById('container');
+            /* 1.将所有图片加载出来 */
+            // 设置一个记数器确定图片已全部加载完成
+            var count = 0;
+            for (var i = 0; i < 24; i++) {
+                // 加载所有的小图
+                var oSmallImg = new Image();
+                oSmallImg.src = './img/thumbs/' + (i + 1) + '.jpg';  // i+1:对应图片保存的数字
+                oSmallImg.onload = function () {
+                    count++;
+                    if (count == 48) {
+                        // 图片加载完成，可以写逻辑了
+                        // 函数调用，图片加载成功后的操作
+                        loadSuccess();
+                    }
+                }
+
+                // 加载所有大图
+                var oBigImg = new Image();
+                oBigImg.src = './img/' + (i + 1) + '.jpg';
+                oBigImg.onload = function () {
+                    count++;
+                    if (count == 48) {
+                        // 图片加载完成，可以写逻辑了
+                        // 函数调用，图片加载成功后的操作
+                        loadSuccess();
+                    }
+
+                }
+            }
+
+            // 图片全部加载完之后应该执行的逻辑
+            function loadSuccess() {
+                // 为了创建div的时候计算图片的名字
+                var imgName = 0;
+                var index = 0;  //当前显示的图片索引
+                var oPrev = document.getElementById('prev');
+                var oNext = document.getElementById('next');
+                /* 2.创建24个小div装小图片(4行6列)*/
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < 6; j++) {
+                        imgName++;
+                        var oDiv = document.createElement('div');
+                        oDiv.style.background = 'url(img/thumbs/' + imgName + '.jpg)';
+                        oDiv.className = 'thumbs';
+                        // 将新创建的div插入到container中
+                        oContainer.appendChild(oDiv);
+                        // 为了方便计算位置
+                        oDiv.row = i;
+                        oDiv.col = j;
+                        // 注册点击事件
+                        oDiv.onclick = toggle;
+                        // 用span装大图
+                        oDiv.innerHTML = '<span></span>';  
+                        oDiv.index = imgName;
+                    }
+                }
+                /* 3.计算小div的位置*/
+                var aThumbs = document.getElementsByClassName('thumbs');
+                var smallImgWidth = 125;    //将图片大小确定方便计算
+                var smallImgHeight = 125;
+                // 小图片间的空隙的距离
+                var smallDisX = (oContainer.offsetWidth - 6 * (smallImgWidth + 10)) / 7;
+                var smallDisY = (oContainer.offsetHeight - 4 * (smallImgHeight + 10)) / 5;
+
+                // 小图片定位到的位置
+               setTimeout(function(){
+                for (var i = 0; i < aThumbs.length; i++) {
+                    aThumbs[i].style.left = (aThumbs[i].col + 1) * smallDisX + aThumbs[i].col * (smallImgWidth + 10) + 'px';
+                    aThumbs[i].style.top = (aThumbs[i].row + 1) * smallDisY + aThumbs[i].row * (smallImgHeight + 10) + 'px';
+                    aThumbs[i].style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg)';   //图片可以随机的转变角度
+                    // 给图片设置延迟时间，使下面的图片先出来，上面的图片后出来
+                    aThumbs[i].style.transitionDelay = (aThumbs.length - i) * 100 + 'ms';
+                }
+               },100)
+
+                // 大图片间空隙的距离
+                var bigDisX = (oContainer.offsetWidth - 6 * (smallImgWidth + 2)) / 2;
+                var bigDisY = (oContainer.offsetHeight - 4 * (smallImgHeight + 2)) / 2;
+                var aSpan = oContainer.getElementsByTagName('span');
+
+                // 单击某一张小图片时，切换图片状态
+                function toggle() {
+                    var isBig = false;   //标识位
+                    index = this.index;  //oDiv的索引
+                    if (isBig) {
+                        // 图片散开
+                        for (var i = 0; i < aThumbs.length; i++) {
+                            aThumbs[i].style.left = (aThumbs[i].col + 1) * smallDisX + aThumbs[i].col * (smallImgWidth + 10) + 'px';
+                            aThumbs[i].style.top = (aThumbs[i].row + 1) * smallDisY + aThumbs[i].row * (smallImgHeight + 10) + 'px';
+                            aThumbs[i].style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg)';
+                            aThumbs[i].style.borderWidth = '5px';
+
+                            aSpan[i].style.display = 'none';
+                        }
+                        isBig = !isBig;
+                        // 将左右两个按钮隐藏起来
+                        oPrev.style.opacity = oNext.style.opacity = 0;
+                    }
+                    else {
+                        // 图片合并
+                        for (var i = 0; i < aThumbs.length; i++) {
+                            aThumbs[i].style.left = bigDisX + aThumbs[i].col * (smallImgWidth + 2) + 'px';
+                            aThumbs[i].style.top = bigDisY + aThumbs[i].row * (smallImgHeight + 2) + 'px';
+                            aThumbs[i].style.transform = 'rotate(0deg)';
+                            aThumbs[i].style.transitionDelay = '0ms';
+                            aThumbs[i].style.borderWidth = '1px';
+
+                            aSpan[i].style.display = 'block';
+                            // 注意拼字符串不要忘记空格
+                            // 因为每一个oDiv里都插入一个span,所以同一张图片在不同的oDiv里展示一部分即可达到效果
+                            aSpan[i].style.background = 'url(img/' + index + '.jpg) ' + -aThumbs[i].col *smallImgWidth + 'px ' + -aThumbs[i].row * smallImgHeight + 'px';
+                           
+                        }
+                        isBig = !isBig;
+                        // 将左右两个按钮显示出来
+                        oPrev.style.opacity = oNext.style.opacity = 1;
+                    }
+                }
+
+                // 绑定左右按钮点击事件
+                oPrev.onclick = function() {
+                    // index--;
+                    // if(index<1){
+                    //     index=24;
+                    // }
+                    index = index <= 1 ? 24 : --index;
+                    for(var i=0;i<aSpan.length;i++) {
+                        aSpan[i].style.backgroundImage = 'url(img/' + index + '.jpg)';
+                        aSpan[i].style.transitionDelay = Math.random()*500 + 'ms';
+                    }
+                }
+                oNext.onclick = function() {
+                    // index--;
+                    // if(index<1){
+                    //     index=24;
+                    // }
+                    index = index >= 24 ? 1 : ++index;
+                    for(var i=0;i<aSpan.length;i++) {
+                        aSpan[i].style.backgroundImage = 'url(img/' + index + '.jpg)';
+                        aSpan[i].style.transitionDelay = Math.random()*500 + 'ms';
+                    }
+                }
+            }
+
+
+        })();
+    </script>
+</body>
+
+</html>

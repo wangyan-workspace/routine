@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform3D转换</title>
+    <style>
+        #container{
+            width: 200px;
+            height: 200px;
+            border:black solid 1px;
+            margin: 200px auto;
+            /* perspective 属性定义 3D 元素距视图的距离，以像素计。该属性允许您改变 3D 元素查看 3D 元素的视图。
+                           当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身。
+                           注释：perspective 属性只影响 3D 转换元素。 */
+            /* 设置透视的位置 */
+            perspective: 500px;
+        }
+        #box1{
+            width: 200px;
+            height: 200px;
+            background: red;
+
+            /* perspective属性有两种书写形式，一种用在舞台元素上（动画元素们的共同父辈元素）；第二种就是用在当前动画元素上，与transform的其他属性写在一起 */
+            /* transform: perspective(200px) rotateY(30deg); */
+            transform: rotateY(30deg);
+            /* 看出来子元素的3D效果 */
+            /* transform-style属性也是3D效果中经常使用的，其两个参数，flat|preserve-3d. 
+               前者flat为默认值，表示平面的；后者preserve-3d表示3D透视。 */
+            /* 基本上，我们想要根据现实经验实现一些3D效果的时候，transform-style: preserve-3d是少不了的。
+              一般而言，该声明应用在3D变换的兄弟元素们的父元素上，也就是舞台元素。 */
+            transform-style: preserve-3d;
+        }
+        #inner{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            transform: rotateY(30deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="box1">
+            <div id="inner"></div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <a href="https://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/">有趣的3D变换文章</a>
+    </div>
+
+    <!-- 转换属性
+        transform	                       向元素应用 2D 或 3D 转换。	
+        transform-origin	               允许你改变被转换元素的位置。	
+        transform-style	                   规定被嵌套元素如何在 3D 空间中显示。	
+        perspective	                       规定 3D 元素的透视效果。
+     -->
+
+    <!-- 转换属性值
+        translate3d(x,y,z)	             定义 3D 转化。
+        translateX(x)	                 定义 3D 转化，仅使用用于 X 轴的值。
+        translateY(y)	                 定义 3D 转化，仅使用用于 Y 轴的值。
+        translateZ(z)	                 定义 3D 转化，仅使用用于 Z 轴的值。
+        scale3d(x,y,z)	                 定义 3D 缩放转换。
+        scaleX(x)	                     定义 3D 缩放转换，通过给定一个 X 轴的值。
+        scaleY(y)	                     定义 3D 缩放转换，通过给定一个 Y 轴的值。
+        scaleZ(z)	                     定义 3D 缩放转换，通过给定一个 Z 轴的值。
+        rotate3d(x,y,z,angle)	         定义 3D 旋转。
+        rotateX(angle)	                 定义沿 X 轴的 3D 旋转。
+        rotateY(angle)	                 定义沿 Y 轴的 3D 旋转。
+        rotateZ(angle)	                 定义沿 Z 轴的 3D 旋转。
+        perspective(n)	                 定义 3D 转换元素的透视视图。
+     -->
+
+     <!-- 
+         3D Transform Functions：
+          matrix3d()：以一个4x4矩阵的形式指定一个3D变换
+          translate3d()：指定对象的3D位移。第1个参数对应X轴，第2个参数对应Y轴，第3个参数对应Z轴，参数不允许省略
+          translatez()：指定对象Z轴的平移
+          rotate3d()：指定对象的3D旋转角度，其中前3个参数分别表示旋转的方向x,y,z，第4个参数表示旋转的角度，参数不允许省略
+          rotatex()：指定对象在x轴上的旋转角度
+          rotatey()：指定对象在y轴上的旋转角度
+          rotatez()：指定对象在z轴上的旋转角度
+          scale3d()：指定对象的3D缩放。第1个参数对应X轴，第2个参数对应Y轴，第3个参数对应Z轴，参数不允许省略
+          scalez()：指定对象的z轴缩放
+          perspective()：指定透视距离
+      -->
+</body>
+</html>

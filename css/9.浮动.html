@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            /* list-style: none;将列表前的小圆点去掉 */
+            list-style: none;
+        }
+
+        a {
+            /* 将a标签的下划线去掉 */
+            text-decoration: none;
+        }
+
+        #nav {
+            height: 50px;
+            /* overflow: hidden; */
+            /* display: inline-block; */
+        }
+
+        #nav li {
+            width: 120px;
+            height: 30px;
+            background: #cccccc;
+            /* 文本居中展示 */
+            text-align: center;
+            /* 当line-height属性高度等于文本设置高度时，文本垂直居中展示 */
+            line-height: 30px;
+            /* float:浮动后会脱离文档流，空间会被释放掉*/
+            /* 父元素塌陷解决办法：
+                1、给父元素设置一个高度
+                2、给父元素设置overflow: hidden;
+                3、在子元素的最后添加一个空元素，给这个空元素设置clear: both;
+                4、用伪元素选择器给父元素加一个空伪元素(加在父元素里的子元素中,相当于3的作用)
+            */
+            float: left;
+        }
+        
+        #nav::after {
+            content:'';
+            display: block;
+            clear:both;
+        }
+
+        #box1 {
+            height: 200px;
+            background: rebeccapurple;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+        .left{
+            width: 100px;
+            height: 100px;
+            background: palegoldenrod;
+            float: left;
+        }
+        .right{
+            width: 100px;
+            height: 100px;
+            background: silver;
+            float: right;
+        }
+        .item{
+            width: 200px;
+            height: 100px;
+            background: green;
+            /* 在同一个容器内，如果上方元素设置浮动，空间会被释放
+               下方的元素会向上移动占据原来元素的位置，设置clear：both
+               可以清除浮动带给下方元素的影响 */
+               /* clear：  left | right | both
+                   left：对应清除上方元素的左浮动
+                   right：对应清除上方元素的右浮动
+                   both：对应清除上方元素的左浮动和右浮动*/
+            clear: both;
+        }
+        #box2{
+            height: 300px;
+            background: #cccccc;
+        }
+        img{
+            /* 形成文字包围图片的效果 */
+            float: left;
+            /* 形成文字浮于图片上方的效果 */
+            /* position: absolute; */
+        }
+    </style>
+</head>
+<body>
+    <ul id="nav">
+        <li><a href="">link1</a></li>
+        <li><a href="">link2</a></li>
+        <li><a href="">link3</a></li>
+        <!-- <div class="clearfix"></div> -->
+    </ul>
+    <div id="box1">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="item"></div>
+    </div>
+    <div class="box2">
+        <img src="../html/cat.png" alt="">
+        <h1>这是一行文字</h1>
+        <p>咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。咪咪是个小懒猫，成天就是以各种姿势在不同的地方睡觉觉。。。。</p>
+    </div>
+</body>
+</html>

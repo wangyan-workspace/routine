@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+</head>
+<body>
+    <script>
+        fun1();  //定以前调用该函数
+        //函数声明：可以在定义函数前调用该函数（函数提升）
+        function fun1 () {
+            console.log('fun1');
+        }
+        fun1();  //定义后调用该函数
+
+        //fun2();   //fun2 is not a function
+        //函数表达式：不能在定义前调用
+        var fun2 = function () {
+            console.log('fun2');
+        }
+        fun2();
+
+        //形参
+        function add(x,y) {
+            console.log(arguments);
+            console.log(arguments.length);
+            console.log(x + y);
+            // console.log(x);
+            // console.log(y);
+
+            //想让函数结果对外界造成影响（外界可以通过调用函数给变量赋值的方式获取结果），使用return
+            return x +y
+        }
+        // 实参
+       // add(1,5);  //函数调用
+
+        var sum = add(2,3);
+        console.log(sum);  //return 造成的影响
+
+        // 递归
+        // 阶乘    n!
+        function factorial(n) {
+            if( n == 0 || n == 1) {
+                return 1;
+            } else {
+                // return(n * arguments.callee(n-1));    //arguments.callee:当函数为匿名函数时，调用自身函数
+                return(n * factorial(n-1));    //调用自身函数实现累乘
+            }
+        }
+        var result = factorial(4);
+        console.log(result);
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            height: 2000px;
+        }
+
+        #outer {
+            width: 500px;
+            height: 500px;
+            background: #cccccc;
+            /* margin属性的四个值可分别定义 top right bottom left */
+            /* margin-top: 50px; */
+            /* margin-left: 100px; */
+
+            /* 四个外边距都是50px */
+            /* margin: 50px; */
+
+            /* 第一个值代表上下，第二个值代表左右 */
+            /* margin: 50px 100px; */
+
+            /* 上 左右  下 */
+            /* margin: 50px 60px 80px; */
+
+            /* 上 右 下 左 */
+            /* margin: 50px 60px 70px 80px; */
+
+            /* position: relative; */
+            top: 50px;
+            left: 50px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            /* 可以设置宽高的行级块元素 */
+            display: inline-block;
+        }
+
+        #box1 {
+            background: red;
+        }
+
+        #box2 {
+            background: green;
+            /* position: relative;
+                1、位置相对于自身原始位置计算
+                2、不脱离文档流（原来占的位置不被释放）
+                3、可能会覆盖其它元素
+             */
+            /* position: relative; */
+             /* position：absolute;
+                1、脱离文档流（原来占的位位置会被释放）
+                2、位置计算是相对于最近已定位祖先元素
+            */
+            /* position: absolute; */
+            /*  position: fixed;
+                1、计算位置是相对于浏览器窗口
+                2、脱离文档流（原来占的位位置会被释放）
+            */
+            /* position: fixed; */
+            /* sticky：（relative  +  fixed ）
+                1、计算位置是相对于浏览器窗口  当其父元素没有完全滑出界面时，被定位的元素保持固定位置不变
+                2、滑动页面滚动条，当其父元素完全滑出界面，被定位的元素也会随父元素一起滑出界面 ，
+                   可理解为被定位的元素一直在其父元素内展示，
+                   当其父元素完全滑出界面，随着滚动条滚动被定位的元素会被遮挡住（其实一直在原位置保持不变）       
+             */
+            position: sticky;
+            top: -10px;
+            left: 100px;
+            /* bottom: 30px; */
+        }
+
+        #box3 {
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <div class="box" id="box1"></div>
+        <div class="box" id="box2"></div>
+        <div class="box" id="box3"></div>
+    </div>
+</body>
+</html>

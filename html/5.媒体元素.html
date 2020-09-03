@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>媒体元素</title>
+</head>
+
+<body>
+    <!-- MP4 = MPEG 4文件使用 H264 视频编解码器和AAC音频编解码器 -->
+    <!-- WebM = WebM 文件使用 VP8 视频编解码器和 Vorbis 音频编解码器 -->
+    <!-- Ogg = Ogg 文件使用 Theora 视频编解码器和 Vorbis音频编解码器 -->
+    <!-- video表示视频，视频格式有要求，controls可以控制视频的播放，没有controls将会出现错误 -->
+    <video src="观光.mp4" controls></video>
+    <!-- audio表示音频，controls可以控制音频的播放，没有controls将会出现错误 -->
+    <audio src="./愿你在我看不到的地方安然无恙.mp3" controls></audio>
+
+    <!-- header表示页眉 -->
+    <header style="background: red; width: 200px;">这是一个header</header>
+    <!-- nav表示导航栏 -->
+    <nav></nav>
+    <!-- main表示主体内容，main只能出现一次 -->
+    <main>
+        <!-- section标签定义文章的节，比如章节，页眉，页脚或文档中的其他部分 -->
+        <section>
+            <!-- <article>标签中的内容是独立的、完整的、摘自外部的内容。 -->
+            <!-- 它可以是博客文章、新闻文章、论坛帖子、网友评论等独立的内容。 -->
+            <!-- <article>标签中的内容通常有它自己的标题，甚至有时候还有自己的脚注。 -->
+            <!-- 它可以嵌套使用，但是一般需要外部内容和内部内容有关系。 -->
+            <!-- 比如：一篇博客文章，它的评论就可以使用嵌套的形式，将评论内容嵌套在整体内容中 -->
+            <!-- 说明：<article>标签中的内容经常包含<h1>、<header>、<footer>等标签 -->
+            <article>文章1</article>
+            <article>文章2</article>
+            <article>文章3</article>
+        </section>
+        <section>
+            <article>文章1</article>
+            <article>文章2</article>
+            <article>文章3</article>
+        </section>
+        <section>
+            <article>文章1</article>
+            <article>文章2</article>
+            <article>文章3</article>
+        </section>
+    </main>
+    <footer></footer>
+
+    <!-- 内联框架 -->
+    <iframe src="./4.表单元素.html" frameborder="0"></iframe>
+</body>
+
+</html>

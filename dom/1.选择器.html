@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择器</title>
+</head>
+<body>
+    <div id = "div1">div1</div>
+    <div id = "div1">div2</div>
+
+    <ul id="ul1">
+        <li>1</li>
+        <li class = "blue">2</li>
+        <li class = "blue">3</li>
+    </ul>
+    <ul id="ul2">
+        <li>11</li>
+        <li>22</li>
+        <li>33</li>
+    </ul>
+    <input type="text" name="age">
+
+    <script>
+        // 通过getElementById('id名')获取元素
+        var oDiv1 = document.getElementById('div1');
+        //如果页面中存在两个id名相同的标签，当匹配到第一个标签时即获取元素，不会往下执行获取第二个同id名的标签，因为id名的唯一性
+        console.log(oDiv1);    //<div id = "div1">div1</div>
+
+        // 通过getElementsByClassName('类名')获取元素，当页面中有多个相同类名的标签即返回一个数组，使用数组下标的方式即可获得指定的标签
+        var aLi1 = document.getElementsByClassName('blue');
+        console.log(aLi1);   //HTMLCollection(2) [li.blue, li.blue]
+
+        // 通过getElementsByTagName('标签名')获取元素，当页面中有多个相同的标签即返回一个数组，使用数组下标的方式即可获得指定的标签
+        var oUl1 = document.getElementById('ul1');
+        var aLi2 = oUl1.getElementsByTagName('li');
+        console.log(aLi2);    //HTMLCollection(3) [li, li.blue, li.blue]
+
+        // 通过getElementsByName('标签属性名')获取元素，当页面中有多个相同的标签即返回一个数组，使用数组下标的方式即可获得指定的标签
+        var oAge = document.getElementsByName('age')[0];
+        console.log(oAge);     //<input type="text" name="age">
+
+        // querySelectorAll('css选择器方式') ：选择某标签下的所有元素
+        var aLi3 = document.querySelectorAll('#ul1 li');
+        console.log(aLi3);     //NodeList(3) [li, li.blue, li.blue]
+         //querySelector('css选择器方式') ：选择某标签下的所有元素中的第一个
+         var aLi4 = document.querySelector('#ul1 li');
+         console.log(aLi4);    //<li>11</li>
+    </script>
+</body>
+</html>

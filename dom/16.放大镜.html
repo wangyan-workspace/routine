@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放大镜</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #small{
+            width: 400px;
+            height: 400px;
+            float: left;
+            position:relative;
+        }
+        /* 给drag设置定位可以计算drag之后在small中的移动 */
+        #small #drag{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #drag{
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        #big{
+            width: 400px;
+            height: 400px;
+            /* 将溢出div的其他部分隐藏起来 */
+            overflow: hidden;
+            float: left;
+            position: relative;
+        }
+         /* 给大图片设置定位可以计算img之后在big中的移动 */
+        #big img{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+       
+    </style>
+</head>
+<body>
+    <div id="small">
+        <img src="./imgs/s.png" alt="">
+        <div id="drag"></div>
+    </div>
+    <div id="big">
+        <img src="./imgs/b.png" alt="">
+    </div>
+
+    <script>
+        var oSmall = document.getElementById('small');
+        var oDrag = document.getElementById('drag');
+        var oBig = document.getElementById('big');
+        var oImg = oBig.getElementsByTagName('img')[0];
+
+        //鼠标滑入时，将透明框和大图片展示出来
+        oSmall.onmouseover = function() {
+            oDrag.style.display = 'block';
+            oBig.style.display = 'block';
+
+            // 计算出透明框可以在小图片中移动的最大距离
+            var maxWidth = oSmall.offsetWidth - oDrag.offsetWidth;
+            var maxHeight = oSmall.offsetHeight - oDrag.offsetHeight;
+
+            // 鼠标在小图片中移动都算做移动
+            oSmall.onmousemove = function(e) {
+                // 小方块移动，计算小方块距离小图片最左边的距离（透明块就会跟着鼠标移动）
+                oDrag.style.left = e.clientX - oDrag.offsetWidth/2 + 'px';
+                // 计算小方块距离小图片最上边的距离（透明块就会跟着鼠标移动）
+                oDrag.style.top = e.clientY - oDrag.offsetHeight/2 + 'px';
+
+                // 规定最大移动距离和最小移动距离，确保小方块不会从小图片中移出
+                if(oDrag.offsetLeft < 0){
+                    oDrag.style.left = 0;
+                }
+                if(oDrag.offsetLeft > maxWidth){
+                    // style属性为字符串型，后要拼接字符串'px'
+                    oDrag.style.left = maxWidth + 'px';
+                }
+                if(oDrag.offsetTop < 0){
+                    oDrag.style.top = 0;
+                }
+                if(oDrag.offsetTop > maxHeight){
+                    // style属性为字符串型，后要拼接字符串'px'
+                    oDrag.style.top = maxHeight + 'px';
+                }
+
+                // 大图片移动
+                // 计算出大图片可以在big中移动的最大距离
+                var maxBigWidth = oImg.offsetWidth - oBig.offsetWidth;
+                var maxBigHeight = oImg.offsetHeight - oBig.offsetHeight;
+                // 计算移动比例（透明框在small中移动多少，大图片就对应在big中移动多少）
+                var proportionX = maxBigWidth/maxWidth ;
+                var proportionY = maxBigHeight/maxHeight;
+
+                // big固定位置，大图片在big里移动，当透明框和大图片初始固定在自身容器的左上角
+                // 当透明框向右移动时，大图片对应向左移动（顾为负值）
+                // 当透明框向下移动时，大图片对应向上移动（顾为负值）
+                oImg.style.left = -(oDrag.offsetLeft * proportionX) + 'px';
+                oImg.style.top = -(oDrag.offsetTop * proportionY) + 'px';
+            }
+        }
+        //鼠标滑出时，将透明框和大图片隐藏出来
+        oSmall.onmouseout = function() {
+            oDrag.style.display = 'none';
+            oBig.style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>

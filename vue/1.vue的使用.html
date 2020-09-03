@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue的使用</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 将绑定的数据显示出来，要用{{ }}包着，基于data里的绑定数据 -->
+        {{msg}};
+    </div>
+    <!-- 引入vue -->
+    <script src="./vue.js"></script>
+    <script>
+        //定义一个Vue对象
+        let vm = new Vue({
+            //确定挂载的元素，add下的子元素都会受到Vue的影响，可以使用Vue对象
+            el: '#app',
+            //声明绑定的数据
+            data: {
+                msg: 'hello world'
+            }
+        })
+    </script>
+</body>
+</html>

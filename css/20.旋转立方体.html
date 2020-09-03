@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旋转立方体</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background: #000;
+            perspective: 500px;
+        }
+        #container{
+            width: 200px;
+            height: 200px;
+            margin: 200px auto;
+            transform-style: preserve-3d;
+            position: relative;
+
+            animation: rotateBox 2s ease infinite;
+        }
+        @keyframes rotateBox{
+            from{
+                transform: rotateY(0);
+            }
+            to{
+                transform: rotateY(360deg);
+            }
+        }
+        .plane  {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.5);
+            /* background: #cccccc; */
+            font-size: 30px;
+            text-align: center;
+            line-height: 200px;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        /* rotate沿着中心点旋转 故沿着X，Y，Z轴平移只需要移动元素本身的一半距离*/
+        /* 因为plane2旋转完正好与plane1垂直，所以plane1需要在Z轴方向上移动plane2元素本身的一半距离，即达到翻转的效果 */
+        #plane1{
+            transform: translateZ(100px);
+        }
+        /* 先旋转后移动和先移动后旋转的写法不一样：因为当面旋转的时候轴也会跟个面一起旋转 */
+        #plane2{
+             /* transform: rotateY(90deg) translateZ(100px) ; */
+            transform: translateX(100px) rotateY(90deg);
+        }
+        #plane3{
+            transform: translateZ(-100px) rotateY(180deg);
+        }
+        #plane4{
+            transform: translateX(-100PX) rotateY(-90deg);
+        }
+        #plane5{
+            transform: translateY(-100px) rotateX(90deg);
+        }
+        #plane6{
+            transform: translateY(100px) rotateX(-90deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="plane" id="plane1">1</div>
+        <div class="plane" id="plane2">2</div>
+        <div class="plane" id="plane3">3</div>
+        <div class="plane" id="plane4">4</div>
+        <div class="plane" id="plane5">5</div>
+        <div class="plane" id="plane6">6</div>
+    </div>
+</body>
+</html>

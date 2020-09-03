@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>elelment方法</title>
+</head>
+<body>
+    <ul id="ul1" aa="bb">
+        <li>111</li>
+    </ul>
+    <button id="btn1">加</button>
+    <button id="btn2">减</button>
+    <button id="btn3">换</button>
+    <button id="btn4">在最前面加一个</button>
+    <button id="btn5">在最后面加一个</button>
+    <script>
+        var oUl1 = document.getElementById('ul1');
+        var oBtn1 = document.getElementById('btn1');
+        var oBtn2 = document.getElementById('btn2');
+        var oBtn3 = document.getElementById('btn3');
+        var oBtn4 = document.getElementById('btn4');
+        var oBtn5 = document.getElementById('btn5');
+
+        oBtn1.onclick = function() {
+            //父元素.appendChild() 方法可向节点的子节点列表的末尾添加新的子节点
+            // 首先创建一个节点，然后创建一个文本节点，然后将文本节点添加到LI节点上。最后将节点添加到列表中。
+            //创建一个新的元素节点
+            var oLi = document.createElement('li');
+            oLi.innerHTML = 'appendChild';
+            oUl1.appendChild(oLi);
+        }
+
+        oBtn2.onclick = function() {
+            //父元素.removeChild() 方法可从子节点列表中删除某个节点。
+            oUl1.removeChild(oUl1.lastElementChild);
+        }
+
+        oBtn3.onclick = function() {
+            // removeChild() 方法可从子节点列表中删除某个节点。新节点可以是文本中已存在的，或者是你新创建的。
+            //用法：父元素.replaceChild(newnode：新生成的节点,oldnode需要被替换的节点)
+            //1.创建一个新的元素节点，通过替换整个标签来替换标签内容
+            /*var oLi = document.createElement('li');
+            oLi.innerHTML = 'replaceChild';
+            oUl1.replaceChild(oLi,oUl1.firstElementChild);*/
+
+            //2.创建一个新的文本节点，通过替换标签内容，使子节点标签内容发生变化
+            /*var textNode = document.createTextNode('haha');
+            var oLi = oUl1.firstElementChild;
+            oLi.replaceChild(textNode,oLi.childNodes[0]);*/
+
+            // 3.通过更改父元素中子节点中的内容，使子节点中的内容发生变化
+            oUl1.firstElementChild.innerHTML = 'gagaga...';
+        }
+
+        oBtn4.onclick = function() {
+            //insertBefore() 方法可在已有的子节点前插入一个新的子节点
+            //用法：insertBefore(新创建的子节点，新创建子节点插入的位置)
+            var oLi = document.createElement('li');
+            oLi.innerHTML = 'insertBefore';
+            oUl1.insertBefore(oLi,oUl1.firstElementChild);
+        }
+
+        oBtn5.onclick = function() {
+            //cloneNode() 方法可创建指定的节点的精确拷贝。
+            //cloneNode() 方法 拷贝所有属性和值。
+            /*该方法将复制并返回调用它的节点的副本。如果传递给它的参数是 true，
+              它还将递归复制当前节点的所有子孙节点。否则，它只复制当前节点。*/
+            var oLi = oUl1.firstElementChild;
+            // 当克隆传递参数为true ：深拷贝，克隆该元素下面的所有节点
+           /* var oClone = oLi.cloneNode(true);
+            oUl1.appendChild(oClone);
+            console.log(oClone);  */    //<li>111</li>
+
+            //当克隆传递参数为false ：只克隆元素不克隆子节点
+            var iClone = oLi.cloneNode(false);
+            console.log(iClone);      //<li></li>
+            oUl1.appendChild(iClone); 
+        }
+
+        // 在DOM中，每一个元素看成一个节点，而每一个节点就是一个“对象”。
+        // 也就是我们在操作元素时，把每一个元素节点看成一个对象，然后使用这个对象的属性和方法进行相关操作。
+        console.log(oUl1.id);   //ul1
+        //对象.属性：可以更改 “已经设置好的” dom对象的属性
+        oUl1.id = 'lalala';
+        // 只是改了id的值，但是元素还是在的，可以正常获取到
+        console.log(oUl1.id);   //lalala
+        oUl1.aa = 'heihei';
+        console.log(oUl1.aa);   //cc
+
+        //给dom设置对象属性
+        //通过这个"对象.属性"方式可以给dom元素设置属性，但是不显示在dom元素属性里
+        //     =>因为这个跟正常给对象设置对象属性一样，只有打印他的时候，才会出现
+        oUl1.cc = 'dd';
+        console.log(oUl1.cc);  //dd
+
+        //自定义dom属性:
+        //getAttribute:
+        //setAttribute:
+        // 自定义的dom属性可通过这个方式增加dom对象的属性（可显示在正常代码中）
+        oUl1.setAttribute('ee','ff');
+        // 自定义dom属性只能通过该方法获取到
+        console.log(oUl1.ee);       //undefined
+        console.log(oUl1.getAttribute('ee'));    //ff
+
+
+    </script>
+</body>
+</html>

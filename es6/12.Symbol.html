@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol</title>
+</head>
+<body>
+    <!-- 
+        基本数据类型：
+            string number boolean undefined null
+            es6: Symbol()
+        引用数据类型：
+            数组  对象
+     -->
+     <script>
+         //定义了一个Symbol(),是独一无二的，尽管以后还会定义很多其他的Symbol()，这些Symbol()都是不一样的且独立的
+         let aaa = Symbol();
+         console.log(aaa);      //Symbol()
+
+         let bbb = Symbol();
+         console.log(bbb);      //Symbol()
+
+         console.log(aaa == bbb);   //false
+         console.log(aaa === bbb);  //false
+         console.log(Object.is(aaa,bbb)); //false
+
+        let obj1 = {
+            name: 'wangwu',
+            age: 69,
+            [aaa]:'aaa',
+            [bbb]: 'bbb',
+            [Symbol('s1')]: 's1',  //给Symbol 添加描述
+            [Symbol('s2')]: 's2'
+        }
+        console.log(obj1);
+
+        //获取属性的值
+        console.log(obj1.name);  //wangwu
+        console.log(obj1[aaa]);  //aaa  如果属性名是Symbol(),只能通过先给Symbol()定义一个变量名，之后这个变量名作为对象的属性的方式获取属性值
+        console.log(obj1[Symbol('s1')]);  undefined
+
+        //插入属性值
+        obj1.weight = '80kg';
+        obj1[Symbol('s3')] = 's3';
+        console.log(obj1); //{age: 69, name: "wangwu", weight: "80kg", Symbol(): "aaa", Symbol(): "bbb", Symbol(s1): "s1", Symbol(s2): "s2", Symbol(s3): "s3"}
+
+        //Symbol()属性无法通过循环获取到 =>  只能一个一个拿
+        for(let p in obj1) {
+            console.log(p);   //获得属性名
+            console.log(obj1[p]);  //获得属性值
+        }
+     </script>
+</body>
+</html>

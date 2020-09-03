@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>set</title>
+</head>
+<body>
+    <script>
+        let a1 = [77,99,88,66,1,2,3,2,3,4,4,5,6,6,6,6];
+        let s1 = new Set(a1);  //类数组，不允许成员重复
+        console.log(s1);    //Set(10) {77, 99, 88, 66, 1, 2, 3, 4, 5, 6}
+
+        let a2 = [...s1];  //类数组转换为数组
+        console.log(a2);    //(10) [77, 99, 88, 66, 1, 2, 3, 4, 5, 6]
+
+        //添加数据 add() => 返回更改后的set
+        s1.add(444);
+        console.log(s1.add(444));
+        s1.add(6);  //数组中存在的数字，再添加相同的数字，不会添加到数组中
+        s1.add('hello');
+        s1.add({
+            world: 'world'
+        })
+        s1.add(7,8,9);  //添加数据一次只能添加一个，就算一次性添加多个，也只会把第一个添加到数组中
+        console.log(s1);
+
+        //获取长度 size
+        console.log(s1.size);  //14
+
+        //删除数据 delete() => 返回boolean类型
+        console.log(s1.delete(444));    //true 删除成功
+        console.log(s1.delete(0));      //false  删除失败，因为数组中本身不存在数字0
+
+        //判断是否含有某个数据  has() => 返回boolean类型
+        console.log(s1.has('hello'));   //true
+        console.log(s1.has('world'));   //false
+
+        //清空 clear()
+        // s1.clear();
+        console.log(s1);    //Set(0) {}
+
+        //循环  for...of
+        for(let [index,value] of s1.entries()) {
+            console.log(index,value);   //index 和 value 都一样
+        }
+
+        /* WeakSet() : 和set类似，但是只能添加对象 */
+        let wsArr = new WeakSet();
+        let obj = {
+            name: 'zhaosi',
+            age: 88
+        }
+        wsArr.add(obj);
+        // wsArr.add(666);     //Invalid value used in weak set 报错，只能添加对象，别的类型的数值都不可以
+        console.log(wsArr);     //WeakSet {{…}}
+
+
+
+    </script>
+</body>
+</html>

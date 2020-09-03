@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件的定义</title>
+</head>
+<body>
+    <!-- 
+        模块化：（js: 请求数据，判断用户设备，格式化当前时间）
+        组件化：（html ,css ,js => （轮播图，弹窗...））
+     -->
+    <div id="app1">
+        <!-- 通过组件名将组件引入 命名方式用 ‘-’ 连接 -->
+        <!-- 在组件中可以加自定义属性
+                属性值是常量：属性正常定义，title="我的组件"
+                属性值是变量：通过:变量名（v-bind:变量名）的方式定义属性
+        -->
+        <!-- 引用全局组件 -->
+        <my-component title="我的组件1" :news="msg"></my-component>
+
+        <!-- 引用局部组件 -->
+        <tpl1 :information="msg" title="tpl1111"></tpl1>
+        <tpl2 title="tp2222"></tpl1>
+
+    </div>
+
+    <br>
+    <div id="app2">
+        <my-component title="我的组件2" :number="a"></my-component>
+        <!-- 局部组件不能在定义它之外的地方使用，会报错 -->
+        <!-- <tpl1 title="tpl111111111111111111"></tpl1> -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // 全局组件
+        //myComponent:组件名字 驼峰式命名
+        // template：模板，在里面放入html结构，一定要有根标签，否则报错
+        Vue.component('myComponent', {
+            //在组件模板中直接写常量也可以显示出来
+            template: '<div> heiha {{title}} {{news}} {{number}} </div>',
+            /*
+                通过props来接收父组件传的值(用一个数组接)
+                若传的值是常量 title="我的组件" => 接title属性名
+                若传的是变量，:news="msg" => 接news属性名
+            */
+            //props:['父组件属性'，'父组件属性'，'父组件属性'...]
+            props: ['title','news','number']
+        })
+        // 局部组件 ：在Vue实例化对象里定义的组件
+        let vm1 = new Vue({
+            el: '#app1',
+            data:{
+                msg: 'hello world!'
+            },
+            //components:{} :在这个里面可以定义多个局部组件，只能用在Vue实例化对象vm1中，即只能在#app1中使用
+            components: {
+                //tpl1,tpl2即为组件名，以后使用组件，可通过组件名将组件引入
+                'tpl1':{
+                     //在组件模板中直接写常量也可以显示出来
+                    template: '<div> hahaha {{title}} {{information}} </div>',
+                    props:['title','information']
+                },
+                'tpl2':{
+                     //在组件模板中直接写常量也可以显示出来
+                    template: '<div> lalala {{title}} </div>',
+                    props:['title']
+                },
+            }
+        })
+        let vm2 = new Vue({
+            el: '#app2',
+            data: {
+                a: 999,
+            }
+        })
+    </script>
+</body>
+</html>

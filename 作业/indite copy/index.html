@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indite</title>
+
+    <!-- 引用的第三方字体图标，一般不需要修改 -->
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css" media="all">
+    <!-- 引用的第三方iconfont字体库，一般不需要修改 -->
+    <link rel="stylesheet" href="css/font.css" type="text/css" media="all">
+    <!-- 浏览器样式重置 -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- 自定义样式 -->
+    <!-- 通用样式表 -->
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <!-- 媒体查询样式表 -->
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <h1 class="site-title">
+                <a class="site-img" href="">
+                    <img src="./images/indite-logo.png" alt="">
+                </a>
+            </h1>
+            <p class="site-description">Just another awesome simple and stylish blog theme</p>
+            <nav id="nav-header">
+                <ul id="nav-ul">
+                    <a class="nav-toggle" href="#nav-ul"><i class="fas fa-bars"></i></a>
+                    <li class="menu-item"><a href="">Home</a></li>
+                    <li class="menu-item">
+                        <a class=" sub active" href="">Categories</a>
+                        <ul class="sub-menu">
+                            <li class="sub-menu-item"><a href="">General</a></li>
+                            <li class="sub-menu-item"><a href="">Lifestyle</a></li>
+                            <li class="sub-menu-item"><a href="">Mixed</a></li>
+                            <li class="sub-menu-item"><a href="">Travel</a></li>
+                            <li class="sub-menu-item">
+                                <a class="last" href="">Post Fomats</a>
+                                <ul class="last-menu" >
+                                    <li id="last-menu-item"><a href="#">Dropdown Item</a></li>
+                                    <li id="last-menu-item"><a href="#">Random Link</a></li>
+                                    <li id="last-menu-item"><a href="#">Lorem Ipsum</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a class="sub" href="">Layouts</a>
+                        <ul class="sub-menu">
+                            <li class="sub-menu-item"><a href="">Sidebar Left</a></li>
+                            <li class="sub-menu-item"><a href="">Sidebar Right</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="">Typography</a></li>
+                    <a class="nav-toggle close" href="#container"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </ul>
+                
+            </nav>
+            <div id="profile">
+                <div class="profile-img">
+                    <img src="./images/StockSnap_IPXQTD44G8-square.jpg" alt="">
+                </div>
+                <div class="profile-name">Jane Doe</div>
+                <div class="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+            <div id="sidebar">
+                <div class="sidebar-item comment">
+                    <h3>Recent Comments</h3>
+                    <ul>
+                        <li><span>Alexander</span>on<a href="">Why I Moved From A Square To A Circle</a></li>
+                        <li><span>Lisa</span>on<a href=""> The Issue With Global Node Packages</a></li>
+                        <li><span>Norah Jones</span>on<a href="">Designing The Most Desirable Product</a></li>
+                        <li><span>Sarah</span>on<a href="">Gallery Format Post</a></li>
+                        <li><span>Alexander</span>on<a href="">Designing for Kids Is Not Child’s Play</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-item post">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        <li><a href="">Combining Design And Psychology To Change Behavior</a></li>
+                        <li><a href="">Why I Moved From A Square To A Circle</a></li>
+                        <li><a href="">Leaner Responsive images with Client Hints</a></li>
+                        <li><a href="">The New Smashing Mystery Riddle:Have You Figured It Out Yet?</a></li>
+                        <li><a href="">Eliminating Known Vulnerabilities With Snyk</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-item search">
+                    <h3>Search</h3>
+                    <form action="get">
+                        <div class="form-item">
+                            <input type="text" placeholder="To search type and hit enter">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <!-- 移动侧边栏 -->
+        <!-- 有跳转的功能（字符型图标）要在标签外套一层a标签 -->
+        <div id="move-sidebar">
+            <a href="" class="toggle-search"><i class="fas fa-search"></i></a>
+            <ul class="social-links">
+                <li class="social-links-item">
+                    <a class="social-tooltip" title="Facebook" href="#">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li class="social-links-item">
+                    <a class="social-tooltip" title="Twitter" href="#">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="social-links-item">
+                    <a class="social-tooltip" title="Google" href="#">
+                        <i class="fab fa-google"></i>
+                    </a>
+                </li>
+                <li class="social-links-item">
+                    <a class="social-tooltip" title="Dribbble" href="#">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </li>
+                <li class="social-links-item">
+                    <a class="social-tooltip" title="GitHub" href="#">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <main>
+            <section>
+                <article>
+                    <!-- 图片有跳转链接的作用 -->
+                    <a href=""><img src="./images/StockSnap_FLU1A9EK7E-720x405.jpg" alt=""></a>
+                    <!-- 内容 -->
+                    <div class="content-box">
+                        <h2 class="content-title">Combining Design And Psychology To Change Behavior</h2>
+                        <div class="content-meta">
+                            <span class="meta-date">
+                                <i class="far fa-calendar"></i>July 7, 2019
+                            </span>
+                            <span class="meta-comments">
+                                <i class="far fa-comment"></i><a href="">4</a>
+                            </span>
+                            <span class="meta-author">
+                                <i class="far fa-user"></i><a href="" title="Posts by Alexander"
+                                    rel="author">Alexander</a>
+                            </span>
+                            <span class="meta-category">
+                                <a href="" rel="category tag"> General</a>
+                                <a href="" rel="category tag">Mixed</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p class="content-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        </p>
+                        <p class="content-description">
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                        </p>
+                        <p class="content-description">
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                            doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+                            inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+                            sed quia consequuntur magni dolores eos qui ratione voluptatem sequi 
+                            nesciunt.Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et 
+                            quasi architecto beatae vitae dicta sunt explicabo.
+                        </p>
+                        <p class="content-description">
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+                            sed quia consequuntur magni dolores eos qui ratione voluptatem sequi 
+                            nesciunt.
+                        </p>
+                        <p class="content-description">
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+                            doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+                            inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+                            sed quia consequuntur magni dolores eos qui ratione voluptatem sequi 
+                            nesciunt.
+                        </p>
+                        <p class="content-description">
+                            Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi 
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem 
+                            quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni 
+                            dolores eos qui ratione voluptatem sequi nesciunt.
+                        </p>
+                        <h2 class="content-title">Adipisci velit, sed quia non numquam</h2>
+                        <p class="content-description">
+                            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, 
+                            consectetur, adipisci velit, sed quia non numquam eius modi tempora 
+                            incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad 
+                            minima veniam, quis nostrum exercitationem ullam corporis suscipit 
+                            laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                        </p>
+                        <p class="content-description">
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+                            doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+                            inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+                            sed quia consequuntur magni dolores eos qui ratione voluptatem sequi 
+                            nesciunt.Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et 
+                            quasi architecto beatae vitae dicta sunt explicabo.
+                        </p>
+                        <p class="content-description">
+                            Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam 
+                            nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas 
+                            nulla pariatur?
+                        </p>
+                        <blockquote>
+                            <p>
+                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut 
+                                fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem 
+                                sequi nesciunt.
+                            </p>
+                        </blockquote>
+                        <p class="content-description">
+                            Dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi 
+                            tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis 
+                            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                        </p>
+                        <p class="content-description">
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
+                            praesentium voluptatum deleniti atque corrupti quos dolores et quas 
+                            molestias excepturi sint occaecati cupiditate non provident, similique sunt in 
+                            culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+                        </p>
+                        <h2 class="content-title">Et iusto odio dignissimos ducimus</h2>
+                        <ul>
+                            <li>Dignissimos ducimus qui blanditiis praesentium</li>
+                            <li>Nemo enim ipsam voluptatem quia voluptas sit aspernatur</li>
+                            <li>Tenetur a sapiente delectus</li>
+                            <li>Minus id quod maxime placeat facere possimus</li>
+                        </ul>
+                        <p class="content-description">
+                            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, 
+                            cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod 
+                            maxime placeat facere possimus, omnis voluptas assumenda est, omnis 
+                            dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut 
+                            rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et 
+                            molestiae non recusandae.</p>
+                        <p class="content-description">
+                            Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis 
+                            voluptatibus maiores alias consequatur aut perferendis du.</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-bio">
+                            <div class="author-img">
+                                <img src="./images/01a4e821987a282cabb9f68c974d5efe.jpeg" alt="">
+                            </div>
+                            <div class="author-name">Alexander</div>
+                            <div class="author-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-share">
+                        <div class="share-first box">
+                            <a class="box-group" href="#">
+                                <div class="count" href="#">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="share">
+                                    <i class="fab fa-twitter"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="share-second box">
+                            <a class="box-group" href="#">
+                                <div class="count" href="#">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="share">
+                                    <i class="fab fa-linkedin"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <h4 class="heading">
+                        <i class="fas fa-hand-point-right"></i>
+                        You may also like...
+                    </h4>
+                    <ul class="recommend">
+                        <li class="recommend-item">
+                            <div class="recommend-img">
+                                <a href="#">
+                                    <img src="./images/StockSnap_73MWYOFO4W-520x293.jpg" alt="">
+                                    <span class="thumb-icon">
+                                        <i class="fas fa-play"></i>
+                                    </span>	
+                                </a>																						</a>
+                            </div>
+                            <div class="recommend-content">
+                                <h4 class="recommend-title">
+                                    <a href="">Video Format Post</a>
+                                </h4>
+                            </div>
+                        </li>
+                        <li class="recommend-item">
+                            <div class="recommend-img">
+                                <a href="#">
+                                    <img src="./images/StockSnap_MPG4U4PZNY-520x293.jpg" alt="">	
+                                </a>																					
+                            </div>
+                            <div class="recommend-content">
+                                <h4 class="recommend-title">
+                                    <a href="">Image Format Post</a>
+                                </h4>
+                            </div>
+                        </li>
+                        <li class="recommend-item">
+                            <div class="recommend-img">
+                                <a href="#">
+                                    <img src="./images/StockSnap_M9AN4Y1HYC-520x293.jpg" alt="">	
+                                </a>																						
+                            </div>
+                            <div class="recommend-content">
+                                <h4 class="recommend-title">
+                                    <a href="">Designing for Kids Is Not Child's Play</a>
+                                </h4>
+                            </div>
+                        </li>    
+                    </ul>
+                    <div class="post-nav">
+                        <a class="skip" href="#">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                        <a class="skip" href="#">
+                            <span>PREVIOUS</span> 
+                            <div class="strong">Why I Moved From A Square To A Circle</div>
+                        </a>
+                    </div>
+                    <div class="report">
+                        <h3 class="heading">4 Responses</h3>
+                        <ul class="report-way">
+                            <li>
+                                <a href="#">
+                                    <i class="far fa-comments"></i>Comments<span>4</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-share"></i>Pingbacks<span>0</span>
+                                </a>
+                            </li>
+                        </ul>
+                </div>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

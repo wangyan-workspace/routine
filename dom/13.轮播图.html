@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            width: 750px;
+            height: 291px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        #img-box>img {
+            display: none;
+        }
+
+        #img-box>img:first-child {
+            display: block;
+        }
+
+        #tab {
+            width: 120px;
+            justify-content: space-between;
+            display: flex;
+            position: absolute;
+            right: 50px;
+            bottom: 20px;
+        }
+
+        #tab>li {
+            height: 20px;
+            width: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            list-style: none;
+        }
+
+        #tab>li.active {
+            background: rgba(255, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        span {
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 60px;
+            font-weight: 600;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+        }
+
+        span.next {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="img-box">
+            <img src="./imgs/1.jpg" alt="">
+            <img src="./imgs/2.jpg" alt="">
+            <img src="./imgs/3.jpg" alt="">
+            <img src="./imgs/4.jpg" alt="">
+            <img src="./imgs/5.jpg" alt="">
+        </div>
+        <ul id="tab">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <span class="prev">&lt;</span>
+        <span class="next">&gt;</span>
+    </div>
+    <script>
+        var oContainer = document.getElementById('container');
+        var aImg = document.querySelectorAll('#img-box img');
+        var aLi = document.querySelectorAll('#tab li');
+        var oPrev = document.getElementsByTagName('span')[0];
+        var oNext = document.getElementsByTagName('span')[1];
+        var currentIndex = 0;
+
+        // 分装出一个函数，下面哪里应用到这个函数，可直接调用，减少代码量，可优化
+        function change() {
+            for (var j = 0; j < aLi.length; j++) {
+                    aLi[j].className = '';
+                    aImg[j].style.display = 'none';
+                }
+                aLi[currentIndex].className = 'active';
+                aImg[currentIndex].style.display = 'block';
+        }
+        // 选项卡图片点击li滚动
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].index = i;
+            aLi[i].onclick = function () {
+                // 这里的索引是aLi[i]，所以要将this.index赋值给currentIndex，以便调用分装出的函数
+                currentIndex = this.index;
+                change();
+            }
+        }
+        // 点击左右span图片滚动
+        oNext.onclick = function () {
+            currentIndex++;
+            if (currentIndex > 4) {
+                currentIndex = 0;
+            }
+            change();
+
+        }
+        oPrev.onclick = function() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = 4;
+            }
+            change();
+        }
+        // 自动播放
+        var timer;
+        // 定时器控制图片自动播放的速度
+        function go() {
+            timer=setInterval(function(){
+                oNext.onclick();
+            },1000)
+        }
+        go();
+        oContainer.onmouseover = function() {
+            clearInterval(timer);
+        }
+        oContainer.onmouseout = function() {
+            go();
+        } 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+//@import :通过这样的方式可以将其他需要的文件引入到一个文件中
+@import './main.scss';
+/* 变量的定义 */
+// 用$符号定义变量
+$color: #eecc00;
+//默认变量
+$color: #eeccff!default;
+//必须用''包着，否则报错
+$student: '#student-list li';
+$attr: width;
+
+#container{
+    width: 1000px;
+    margin: 0 auto;
+    background: $color;
+    font-size: 20px;
+    border: 1px soild #000;
+    //sass里面可以嵌套结构
+    //选择器的嵌套
+    .box1{
+        width: 800px;
+        height: 300px;
+        background: #ccc;
+        border: 1px soild #000;
+        //用&符号引用父选择器（&:hover  &-test）
+        a{
+            background: red;
+            &:hover{
+                background: blue;
+            }
+        }
+        &-item{
+            color: green;
+            //属性的嵌套
+            padding: {
+                top: 20px;
+                left: 50px;
+            }
+        }
+        //使用定义的变量作为 ‘选择器形式’ ‘属性名’ 要用#{}包着
+        //作为属性值可以用#{}包着，也可以不用
+        /* 特殊变量 */
+        /* #{$student} */
+        #{$student}{
+            list-style: none;
+            #{$attr}: 200px;
+            // color: $color;
+            color: #{$color};
+        }
+    }
+    // @mixin box() {
+    //     width: 500px;
+    //     height: 400px;
+    //     padding: 20px;
+    // }
+    //混合宏（若给变量设置默认值，则所有变量都要设置，否则报错）
+    @mixin box($w:900px,$h:450px,$p:225px) {
+        width: $w;
+        height: $h;
+        padding: $p;
+    }
+    .box2{
+        // width: 500px;
+        // height: 400px;
+        // padding: 20px;
+        // @include box();
+        // @include box(800px,400px,20px);
+        //若传的参数不全，则需指明所传参数的含义
+        @include box($h:400px,$p:200px);
+        background: red;
+    }
+    .box3{
+        // width: 500px;
+        // height: 400px;
+        // padding: 20px;
+        // @include box();
+        // @include box(400px,100px,50px);
+        @include box($w:300px,$p:30px);
+        background: blue;
+    }
+    .box4{
+        width: 20px;
+        height: 20px;
+    }
+    .box5{
+        // @extend:表示继承某一个选择器里的属性
+        @extend .box4;
+        font-size: 50px;
+    }
+    .box6{
+        //只能写一个单位
+        width: 20px*8;
+        //1.必须要写括号（）  2.单位只能写在被除数上，除数不能有单位
+        height: (90px/3);
+        //percentage:百分数
+        padding: percentage(800px/600px);
+    }
+    //拼字符串
+    $img:'bg';
+    $str:'hello world!!!';
+    .box7{
+        background: #ccc url('./imgs/'+$img+'.jpg');
+
+        &::after{
+            // content: $str;
+            //字符串大小写转换
+            // content: to-upper-case($str);
+            content: to-lower-case($str);
+            //返回的长度没有单位，不能直接作为某些属性的值
+            font-size: str-length($str);
+            //str-index:返回字符串索引值，从1开始数
+            content: str-index($str, o);
+            //str-insert:像字符串中添加字符串，第三个参数表示索引添加到哪6个位置
+            content: str-insert($str, '888',6);
+        }
+    }
+    .box8{
+        color: $color;
+        //ligthten():颜色更浅
+        color: lighten($color,20%);
+        //darken(): 颜色更深
+        color: darken($color,20%);
+        //opacify():更不透明
+        color: opacify($color,0.3);
+        //transparentize(): 更透明
+        color: transparentize($color,0.3);
+    }
+
+    $list1:1px solid #000;
+    $list2:1px solid;
+    $list3:blue;
+    .box9{
+        border: $list1;
+        //append():可以往列表里添加项目，列表后面追加值
+        border: append($list2,red);
+        //index():返回列表中属性值的索引值
+        border: index($list1,solid);
+        //join():将两个列表拼接
+        border: join($list2,$list3);
+        //nth():返回索引对应的值
+        color:nth($list1,3);
+        //length():返回列表长度
+        z-index:length($list1);
+    }
+    $map:(color1:red,color2:green,color3:blue);
+    .box10{
+        //map-keys(): 返回所有的key
+        color: map-keys($map);
+        //map-values(): 返回所有的values
+        color: map-values($map);
+        //map-has-key(): 判断是否包含某个属性的key
+        color: map-has-key($map,color2);
+    }
+    //@for 循环出1-10（不包括10）的项目
+    @for $i from 1 to 10 {
+        .item#{$i}{
+            width: 200px*$i;
+        }
+    }
+     //@for 循环出1-10（包括10）的项目
+    @for $i from 1 through 10 {
+        .content#{$i}{
+            width: 200px*$i;
+        }
+    }
+    //@each 取出列表中的每一项
+    @each $item in $list1{
+        .item-#{$item} {
+            width: #{$item};
+        }
+    }
+
+    $i:1;
+    @while $i<5{
+        .student-#{$i} {
+            padding: 20px;
+        }
+        $i:$i+1;
+    }
+
+    @function fn1($n) {
+        @if($n==0) {
+            @return red;
+        }
+
+        @else if($n==1) {
+            @return green;
+        }
+
+        @else {
+            //可以手动添加警告
+            @warn '注意看了，这样容易有问题！！！';
+            //可以手动添加报错
+            // @error '出错啦，出错啦！！！';
+            @return blue;
+        }
+    }
+
+    .box11{
+        // color: fn1(0);
+        // color: fn1(1);
+        color: fn1(99);
+    }
+}

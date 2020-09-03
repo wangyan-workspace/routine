@@ -1,0 +1,34 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>最小值</title>
+    </head>
+    <body>
+        <!-- 
+            2.编写一个函数Min(x,y)求出x,y这两个数中的最小值，要求x,y的值由用户通过提示对话框输入。
+         -->
+         <script>
+            function Min(x,y)
+            {
+            if (x<y)
+                return x;
+            else
+                return y;
+            }
+
+            var x,y;
+            x = prompt("x=","0");
+            y = prompt("y=","0");
+            //x,y两边的+号，可以把用户输入的值显示在括号内
+            alert("Min("+x+","+y+")=" + Min(x,y));
+         </script>
+
+        <script>
+            var x = prompt('x:');
+            var y = prompt('y:');
+            alert(x < y? x : y);
+        </script>
+    </body>
+    </html>

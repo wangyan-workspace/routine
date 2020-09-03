@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+</head>
+<body>
+    <!-- 
+      React中每个class组件都有生命周期（钩子函数）
+      render(): 方法是class组件中唯一必须实现的方法
+      constructor(props): 通过给 this.state 赋值对象来初始化内部的state。为事件处理函数绑定实例
+      componentDidMount(): 会在组件挂载后（插入DOM树种）立即调用(只执行一次)
+      componentDidUpdate(prevProps,prevState,snapshot): 会在更新后立即调用。首次渲染不会执行此方法
+      shouldComponentUpdate(nextProps,nextState) ：该方法判断是否需要更新，返回一个布尔型的值
+      componentWillUnmount(): 会在组件卸载及销毁之前直接调用
+      static getDerivedStateFromProps(): 会在调用render方法之前调用，并且在初始挂载及后续更新时都会被调用。
+                              它应返回一个对象来更新state，如果返回null则不更新任何内容
+      getSnapshotBeforeUpdate(): 在最近一次渲染输出（提交到DOM节点）之前调用，它使得组件能在发生更改之前从DOM中捕获一些信息
+                                 （例如，滚动位置），此生命周期的任何返回值将作为参数传递给componentDidUpdate()
+     -->
+    <div id="app"></div>
+
+    <!-- 用来编译jsx语法 -->
+    <script src="./browser.min.js"></script>
+    <!-- react的核心库，用来管理组件和状态的 -->
+    <script src="./react.development.js"></script>
+    <!-- 用来渲染组件的，它依赖于react.js 所以必须在react.js的下面引用 -->
+    <script src="./react-dom.development.js"></script>
+
+    <!-- 必须要加type="text/babel" ，表示这里写的是jsx语法 -->
+    <script type="text/babel">
+      let root=document.getElementById('app');
+      class Main extends React.Component{
+        constructor(props) {
+          super(props)
+        
+          this.state = {
+            isShow:false
+          }
+        
+          this.sendMsg = this.sendMsg.bind(this)  //改变this指向
+        }
+        sendMsg(){
+          this.setState({
+            isShow: !this.state.isShow
+          })
+        }
+        render() {
+          // console.log('render');
+          return (
+            <div>
+              <button onClick={this.sendMsg}>点击获取验证码</button>
+              {
+                this.state.isShow ? <Clock number={5} stop={this.sendMsg}/> : null
+              }
+            </div>
+          )
+        }
+        
+      }
+
+      class Clock extends React.Component{
+        constructor(props) {
+          super(props)
+        
+          this.state = {
+            num:-1
+          }
+        
+          // this.handleEvent = this.handleEvent.bind(this)
+        }
+
+        componentWillUnmount(){
+          clearInterval(this.timer);
+          console.log('componentWillUnmount')
+        }
+        
+        // 会在更新后会被立即调用，首次渲染不会执行此方法
+        componentDidUpdate(prevProps, prevState) {
+          // console.log('componentDidUpdate',prevProps,prevState)
+        }
+
+        shouldComponentUpdate(nextProps, nextState) { 
+          // console.log('shouldComponentUpdate',nextProps,nextState);
+          if(nextState.num <= 0){
+            this.props.stop();
+            return false;
+          } else {
+          return true;
+          }
+        }
+
+        componentDidMount(){
+          console.log('componentDidMount');
+          this.timer = setInterval(() => {
+            console.log('setInterval');
+            this.setState({
+              num:this.state.num -1
+            })
+          }, 1000);
+        }
+
+        render() {
+          console.log('render');
+          return (
+            <div>
+              <p>{this.state.num} 秒以后重新获取验证码</p>
+            </div>
+          )
+        }
+
+        // 会在调用react方法之前调用，并且再初始挂载及后续更新时都会被调用，它应返回一个对象来更新state，如果返回null则不更新任何内容
+        static getDerivedStateFromProps(nextProps, nextState) {
+          console.log('getDerivedStateFromProps',nextProps,nextState);
+          if(nextState.num == -1){
+            return {
+              num:nextProps.number
+            }
+          } else{
+            return null;
+          }
+        }
+        
+      }
+    
+      ReactDOM.render(
+        <Main/>
+      ,root)
+
+    </script>
+</body>
+</html>

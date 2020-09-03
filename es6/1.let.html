@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <!-- 
+        var 和 let 的区别：
+        1.let不允许重复声明变量会报错
+        2.let不存在变量提升，会报错
+        3.let存在一个块级作用域的概念：一个{}就是一个块级作用域，
+          let声明变量只能在声明他的{}中获取到，在其他地方获取不到，会报错
+        4.暂时性死区：[在一个作用域内不允许同名变量进来]，当用let去声明一个变量的时候，
+          就会形成一个封闭的死区，只能在声明后调用，否则会报错
+     -->
+    <script>
+        /* 1.let不允许重复声明变量 */
+
+        // var:可以重复声明同一个变量
+        /* var str = 'hello';
+        var str = 'world';
+        console.log(str); */  //world 对同一变量赋值，之前赋值的会被覆盖
+
+        /* let str = 'hello';
+        let str = 'world';
+        console.log(str); */     // Identifier 'str' has already been declared
+
+        /* 2.let不存在变量提升，会报错 */
+
+        // 变量提升
+        /* console.log(str);     //undefined
+        var str = 'hello';
+        //相当于
+        var str;
+        console.log(str);
+        str = 'hello'; */
+
+        /* console.log(str);     //str is not defined:let不存在变量提升
+        let str = 'hello'; */
+
+        /* 
+            作用域 ：
+                1.全局作用域
+                2.局部作用域（函数作用域）
+                3.块级作用域： es6:一个{}就是一个块级作用域，
+                              let声明的变量只能在声明他的{}中获取到
+        */
+
+        /* 3.let存在一个块级作用域的概念 */
+
+        /* if(true) {
+            var a =10;
+        }
+        console.log(a); */  //10
+
+        /* if(true) {
+            let a =10;
+        }
+        console.log(a); */  //a is not defined:块级作用域
+
+        /* for(var i=0;i<3;i++) {
+            console.log(i);  //0 1 2
+        }
+        console.log(i);  //3 */
+
+        /* for(let i=0;i<3;i++) {
+            console.log(i);  //0 1 2
+        }
+        console.log(i);  // i is not defined:块级作用域  */
+
+        let aLi = document.getElementsByTagName('li');
+        /* for(var i=0;i<aLi.length;i++) {
+            //当点击li时出发点击事件，此时for循环已在页面加载时循环结束，此时的i已变成3
+            aLi[i].onclick = function(){
+                console.log(i);  //3
+            }
+        }
+        console.log(i);   //3  */
+
+        //let原理和闭包一样
+        /* for(let i=0;i<aLi.length;i++) {
+            aLi[i].onclick = function(){
+                console.log(i);  //0 1 2 
+            }
+        } 
+        console.log(i); //i is not defined:块级作用域,在其他地方获取不到 */
+
+        /* for(let i=0;i<aLi.length;i++) {
+           (function(){  
+                aLi[i].onclick = function() {
+                    console.log(i);  //0 1 2
+                }
+           })(i)  //将每次循环的i保存起来
+        //    console.log(index);  // index is not defined:块级作用域，所以获取不到
+        } */
+
+        // 闭包：外部函数中声明了内部函数，内部函数中引用了外部函数中的局部变量，这样外部函数执行完毕之后内存不释放
+        /* for(var i=0;i<aLi.length;i++) {
+           (function(){
+                //将每次循环产生的i，用index保存起来，以便 内部函数中引用了外部函数中的局部变量   
+                var index=i;
+                aLi[i].onclick = function() {
+                    console.log(index);   //0 1 2 
+                }
+           })()
+        //    console.log(index);  // index is not defined:局部作用域（函数作用域），所以获取不到
+        } */
+        /* for (var i = 0; i < aLi.length; i++) {
+            (function (index) {  //形参
+                //将每次循环产生的i，用index保存起来，以便 内部函数中引用了外部函数中的局部变量   
+                // var index = i;     //      <=等价于(将外部函数和内部函数两个参数，以实参和形参的形式放到立即调用函数中)
+                aLi[i].onclick = function () {
+                    console.log(index);  //0 1 2 
+                }
+            })(i)  //实参
+            //    console.log(index);  // index is not defined:局部作用域（函数作用域），所以获取不到
+        } */ 
+
+        /* 4.暂时性死区 */
+        var a = 88;
+        function fn1() {
+            //当调用函数时，先找局部是否有定义，如果有执行局部的变量，如果没有再到全局里去找
+            // 局部作用域有定义的变量且已赋值，但是是在打印后赋值的，会出现局部作用域内变量提升
+            console.log(a);  //undefined:局部作用域内变量提升
+            var a = 888;
+        }
+        fn1();
+
+        let b=99;
+        function fn2(){
+            console.log(b); //Cannot access 'b' before initialization 会报错：暂时性死区
+            let b=999;
+        }
+        fn2();
+    </script>
+</body>
+
+</html>

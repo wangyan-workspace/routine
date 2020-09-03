@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+</head>
+<body>
+    <!-- 引入Vue -->
+    <script src="./vue.js"></script>
+    <div id="app">
+        <!-- 事件源，事件处理函数，事件（$event或者在事件处理函数中直接用event），this -->
+        <!-- v-on : 绑定的事件名 = “事件处理函数”  事件处理函数可以传参数（不是必须） -->
+        <!-- <button v-on:click="add('hahaha',$event)">添加</button> -->
+        <!-- v-on简写形式 => @绑定事件名 -->
+        <button @click="add('hahaha',$event)">添加</button>
+        <ul>
+            <li v-for="(student,index) in students">
+                <span>序号：{{index + 1}}</span>
+                <span>姓名：{{student.name}}</span>
+                <span>年龄：{{student.age}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                students: [
+                    {
+                        name: 'lisi',
+                        age: 18
+                    },
+                    {
+                        name: 'wangwu',
+                        age: 26
+                    },
+                    {
+                        name: 'zhaoliu',
+                        age: 39
+                    }
+                ]
+            },
+            methods: {
+                add(str,e) {
+                    //进行数组中添加一个元素
+                    // this => 当前的实例化的（Vue）对象（vm）
+                    //获取data当中的属性时，直接 this.属性名 ，不用this.data.属性名
+                    ///向students数组中添加元素，调用push方法，此时向数组中添加对象
+                    this.students.push({
+                        name: 'xiaowangyan',
+                        age: 16
+                    });
+                    // 获取事件的对象，必须写event，别的不行
+                    // console.log(event);   //MouseEvent {isTrusted: true, screenX: 26, screenY: 120, clientX: 26, clientY: 17, …}
+                    console.log(str);   //hahaha
+                    console.log(e);  //MouseEvent {isTrusted: true, screenX: 26, screenY: 120, clientX: 26, clientY: 17, …}
+                },
+
+                // add:function() {
+
+                // }
+            }
+        })
+    </script>
+</body>
+</html>

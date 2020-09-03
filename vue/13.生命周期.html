@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+</head>
+<body>
+    <div id="app">
+        <p> {{count}} </p>
+        <button v-on:click="add">增加</button>
+        <button @click="del">销毁</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+       let vm = new Vue({
+            el: '#app',
+            data: {
+                count: 0,
+            },
+            methods: {
+                add() {
+                    this.count++;
+                },
+                del() {
+                    //$destroy() : 调用实例化对象自身的方法（自带的不是后来自己设置的）
+                    vm.$destroy();
+                }
+            },
+            /* 生命周期提供的方法叫钩子 */ 
+            // $el,$data,$destory() :调用Vue实例化对象自身的属性和方法，
+            //不是创建实例化Vue对象后写入的el和data，$el,$data是为了与之后设置的el和data区分开
+            //实例创建之前调用
+            beforeCreate() {
+                console.log('--------------beforeCreate--------------');
+                console.log('el',this.$el);   //undefined
+                console.log('data',this.$data);   //undefined
+                console.log('innerHTML',document.getElementById('app').innerHTML); //<p> {{count}} </p>
+            },
+            //实例创建成功，此时 data 中的数据显示出来了
+            created() {
+                console.log('--------------created--------------');
+                console.log('el',this.$el);   //undefined
+                console.log('data',this.$data);   //{__ob__: Observer}
+                console.log('innerHTML',document.getElementById('app').innerHTML); //<p> {{count}} </p>
+            },
+            //数据中的 data 在模版( {{ }} )中先占一个位置  beforeMount:准备之前
+            beforeMount() {
+                console.log('--------------beforeMount--------------');
+                console.log('el',this.$el);   //<p> {{count}} </p>
+                console.log('data',this.$data);   //{__ob__: Observer}
+                console.log('innerHTML',document.getElementById('app').innerHTML);  //<p> {{count}} </p>
+            },
+            //模版中的 data 数据直接显示出来了
+            mounted() {
+                console.log('--------------mounted--------------');
+                console.log('el',this.$el);   //<p> 0 </p>
+                console.log('data',this.$data);   //{__ob__: Observer}
+                console.log('innerHTML',document.getElementById('app').innerHTML);  //<p> 0 </p>
+            },
+            //虚拟DOM：虚拟DOM可以理解为我们根据页面的真实的DOM结构抽象出来的一种数据结构，一个层级比较复杂的对象，和真实的DOM一一映射。
+            /*
+                Virtual DOM 作用是什么？
+                    虚拟DOM的最终目标是将虚拟节点渲染到视图上。但是如果直接使用虚拟节点覆盖旧节点的话，
+                    会有很多不必要的DOM操作。例如，一个ul标签下很多个li标签，其中只有一个li有变化，
+                    这种情况下如果使用新的ul去替代旧的ul,因为这些不必要的DOM操作而造成了性能上的浪费。
+                    为了避免不必要的DOM操作，虚拟DOM在虚拟节点映射到视图的过程中，
+                    将虚拟节点与上一次渲染视图所使用的旧虚拟节点（oldVnode）做对比，
+                    找出真正需要更新的节点来进行DOM操作，从而避免操作其他无需改动的DOM。
+
+                其实虚拟DOM在Vue.js主要做了两件事：
+                    提供与真实DOM节点所对应的虚拟节点vnode
+                    将虚拟节点vnode和旧虚拟节点oldVnode进行对比，然后更新视图
+
+            */ 
+            //当 data 数据发生变化调用，发生在虚拟 DOM 重新渲染
+            beforeUpdate() {
+                console.log('--------------beforeUpdate--------------');
+                console.log('el',this.$el);   //<p> 1 </p>
+                console.log('data',this.$data);   //{__ob__: Observer}
+                console.log('innerHTML',document.getElementById('app').innerHTML);  //<p> 0 </p>
+            },
+            // 数据更改导致的虚拟DOM重新渲染   在html结构中会加载出来数据
+            updated() {
+                console.log('--------------updated--------------');
+                console.log('el',this.$el);   //<p> 1 </p>
+                console.log('data',this.$data);   //{__ob__: Observer}
+                console.log('innerHTML',document.getElementById('app').innerHTML);  //<p> 1 </p>
+            },
+            //在Vue实例销毁之前调用，此时实例仍然可用
+            beforeDestroy() {
+                console.log('--------------beforeDestroy--------------');
+                console.log('el',this.$el);   //<p> 1 </p>
+                console.log('data',this.$data);   //{__ob__: Observer}
+                console.log('innerHTML',document.getElementById('app').innerHTML);  //<p> 1 </p>
+            },
+            //在Vue实例销毁之后调用，Vue实例里面的所有东西都会解除绑定，所有的事件监听器会被移除，所有的子实例也会被销毁，保持销毁前的数据（不再有任何功能）
+            destroyed() {
+                console.log('--------------destroyed--------------');
+                console.log('el',this.$el);   //<p> 1 </p>
+                console.log('data',this.$data);   //{__ob__: Observer}
+                console.log('innerHTML',document.getElementById('app').innerHTML);  //<p> 1 </p>
+            }
+        })
+    </script>
+</body>
+</html>

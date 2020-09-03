@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用事件</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+    
+    <script>
+         /* window.onload() 方法用于在网页加载完毕后立刻执行的操作，即当 HTML 文档加载完毕后，立刻执行某个方法。
+           window.onload() 通常用于 <body> 元素，在页面完全载入后(包括图片、css文件等等)执行脚本代码。  */
+           window.onload = function() {
+               var oSex = document.getElementById('sex');
+               oSex.onchange = function () {
+                   console.log(666);
+               }
+           }
+           //onload: onload 事件会在页面或图像加载完成后立即发生。
+           // onload 通常用于 <body> 元素，在页面完全载入后(包括图片、css文件等等。)执行脚本代码。 
+           function aload() {
+               alert('页面已加载完成');
+           }
+    </script>
+</head>
+
+<body onload="aload()">
+    <p>
+        <input type="text" id="username" value="请输入名字">
+    </p>
+
+    <p>
+        <select name="" id="sex">
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+    </p>
+
+    <p>
+        <input type="text" id="search" value="">
+    </p>
+
+    <button id="btn1">点我点我点我啊！！！</button>
+
+    <div id="div1">12345</div>
+
+    <form action="https://www.baidu.com" id="myform">
+        <p>
+            用户名：<input type="text">
+        </p>
+
+        <p>
+            密码：<input type="text">
+        </p>
+
+        <button type="submit">提交</button>
+    </form>
+
+    <script>
+        //onfocus：onfocus 事件在对象获得焦点时发生。 onfocus 通常用于 <input>, <select>, 和<a>.
+        //onblur：onblur 事件会在对象失去焦点时发生。 onblur 经常用于Javascript验证代码，一般用于表单输入框。
+        var oInput = document.getElementById('username');
+        oInput.onfocus = function() {
+            console.log(this.value);
+            if (this.value == '请输入名字') {
+            this.value = '';
+            }
+        }
+        oInput.onblur = function() {
+            if(this.value == '') {
+                this.value = '请输入名字'
+            }
+        }
+
+        //onchange:onchange 事件会在域的内容改变时发生。 onchange 事件也可用于单选框与复选框改变后触发的事件。
+        var oSex = document.getElementById('sex');
+        oSex.onchange = function() {
+            console.log(666);
+        }
+
+        //onkeydown:onkeydown 事件会在用户按下一个键盘按键时发生。
+        //onkeyup:onkeyup 事件会在键盘按键被松开时发生
+        var oSearch = document.getElementById('search');
+        /*oSearch.onkeydown = function() {
+             //看起来有延迟，实则不是，因为当键盘键按下时输出的是value的值（value上一次的值），再按下键盘才会将刚才的value输出出来（内存中存储的是上一次的value值）
+            console.log(this.value); 
+        } */
+        oSearch.onkeyup = function() {
+            console.log(this.value);
+        }
+
+        //onmouseover(鼠标滑入): onmouseover 事件会在鼠标指针移动到指定的元素上时发生。
+        //onmouseout(鼠标移出): onmouseout 事件会在鼠标指针移出指定的对象时发生
+        //onmousemove(鼠标移动): onmousemove 事件会在鼠标指针移到指定的对象内部有移动时发生。
+        var oDiv = document.getElementById('div1');
+        oDiv.onmouseover = function() {
+            console.log('我进去了');
+        }
+        oDiv.onmouseout = function() {
+            console.log('我出去了');
+        }
+        oDiv.onmousemove = function() {
+            console.log('我在移动');
+        }
+
+        // onclick:鼠标左键（右键不好使），空格，回车点击对象时发生
+        var oBtn1 = document.getElementById('btn1');
+        oBtn1.onclick = function() {
+            console.log(111);
+        }
+        //onmousedown:onmousedown 事件会在鼠标按键(鼠标左键和右键都可以)被按下时发生
+        //onmouseup： onmouseup 事件会在鼠标按键(鼠标左键和右键都可以)被松开时发生。
+        oBtn1.onmousedown = function() {
+            console.log('我按下了');
+        }
+        oBtn1.onmouseup = function() {
+            console.log('我抬起了');
+        }
+
+        //onsubmit:当表单提交时触发
+        var oForm = document.getElementById('myform');
+        oForm.onsubmit = function() {
+            // return true;
+            return false;
+        }
+    </script>
+</body>
+
+</html>

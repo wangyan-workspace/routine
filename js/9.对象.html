@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+</head>
+<body>
+    <!-- 
+        对象（object）：everything is object 一切皆对象
+        只要关心它，想研究它，不管它是具体的事物，还是抽象的事物，都是对象
+        对象的属性（property）和方法（method）
+        面向对象（object-oriented）
+        OOA(analysis):       面向对象分析
+        OOD(design):         面向对象设计
+        OOP(programing):     面向对象程序
+     --> 
+     
+     <!-- 例子：
+         人到图书馆借书
+         对象：
+            人：
+                属性：姓名、身份证
+
+            图书馆：
+                属性：馆名、地址
+
+            书：
+                属性：书名、ISBN
+
+            管理员：
+                属性：
+                方法：登记()
+      -->
+      <script>
+          //创建对象的几种方式：
+          //1.new Object()
+          var o1 = new Object();
+          //o1.xxx ->给对象完善属性和方法，用 = 连接
+          //name -> property-name     （对象属性名）
+          //'lisi' -> property-value  （对象属性值）
+          o1.name = 'lisi';
+          o1.age = 23;
+          //sayHello -> method (对象的方法:等号后面使用匿名函数)
+          o1.sayHello = function() {
+              console.log('hahaha...');
+              return 'gagaga';
+          };
+          console.log(o1);
+          o1.sayHello();    //调用对象方法
+          console.log(o1.sayHello);   //打印出sayHello函数
+          console.log(o1.sayHello()); //undefined  函数会被执行，打印出hahaha...，但是因为函数没有返回值，即打印出来的是undefined，如果有返回值，会打印出gagaga
+
+          //2.使用对象直接量（literal）{}  （最常用）
+          //给对象增加属性和方法用 ： 连接，属性与属性之间，属性和方法之间，方法和方法之间用逗号连接
+          //对象的方法：冒号后面使用匿名函数
+          var o2 = {
+              name:'lisi',
+              age:23,
+              sayHello:function() {
+                  console.log('heiheihei...');
+                  return 'lalala...';
+              }
+          };
+          console.log(o2);
+          o2.sayHello();    //调用对象方法
+          console.log(o2.sayHello);  //打印出sayHello函数
+          console.log(o2.sayHello());//undefined    函数会被执行，打印出heiheihei...，但是因为函数没有返回值，即打印出来的是undefined，如果有返回值，会打印出lalala...
+
+          //3.Object.create()
+          //该方法创建一个新对象（o3),使用现有的对象（o1）来提供新创建的对象（o3）的 __proto__
+          //实际上o3和o1是两个不同的对象（在堆内存里占有不同的空间），o3继承父对象（o1）的属性和方法，一旦o1内容发生变化，o3也跟着发生变动
+          //如果在o3中更改从o1继承来的某属性或方法，在调用时，调用更改后的o3的属性或方法   
+          /*调用时：
+                  1.先看看自身是否有对应的属性和方法,如果有调用自身的属性和方法（自身的属性和方法会自动屏蔽父对象的属性和方法）
+                  2.如果没有，在调用父元素的属性和方法
+          */
+          var o3 = Object.create(o1);
+          //原型（prototype）：
+          //o3.__proto__ = o1;
+          console.log(o3.name);  //lisi
+          o3.name = 'zhangsan';
+          console.log(o3.name);  //zhangsan
+
+          var o4 = new Object();
+          o4.name = 'zhangsan';
+          o4._gender = 'male';  //带有 _ 表示私有的数据，很重要，不允许改动
+          // ...
+          o4.name = 'lisi';
+          o4._gender = 'female'; //=> 这么做是错误的
+          console.log(o4._gender);
+
+          //4.new Class
+          //es6
+          class Person {
+              //形参
+              constructor(name,age) {
+                  this.name = name;
+                  this.age = age;
+              }
+          }
+          Person.prototype.sayHello = function() {
+              console.log('My name is ' + this.name + ' lalala');
+          };
+          //构造函数向类里面传递参数
+          //实参
+          var p1 = new Person('zhangsan',23);
+          console.log(p1.name,p1.age);
+          p1.sayHello();
+          //es5-
+          //定义类
+          //约定：属性放在类的构造函数中，方法放在原型中
+
+          var fn = new Function // => fn=Ox121231
+
+          function People(name,age) {
+              this.name = name;
+              this.age = age;
+          }
+          People.prototype.sayHello = function() {
+              console.log('My name is ' + this.name + ' hello');
+          };
+          //创建类的实例对象
+          var p1 = new People('lisi',34);
+          console.log(p1);
+          var p2 = new People('wangwu',23);
+          console.log(p2);
+          p1.sayHello();  
+          
+
+          //this:是指对当前对象的引用
+      </script>
+</body>
+</html>

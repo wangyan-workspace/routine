@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+    <style>
+        #tbl,#tbl td {
+            border: 1px solid #000;
+        }
+
+        #tbl {
+            border-collapse: collapse;
+            margin: 50px auto;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn-load">加载数据</button>
+    <table id="tbl">
+        <tr>
+            <td>编号</td>
+            <td>用户名</td>
+            <td>性别</td>
+        </tr>
+    </table>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script>
+        $(function(){
+            $('#btn-load').on('click', function() {
+                //get获取数据
+                //第一参数：发送请求的地址   第二个参数：回调函数  第三个参数：需要转换的文件格式
+                $.get('server.php', function (res) {
+                    // console.log(res);
+                    for (var i = 0; i < res.length; i++) {
+                        var user = res[i];
+                        $('#tbl').append('<tr><td>' + user.id + '</td><td>' + user.name + '</td><td>' + user.gender + '</td></tr>');
+                    }
+                });
+                //post提交数据
+                //第二个参数：{}一个对象，是向服务器端提交的数据
+                /* $.post('server.php',{
+                    username: 'haha',
+                    age: 12
+                },function(res) {
+                    //...
+                }); */
+
+                // 不太关注进行的是get操作，还是post操作
+                $.ajax({
+                    url: 'server.php',
+                    //这里指明进行的是get操作，还是post操作
+                    method: 'post',
+                    data: {
+                        username: 'haha',
+                        age: 12
+                    },
+                    success: function(){
+                        // 成功了执行这个里面的内容
+                    },
+                    error: function(){
+                        // 失败了进行这个里面的内容
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>

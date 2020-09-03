@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阶乘相加</title>
+</head>
+<body>
+    <!-- 
+        4.编写程序，计算 1!+2!+3!+…..＋10！的结果。
+     -->
+     <script>
+         //方案一
+         var sum_fac,fac,i;
+         sum_fac = 0;
+         fac =1;
+         for(i=1;i<=10;i++)
+         {
+             fac *=i;
+             sum_fac += fac;
+         }
+         alert("1!+2!+3!+4!+... +10!=" + sum_fac);
+     </script>
+
+    <script>
+        // 方案二
+       function factorial(n) {
+            var fab = 1;
+            for (var i = 1; i <= n; i++) {
+                fab *= i;
+            }
+            return fab;
+        }
+        // console.log(factorial(3));;
+        var sum = 0
+        for (var i = 1; i <= 10; i++) {
+            sum += factorial(i)
+        }
+        console.log(sum); 
+
+        // 方案三
+        var sum1 = 0;
+        for (var i = 1; i <= 10; i++) {
+            var n = 1;
+            for (var j = 1; j <= i; j++) {
+                n *= j;
+            }
+            sum1 += n;
+        }
+        alert(" 1!+2!+3!+…..＋10！=" + sum1);
+    </script>
+</body>
+</html>

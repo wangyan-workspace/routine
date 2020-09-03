@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内存机制</title>
+</head>
+<body>
+    <img src="./dz.PNG" alt="">
+    <script>
+        //所有的基本类型都放在栈内存中，连续存储
+        // 所有的引用类型都放在堆内存中，散列存储
+
+        //栈内存中
+        var a = 5;
+        var b = "abc";
+        var c = true;
+
+        //堆内存中
+        //o1和o2是两个不相同的对象，尽管内容相同，存放在堆内存中的不同位置，
+        //分别有两个栈内存的指针（存放对应堆内存的地址），指向这两块堆内存的内容
+        var o1 = {
+            name: 'lisi',
+            age: 23
+        };
+
+        /* var o2 = {
+            name: 'lisi',
+            age: 23
+        }; */
+
+        //o1和o3在栈内存中的不同位置(地址相同)，但都是指向同一块堆内存空间
+        // 当o1或者o3更改其中的内容（属性和方法），o1和o3同时对应更改其中的内容（属性和方法）
+        var o3 = o1;
+
+        o1.name = 'wangwu';
+
+        console.log(o3.name);  //wangwu
+    
+        // 值传递和引用传递
+        // 对于基本类型数据传递是属于值传递
+        // 对于引用类型数据传递是属于引用传递
+        //在js底层机制下都是值传递，只不过在栈内存中对象的值特殊，是对象在堆内存的地址
+        function test(x) {
+            x.name = 'wangwu';
+            console.log(x.name);  //wangwu
+        }
+        test(o1);
+        //o1和x指向同一块堆内存空间，即一块内存空间有两个名o1和x,
+        //如果属性值有变化，则对应的显示出来的也会有变化
+        console.log(o1.name);   //wangwu
+    </script>
+</body>
+</html>

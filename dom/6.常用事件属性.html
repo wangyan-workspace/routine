@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用事件属性</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">123456</div>
+    <a href="https://www.baidu.com" id="aa">我要跳转了</a>
+
+    <script>
+        // clientX 事件属性返回当事件被触发时鼠标指针相对于浏览器页面（或客户区）的水平坐标。客户区指的是当前窗口。
+        // 用法：event.clientX 
+        // clientY 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（客户区）的垂直坐标。 客户区指的是当前窗口
+        // 用法：event.clientY
+        //target:事件源    target 事件属性可返回事件的目标节点（触发该事件的节点），如生成事件的元素、文档或窗口。
+        // 用法：event.target(只能用e)
+        var oDiv1 = document.getElementById('div1');
+        oDiv1.onclick = function(e) {
+            console.log(e.clientX,e.clientY);  //两个坐标点
+            console.log(e.target);   //<div id="div1">123456</div>
+        }
+
+        //keyCode: 获取按下的键盘按键Unicode值
+        //keyCode 属性返回onkeypress事件触发的键的值的字符代码，或者 onkeydown 或 onkeyup 事件的键的代码
+        //用法：event.keyCode(只能用e)
+        document.onkeydown = function(e) {
+            console.log(e.keyCode);
+        } 
+
+        //阻止默认行为
+        // 用法：对象.preventDefault()
+        var oA = document.getElementById('aa');
+        oA.onclick = function(oA) {
+            oA.preventDefault();
+        }
+        //e.preventDefault()一样好使
+        oA.onclick = function(e) {
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝和浅拷贝</title>
+</head>
+<body>
+    <script>
+        let obj1 = {
+            name: 'lisi',
+            age: 28,
+            brother: {
+                name: 'zhaosi',
+                age: 23
+            }
+        }
+
+        //这是赋值，不是拷贝(改变obj1 或者 obj2里的值，对应的都会改变obj1和obj2里的值)
+        /* let obj2 = obj1;
+        console.log(obj2);
+        obj2.name = 'wangwu';
+        console.log(obj1.name); //wangwu  */
+
+        //深拷贝
+        function clone(obj) {
+            //先确定传过来的是对象还是数组，然后创建一个空对象（空数组）
+            // 对象的constructor属性引用了该对象的构造函数
+            let o = obj.constructor == Array ? [] : {};
+            // 在对象里遍历对象的属性
+            for(let p in obj) {
+                // console.log(p);
+                // 判断对象中又包含对象的情况
+                // p是一个变量，要用[]包着
+                if(typeof obj[p] === 'object') {
+                    o[p] = clone(obj[p]);  //调用自身函数，把对象里包含的对象也全部克隆出来
+                } else {
+                    o[p] = obj[p];
+                }
+            }
+            return o; //要想对外界造成影响，要有返回值
+        }
+        // clone(obj1);  //name  age  brother
+
+        // function Person(name,age) {
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // let p1 = new Person('xiaohua', 16);
+
+        let obj3 = clone(obj1);
+        console.log(obj3);    // {name: "lisi", age: 28, brother: {…}}
+        obj3.age = 56;
+        //obj3更改属性值并不影响obj1里的属性
+        console.log('boj3', obj3);   //{name: "lisi", age: 56, brother: {…}}
+        console.log('obj1', obj1);   //{name: "lisi", age: 28, brother: {…}}
+        obj3.brother.age = 999;
+        console.log('boj3', obj3);    // brother: {name: "zhaosi", age: 999}
+        console.log('obj1', obj1);    // brother: {name: "zhaosi", age: 23}
+
+        let arr1 = [1,2,[2,3]];
+        let arr2 = clone(arr1);
+        console.log(arr1);  // [1, 2, Array(2)]
+        console.log(arr2);  // [1, 2, Array(2)]
+
+        // arr2的更改并不会影响到arr1
+        arr2[2][1] = 666;
+        console.log(arr1);   // [2, 3]
+        console.log(arr2);   //[2, 666]
+
+    </script>
+</body>
+</html>

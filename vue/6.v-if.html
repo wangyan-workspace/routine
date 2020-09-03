@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if</title>
+</head>
+<body>
+    <!-- 引用Vue -->
+    <script src="./vue.js"></script>
+    <!-- 
+        v-if : 直接决定dom结构中是否有这个元素，适合就判断一次在不更改状态情况
+        v-else-if
+        v-else
+        必须要紧挨着，中间不能隔着其他元素
+
+        v-show  通过控制元素的display属性的值来控制元素的显示隐藏 => 在频繁切换元素状态的时候使用
+     -->
+    <div id="app">
+        <button v-on:click="change">改变</button>
+        <p v-if="tag">好好学习，天天向上</p>
+        <p v-else>不好好学习的都是坏孩纸</p>
+
+        <p v-show = "tag">宝宝，不要哭哦，爱笑的女生，运气都不会差</p>
+
+        <!-- 报错 -->
+        <!-- <div>
+            <p v-else>不好好学习的都是坏孩纸</p>
+        </div> -->
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                tag: true  //标识符
+            },
+            methods: {
+                change() {
+                    this.tag = !this.tag;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

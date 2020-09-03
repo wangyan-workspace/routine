@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全选全不选</title>
+    <style>
+        input{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        你的爱好是什么？<br />
+        <input type="checkbox" name="items" value="足球">足球
+        <input type="checkbox" name="items" value="篮球">篮球
+        <input type="checkbox" name="items" value="羽毛球">羽毛球
+        <input type="checkbox" name="items" value="乒乓球">乒乓球<br />
+        <input type="button" id="checkedAll" value="全选">
+        <input type="button" id="checkedNo" value="全不选">
+        <input type="button" id="checkedRev" value="反选">
+        <input type="button" id="send" value="提交">
+    </form>
+
+    <script src="../jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('#checkedAll').click(function(){
+                $('[name=items]:checkbox').attr('checked',true);
+            });
+            $('#checkedNo').click(function(){
+                $('[name=items]:checkbox').attr('checked',false);
+            });
+            $('#checkedRev').click(function(){
+                $('[name=items]:checkbox').each(function(){
+                    // this.checked = !this.checked;
+                    $(this).ckecked() = !$(this).ckecked()
+                })
+            });
+            $('#send').click(function(){
+                var str = "你的选择是： \t\n";
+                $('[name=items]:checked').each(function(){
+                    // str = str + $(this).val()+"\t\n";
+                    str = str + this.value +"\t\n";
+                });
+                alert(str);
+            })
+        });
+
+        /* 
+            jq里面用this和用$(this)有什么区别
+            1、表示对象不同：this表示的是javascript提供的当前对象，$(this)表示的是用jquery封装候的当前对象。
+            2、过程不同：this对象可以直接用this.style修改样式，$(this)可以使用jquery提供的方法访问样式。
+               比如this.style.display="none"在jquery中可以用$(this).css("display","none")实现。
+
+            扩展资料：
+            $(this)生成的是什么？
+            $()生成的是什么呢？实际上$()=jquery()，就是说返回的是一个jquery的对象。
+            通常我们为了简便直接使用$()。实际上，该函数省略了一个参数context。
+            根据选择器选取匹配的对象即$(selector, context)，以jQuery包装集的形式返回。
+            context可以是Dom对象集合或jQuery包装集，传入则表示要从context中选择匹配的对象，
+            不传入则表示范围为文档对象(即页面全部对象)，即$(selector)=$(selector,document)。
+            this指的是，调用函数的那个html对象。
+            this，表示当前的上下文对象是一个html对象，可以调用html对象所拥有的属性和方法。
+            $(this),代表的上下文对象是一个jquery的上下文对象，可以调用jquery的方法和属性值。
+         */
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* 变量的定义 */
+#container {
+  width: 1000px;
+  margin: 0 auto;
+  background: #eecc00;
+  font-size: 20px;
+  border: 1px soild #000;
+}
+#container .box1 {
+  width: 800px;
+  height: 300px;
+  background: #ccc;
+  border: 1px soild #000;
+  /* 特殊变量 */
+  /* #student-list li */
+}
+#container .box1 a {
+  background: red;
+}
+#container .box1 a:hover {
+  background: blue;
+}
+#container .box1-item {
+  color: green;
+  padding-top: 20px;
+  padding-left: 50px;
+}
+#container .box1 #student-list li {
+  list-style: none;
+  width: 200px;
+  color: #eecc00;
+}
+#container .box2 {
+  width: 900px;
+  height: 400px;
+  padding: 200px;
+  background: red;
+}
+#container .box3 {
+  width: 300px;
+  height: 450px;
+  padding: 30px;
+  background: blue;
+}
+#container .box4, #container .box5 {
+  width: 20px;
+  height: 20px;
+}
+#container .box5 {
+  font-size: 50px;
+}
+#container .box6 {
+  width: 160px;
+  height: 30px;
+  padding: 133.3333333333%;
+}
+#container .box7 {
+  background: #ccc url("./imgs/bg.jpg");
+}
+#container .box7::after {
+  content: "hello world!!!";
+  font-size: 14;
+  content: 5;
+  content: "hello888 world!!!";
+}
+#container .box8 {
+  color: #eecc00;
+  color: #ffe755;
+  color: #887500;
+  color: #eecc00;
+  color: rgba(238, 204, 0, 0.7);
+}
+#container .box9 {
+  border: 1px solid #000;
+  border: 1px solid red;
+  border: 2;
+  border: 1px solid blue;
+  color: #000;
+  z-index: 3;
+}
+#container .box10 {
+  color: color1, color2, color3;
+  color: red, green, blue;
+  color: true;
+}
+#container .item1 {
+  width: 200px;
+}
+#container .item2 {
+  width: 400px;
+}
+#container .item3 {
+  width: 600px;
+}
+#container .item4 {
+  width: 800px;
+}
+#container .item5 {
+  width: 1000px;
+}
+#container .item6 {
+  width: 1200px;
+}
+#container .item7 {
+  width: 1400px;
+}
+#container .item8 {
+  width: 1600px;
+}
+#container .item9 {
+  width: 1800px;
+}
+#container .content1 {
+  width: 200px;
+}
+#container .content2 {
+  width: 400px;
+}
+#container .content3 {
+  width: 600px;
+}
+#container .content4 {
+  width: 800px;
+}
+#container .content5 {
+  width: 1000px;
+}
+#container .content6 {
+  width: 1200px;
+}
+#container .content7 {
+  width: 1400px;
+}
+#container .content8 {
+  width: 1600px;
+}
+#container .content9 {
+  width: 1800px;
+}
+#container .content10 {
+  width: 2000px;
+}
+#container .item-1px {
+  width: 1px;
+}
+#container .item-solid {
+  width: solid;
+}
+#container .item-#000 {
+  width: #000;
+}
+#container .student-1 {
+  padding: 20px;
+}
+#container .student-2 {
+  padding: 20px;
+}
+#container .student-3 {
+  padding: 20px;
+}
+#container .student-4 {
+  padding: 20px;
+}
+#container .box11 {
+  color: blue;
+}
+
+/*# sourceMappingURL=index.css.map */

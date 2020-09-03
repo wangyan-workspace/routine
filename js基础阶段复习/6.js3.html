@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过给函数传递一个参数=>options （可确保即使传入的参数不按顺序，也不会错位输出）
+        function test(options) {
+            console.log("my name is :" + options.name + "my age is:" + options.age);
+        }
+        // 调用函数时，像定义对象属性的方式，通过一对{}包着传入的实参
+        test({
+            age: 23,
+            name: "wangwu"
+        })
+    </script>
+</body>
+</html>

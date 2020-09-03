@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡-事件委托</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            width: 300px;
+            margin: 50px auto 0;
+        }
+        #menu{
+            /* 子元素左浮动造成父元素塌陷，要设置高度 */
+            width:100%;
+            height:40px;
+            border-bottom:1px solid #000;
+        }
+        #menu>li {
+            width: 100px;
+            float:left;
+            background:rgb(129, 125, 119);
+            list-style:none;
+            line-height:40px;
+            text-align:center;
+        }
+        #menu>li.active{
+            background: #000;
+            color:#fff;
+        }
+        #content{
+            background:#000;
+            position:relative;
+        }
+        #content>div{
+            background:#000;
+            color: #fff;
+            width:100%;
+            height: 300px; 
+            opacity: 0;
+            position: absolute;  
+            top: 0;
+            left: 0;
+            transition:ease 1s opacity;
+        }
+        #content>div:first-child{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <ul id="menu">
+            <li class="active">菜单一</li>
+            <li>菜单二</li>
+            <li>菜单三</li>
+        </ul>
+        <div id="content">
+            <div>内容一</div>
+            <div>内容二</div>
+            <div>内容三</div>
+        </div>
+    </div>
+    <script>
+        var oUl = document.getElementById('menu');
+        var aLi = document.getElementsByTagName('li');
+        var oDiv = document.querySelectorAll('#content div');
+    
+        oUl.onclick = function(e) {
+            e=e ||window.event;
+            var target = e.target || e.srcElement;
+            // 确保选中标签名为li的标签
+            if(target.tagName = 'LI')
+            {
+                // 清空所有li的class
+                for(var j = 0;j<aLi.length;j++) {
+                aLi[j].className='';
+                oDiv[j].style.opacity=0;
+               }
+            }
+
+            //这里的this要写成target    aLi[target.index].className也可以写成target.className
+            // 此时的target就是li,故target.index即可获取li增加的自定义属性
+            aLi[target.index].className='active';   
+            // oDiv[target.index]用到了索引值，此时this不再是aLi而是oUl,所以要用target.index
+            // 因为oDiv与aLi的数组下标对应相同，通过这样的方式可以选中想要的oDiv
+            oDiv[target.index].style.opacity=1;
+        }
+
+        for(var i=0;i<aLi.length;i++) {
+             // 给li增加一个自定义属性 属性的值等于数组的索引
+            aLi[i].index = i;
+        }
+    </script>
+</body>
+</html>

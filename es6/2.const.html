@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>const</title>
+</head>
+<body>
+    <!-- 
+        var 和 const 的区别
+        1.const 也不存在变量提升
+        2.const 也不允许重复声明
+        3.（基本数据类型）赋值以后不允许更改变量的值（引用数据类型不能改地址）
+     -->
+     <script>
+         const num = 10;
+         console.log(num);  //10
+
+        /* 1.const 也不存在变量提升 */
+        //  console.log(str);  //Cannot access 'str' before initialization
+        //  const str = 'hello';
+
+        /* 2.const 也不允许重复声明 */
+        // const num = 20;
+        // console.log(num); // Identifier 'num' has already been declared
+
+        // num = 20;
+        // console.log(num);  //Assignment to constant variable.(赋值给常量了)：已经定义赋值好的变量不能再更改值了
+
+        /* 已经定义好对象的属性值可以更改 */
+        const obj1 = {
+            name: 'lisi'
+        }
+        console.log(obj1);  //{name: "lisi"}
+        obj1.name = 'wangwu';
+        console.log(obj1);  //{name: "wangwu"}
+
+        // 已经定义好的对象，不能再定义同一个相同变量名的对象，这样相当于更改对象的地址，是不允许的
+        obj1 = {
+            age:48
+        }
+        console.log(obj1);  //Assignment to constant variable(赋值给常量了)
+
+        /*
+            const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。
+            对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。
+            但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指向实际数据的指针，
+            const只能保证这个指针是固定的（即总是指向另一个固定的地址），至于它指向的数据结构是不是可变的，
+            就完全不能控制了。
+        */
+     </script>
+</body>
+</html>

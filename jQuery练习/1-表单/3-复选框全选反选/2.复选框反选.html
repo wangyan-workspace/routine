@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复选框反选</title>
+    <style>
+        input{
+            margin:5px;
+        }
+    </style>
+</head>
+<body>
+    <form action method="post">
+        你爱好的运动是？
+        <input type="checkbox" id="checkedAll">全选/全不选
+        <br/>
+        <input type="checkbox" name="items" value="足球">足球
+        <input type="checkbox" name="items" value="篮球">篮球
+        <input type="checkbox" name="items" value="羽毛球">羽毛球
+        <input type="checkbox" name="items" value="乒乓球">乒乓球<br/>
+        <input type="button" id="send" value="提交">
+    </form>
+    <script src="../jquery.min.js"></script>
+    <script>
+        $(function(){
+            //对复选框绑定单击事件
+            $('#checkedAll').click(function(){
+                if(this.checked) {
+                    $('[name=items]:checkbox').attr('checked',true);
+                } else{
+                    $('[name=items]:checkbox').attr('checked',false);
+                }
+            });
+            //方法一：看看没有选中的长度是不是等于总个数
+            var flag = true;
+            /* var $tmp = $("[name=items]:checkbox");
+            $('[name=items]').click(function(){
+                $('#checkedAll').attr('checked',$tmp.length == $tmp.filter(":checked").length);
+            }) */
+
+            // 方法二：看看是否全部被选中
+            $('[name=items]').click(function(){
+                $(['name=items']).each(function(){
+                    if(!this.checked){
+                        flag = false;
+                    }
+                });
+                $('#checkedAll').attr('checked',flag);
+            });
+            $('#send').click(function(){
+                var str = "你的选择是： \t\n";
+                $('[name=items]').each(function(){
+                    str += $(this).val()+"\t\n";
+                })
+                alert(str);
+            })
+        });
+    </script>
+</body>
+</html>

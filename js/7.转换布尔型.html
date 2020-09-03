@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>转换布尔型</title>
+</head>
+<body>
+    <script>
+        //0会转换成false
+        //空字符串会转换成false
+        //带空格的空字符串会转换成true
+        //undefined会转换成false
+        //null会转换成false
+
+        //[]和{}会转换成true
+
+        //当判断条件为true时，执行花括号内的语句
+        //当判断条件为false时，不向下执行
+        if(111) {
+            console.log(111);   //111
+        }
+
+        if(0) {
+            console.log(111);
+        }
+
+        if('') {
+            console.log(111);
+        }
+
+        if(' ') {
+            console.log(111);  //111
+        }
+
+        if(undefined) {
+            console.log(111);
+        }
+
+        if(null) {
+            console.log(111);
+        }
+
+        if([1,2,3]) {
+            console.log(111);  //111
+        }
+
+        if([]) {
+            console.log(111);  //111
+        }
+
+        if({}) {
+            console.log(111);  //111
+        }
+
+        if({name: 'lisi',age:'23'}) {
+            console.log(111);      //111
+        }
+
+        if(true){
+            console.log(666);
+        }
+
+        if(false){
+            console.log(666);  
+        }
+        //break结束本次循环，不会在执行下面的循环
+        /* var iNum = 0;
+ 
+        for (var i = 1; i < 10; i++) {
+            if (i % 5 == 0) {
+                break;
+            }
+            iNum++;
+        }
+        alert(iNum); */  //4
+
+        //continue结束当前循环，还会继续执行下一次循环
+        var iNum = 0;
+ 
+        for (var i = 1; i < 10; i++) {
+            if (i % 5 == 0) {
+                continue;
+            }
+            iNum++;
+        }
+        alert(iNum); //8
+
+
+        function aa(x ,y) {
+           console.log('x:' + x);  
+           console.log('y:' +y);   
+            
+        }
+        aa(1,2);   //x:1  y:2
+        aa(3);     //x:3  y:undefined
+    </script>
+</body>
+</html>

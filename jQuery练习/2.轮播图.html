@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            width: 750px;
+            height: 291px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        #img-box {
+            position: relative
+        }
+
+        #img-box>img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        #img-box>img.select {
+            display: block;
+        }
+
+        #tab {
+            width: 120px;
+            justify-content: space-between;
+            display: flex;
+            position: absolute;
+            right: 50px;
+            bottom: 20px;
+        }
+
+        #tab>li {
+            height: 20px;
+            width: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            list-style: none;
+        }
+
+        #tab>li.active {
+            background: rgba(255, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        span {
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 60px;
+            font-weight: 600;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+        }
+
+        span.next {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="img-box">
+            <img class="select" src="./imgs/1.jpg" alt="">
+            <img src="./imgs/2.jpg" alt="">
+            <img src="./imgs/3.jpg" alt="">
+            <img src="./imgs/4.jpg" alt="">
+            <img src="./imgs/5.jpg" alt="">
+        </div>
+        <ul id="tab">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <span class="prev">&lt;</span>
+        <span class="next">&gt;</span>
+    </div>
+
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script>
+        $(function(){
+            var tag = 0;
+            var $li = $('#tab li');
+            var $img = $('#img-box img');
+            var Timer;
+            $li.on('click',function(){
+                //获取当前li索引
+                // var index = $(this).index();
+                tag = $(this).index();
+                changeImg();
+                // $(this).addClass('active').siblings().removeClass('active');
+                // // console.log( $(this).index());
+                // $img.eq(index).addClass('select').siblings().removeClass('select');
+            })
+            $('.next').on('click',function(){
+                tag++;
+                tag = tag >= $li.length ? 0 :tag;
+                changeImg();
+                // $li.eq(tag).addClass('active').siblings().removeClass('active');
+                // $img.eq(tag).addClass('select').siblings().removeClass('select');
+            })
+            $('.prev').on('click',function(){
+                tag--;
+                tag = tag < 0 ? 4 :tag;
+                changeImg();
+                // $li.eq(tag).addClass('active').siblings().removeClass('active');
+                // $img.eq(tag).addClass('select').siblings().removeClass('select');
+            })
+
+            // Timer=setInterval(function(){
+            //     $('.next').trigger('click');
+            // },1000)
+            goTimer();
+
+            // 定时器方法一：
+            $('#container').mouseenter(function(){
+                clearInterval(Timer);
+            })
+
+            $('#container').mouseout(function(){
+                goTimer();
+            })
+
+            // 定时器方法二：
+            /* $('#container').on('mouseover',function(){
+                clearInterval(Timer);
+            })
+
+            $('#container').on('mouseout',function(){
+                goTimer();
+            }) */
+
+            // 给图片切换封装函数
+            function changeImg() {
+                $li.eq(tag).addClass('active').siblings().removeClass('active');
+                $img.eq(tag).addClass('select').siblings().removeClass('select');
+            }
+
+            // 给定时器封装函数
+            function goTimer(){
+                Timer=setInterval(function(){
+                $('.next').trigger('click');
+            },1000)
+            }
+        });
+    </script>
+</body>
+</html>

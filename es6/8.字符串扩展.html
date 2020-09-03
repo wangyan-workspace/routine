@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串扩展</title>
+</head>
+<body>
+    <div id="container">
+        <ul>
+            <i>1</i>
+            <i>2</i>
+            <i>3</i>
+        </ul>
+    </div>
+
+    <script>
+        /* 1.模板字符串 */
+        let oId = 'wrapper';
+
+        //字符串的拼接，有时会出现"" 和''单配不当的问题
+        let str1 = '<div id="'+ oId +'"></div>';
+        console.log(str1);      //<div id="wrapper"></div>
+
+        let str2 = `<div id="${oId}"></div>`;
+        console.log(str2);      //<div id="wrapper"></div>
+
+        let str3 = '<div id="container">' + 
+        '<ul>' +
+        '<li>1</li>' +
+        '<li>2</li>' +
+        ' <li>3</li>' +
+        ' </ul>' +
+        '</div>';
+        console.log(str3);  //<div id="container"><ul><li>1</li><li>2</li> <li>3</li> </ul></div>
+
+        let str4 = `<div id="container">
+        <ul>
+            <i>1</i>
+            <i>2</i>
+            <i>3</i>
+        </ul>
+    </div>`
+    console.log(str4);
+
+    var str5 = 'hello';
+    /* 2、includes()  VS indexOf() */
+    //indexOf():返回输入字符串中第一个字母下标的索引
+    console.log(str5.indexOf('el'));  //1
+    // includes()：判断字符串中是否包含某个或某几个字母，包含返回true，不包含返回false
+    console.log(str5.includes('el'));   //true
+    console.log(str5.includes('ow'));   //false
+    console.log('-----------------------');
+
+    /* 3、startsWith()  endsWith() */
+    //startsWith():判断字符串是否有某个或某几个字符开头，返回boolean类型
+    console.log(str5.startsWith('he'));  //true
+    console.log(str5.startsWith('e'));   //false
+
+    //endsWith():判断字符串是否有某个或某几个字符结尾,返回boolean类型
+    console.log(str5.endsWith('lo'));   //true
+    console.log(str5.endsWith('e'));    //false
+    console.log('-----------------------');
+      
+    /* 4、padStart(5, ‘abc’)  padEnd() */
+    //如果原字符串的长度，等于或大于最大长度，则字符串补全不生效，返回原字符串。
+    //padStart():有两个参数，第一个参数是指字符串的总长数，第二个参数是添加的字符串
+    //如果原字符串长度不够长，可用添加的字符串满足字符串的总长数的前提下在最前面补上空缺的字符串
+    // 第一个参数可以小于原字符串的长度，即输出结果为原字符串
+    console.log(str5.padStart(10,'abc'));   //abcabhello
+    console.log(str5.padStart(3,'abc'));    //hello
+    console.log(str5.padStart(5,'abc'));    //hello
+
+    //padEnd():有两个参数，第一个参数是指字符串的总长数，第二个参数是添加的字符串
+    //如果原字符串长度不够长，可用添加的字符串满足字符串的总长数的前提下在最后面补上空缺的字符串
+    // 第一个参数可以小于原字符串的长度，即输出结果为原字符串
+    console.log(str5.padEnd(8,'xy'));       //helloxyx
+    console.log(str5.padEnd(3,'xy'));       //hello
+    console.log(str5.padEnd(5,'xy'));       //hello
+    console.log('-----------------------');
+
+    /* 5、repeat(5) */
+    //repeat():字符串重复的次数
+    console.log(str5.repeat(5));   //hellohellohellohellohello
+
+    </script>
+</body>
+</html>

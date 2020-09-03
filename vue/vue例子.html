@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue例子</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 引用Vue -->
+    <script src="./vue.js"></script>
+
+    <div id="app">
+        <input type="text" v-model="msg" v-on:keyup="search">
+        <button v-on:click="add">添加</button>
+        <ul>
+            <li v-for="(item,index) in showList" v-on:click="change(item)" v-bind:class="{active:item.isActive}">
+                <span>{{item.content}}</span>
+                <!-- .stop: 阻止事件冒泡 -->
+                <button v-on:click.stop="del(index)">删除</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: '',
+                List: [
+                    {
+                        content: '111',
+                        isActive: false,
+                    },
+                    {
+                        content: '222',
+                        isActive: false,
+                    }
+                ],
+                showList: [
+                    {
+                        content: 111,
+                        isActive: false,
+                    },
+                    {
+                        content: 222,
+                        isActive: false,
+                    }
+                ],
+                //只在data里绑定数据isActive: false，生成的li,和之前存在的li，当点击一个li时，
+                //所有的都将会被选中，因为所有的li都绑定了唯一的isActive: false
+                //所以要给每个li和生成的li，都分别绑定isActive: false
+                // isActive: false,
+            },
+            methods: {
+                //添加
+                add() {
+                    this.List.push({
+                        content: this.msg,
+                        isActive: false,
+                    });
+                    this.msg = '';
+                    this.showList = [...this.List];
+                },
+                //切换class
+                change(obj) {
+                    // this.isActive = !this.isActive;
+                    obj.isActive = !obj.isActive;
+                },
+                //删除
+                del(index) {
+                    this.List.splice(index, 1);
+                    this.showList = [...this.List];
+                },
+                //筛选
+                search() {
+                    this.showList = this.List.filter((obj, index) => {
+                        // console.log(obj);
+                        //includes(): 这个是字符串的方法，所以content应该为字符串类型
+                        return obj.content.includes(this.msg);
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

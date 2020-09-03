@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport的作用： “viewport”，翻译为中文可以叫做“视区”，由于移动设备的屏幕一般都比PC小很多，
+                          webkit浏览器会将一个较大的“虚拟”窗口映射到移动设备的屏幕上，
+                          默认的虚拟窗口为980像素宽（目前大部分网站的标准宽度），然后按一定的比例（3：1或2：1）进行缩放。
+                          也就是说当我们加载一个普通网页的时候，webkit会先以980像素的浏览器标准加载网页，然后再缩小为490像素的宽度。
+                          注意这个缩小是一个全局缩小，也就是页面上的所有元素都会缩小。
+
+                         1.width：控制 viewport 的大小，可以指定的一个值，如果 600，或者特殊的值，
+                                如 device-width 为设备的宽度（单位为缩放为 100% 时的 CSS 的像素）。
+                         2.height：和 width 相对应，指定高度。
+                         3.initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。
+                         4.maximum-scale：允许用户缩放到的最大比例。
+                         5.minimum-scale：允许用户缩放到的最小比例。
+                         6.user-scalable：用户是否可以手动缩放。-->
+    <!-- initial-scale=1.0:页面首次加载缩放比位1.0 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0 ,maximum-scale=1.0,user-scalable=no">
+    <title>响应式</title>
+    <style>
+        body{
+            background: #000;
+        }
+
+        #box1{
+            height: 100px;
+            background: #fff;
+            /* 无论浏览器有多宽（>900px），box1都以900px大小展示 */
+            max-width: 900px;
+            /* 最小宽度为600px，不能再小了 */
+            min-width: 600px;
+        }
+        /* 当页面背景是黑色的，打印时可转换为白底黑字 */
+        /* @media print{
+            body{
+                background: #fff;
+            }
+        } */
+        /* 当屏幕宽度小于580px时，背景颜色为红色 */
+        @media screen and (max-width: 580px){
+            body{
+                background: red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+    <!-- 
+        媒介类型(Media Types)允许你定义以何种媒介来提交文档。文档可以被显示在显示器、纸媒介或者听觉浏览器等等。
+     -->
+     <img src="./不同的媒体类型.PNG" alt="">
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind</title>
+    <style>
+        .div1 {
+            color: palevioletred
+        }
+        .div2 {
+            background: purple;
+        }
+    </style>
+</head>
+<body>
+    <script src="./vue.js"></script>
+    <div id="app">
+        <button v-on:click="change">切换样式</button>
+        <!-- v-bind : 用于控制标签内的自带属性或者自定义属性 => 数组形式，对象形式，单个属性形式-->
+        <div v-bind:class="{div1: isDiv1, div2: isDiv2}">12345</div>
+        <br>
+        <!--     ：属性名      是       v-bind : 属性名        的简写形式 -->
+        <!-- 确定有div1这个类名，通过三目运算符确定是否含有div2这个类名 -->
+        <div :class="['div1',isDiv2 ? 'div2' : '']">67890</div>  
+
+        <div :index = "indexName">索引名</div>
+        <div :id = "name">ID名</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                //isDiv1 和 isDiv2是标识符 =》 是否存在类名div1 或者 div2
+                isDiv1:false,
+                isDiv2:true,
+                indexName: 666,
+                name: 'gagaga'
+            },
+            methods: {
+                change() {
+                    this.isDiv1 = !this.isDiv1;
+                    this.isDiv2 = !this.isDiv2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

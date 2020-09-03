@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档就绪函数</title>
+</head>
+<body>
+    <img src="./img1.jpg" alt="">
+    <img src="./img2.jpg" alt="">
+    <img src="./img3.jpg" alt="">
+
+    <button id="btn">点我</button>
+
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        // $就是jQuery的一个简写形式
+
+        //window.onload与$(document).ready()的区别
+        // 区别一：
+        //文档就绪函数： 等待整个文档中的所有dom结构加载完毕（可能dom元素相关联的东西并没有加载完）在执行
+        // window.onload：等待整个文档中的所有资源文件全部加载完毕才执行
+
+        // 区别二：
+        // 文档就绪函数：能同时编写多个 ，两次结果都输出 => '333' '444'
+        // window.onload：不能同时编写多个 ，结果只会输出“222”
+        window.onload = function(){
+            console.log(111);
+        };
+        window.onload = function(){
+            console.log(222);     //222
+        };
+
+        $(document).ready(function(){
+            console.log(333);      //333
+        });
+        $(document).ready(function(){
+            console.log(444);     //444
+        });
+        // 区别三：
+        // 文档就绪函数：有简写形式
+        // window.onload: 没有简写形式
+        $(document).ready(function(){
+             
+        });
+        // 简写形式
+        $(function(){
+            console.log(555);    //555
+        });
+
+        //函数立即调用
+        // (function(){
+
+        // })();
+    </script>
+</body>
+</html>

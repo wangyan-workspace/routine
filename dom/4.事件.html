@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+</head>
+
+<body>
+    <!-- 
+        我们主要研究着三个名词：
+            1.事件源：该事件是哪个元素触发的
+            2.事件处理函数：如何处理这两个事件的函数
+            3.事件对象：他是对象，在这个对象中，包含所有与该事件相关的信息
+     -->
+
+    <button id="btn1">点我</button>
+    <script>
+        var oBtn1 = document.getElementById('btn1');
+        //e/event :事件对象
+        oBtn1.onclick = function (e) {
+            console.log(111);  //111
+            console.log(e);   //MouseEvent {isTrusted: true, screenX: 879, screenY: 131, clientX: 38, clientY: 12, …}
+        }
+
+        //绑定事件的方式：1.on+事件名   2.事件监听
+        //document.addEventListener() 方法用于向文档添加事件句柄。
+        //用法:对象.addEventListener('事件名'，function（）{}：描述了事件触发后执行的函数，布尔值，指定事件是否 在捕获或冒泡阶段执行)
+        //true - 事件句柄在捕获阶段执行
+        //false- 默认。事件句柄在冒泡阶段执行
+
+        oBtn1.addEventListener('click', function (e) {
+            console.log(222)
+        }, false);
+        //可以使用 document.removeEventListener() 方法来移除 addEventListener() 方法添加的事件句柄
+        oBtn1.addEventListener('click', fn, false);
+        oBtn1.removeEventListener('click', fn, false);
+
+        
+        var fn = function (e) {
+            console.log(333);
+        }
+
+        // 直接把函数写进去是堆中有两个内容一样得函数，栈中有两个不一样的地址
+        // 相当于声明了两个函数只是他们里面的内容相同而已
+        // js中函数也是对象，即使函数体长得一样，但是也是不同的函数
+        //js中只要写了function就是声明一个函数，就是创建了一个对象,即使函数体一样也是不同的对象
+
+        // add和remove的时候的那两个函数虽然函数体长的一样，但是在内存中是两个不同的函数，
+        // 既然是不同的函数，所以就没有办法remove，就这么简单
+
+        /*
+        oBtn1.addEventListener('click', function (e) {
+            console.log(333);
+        }, false);
+        // 不生效
+        oBtn1.removeEventListener('click', function (e) {
+            console.log(333);
+        }, false);
+        */
+    </script>
+</body>
+
+</html>

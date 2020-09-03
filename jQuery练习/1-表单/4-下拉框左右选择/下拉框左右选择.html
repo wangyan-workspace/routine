@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下拉框左右选择</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .content{
+            float:left;
+            text-align: center;
+            margin: 10px;
+        }
+        span{
+            display: block;
+            margin: 2px 2px;
+            padding: 4px 10px;
+            background: #898989;
+            cursor: pointer;
+            font-size: 12px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <!-- multiple 属性规定输入字段可选择多个值 -->
+        <select multiple="multiple" id="select1" style="width: 100px;height: 160px">
+            <option value="1">选项1</option>
+            <option value="2">选项2</option>
+            <option value="3">选项3</option>
+            <option value="4">选项4</option>
+            <option value="5">选项5</option>
+            <option value="6">选项6</option>
+            <option value="7">选项7</option>
+        </select>
+        <div>
+            <span id="add">选中添加到右边</span>
+            <span id="add_all">全部添加到右边</span>
+        </div>
+    </div>
+    <div class="content">
+        <select multiple="multiple" id="select2" style="width: 100px;height: 160px">
+            <option value="8">选项8</option>
+        </select>
+        <div>
+            <span id="remove">选中删除到左边</span>
+            <span id="remove_all">全部删除到左边</span>
+        </div>
+    </div>
+    <script src="../jquery.min.js"></script>
+    <script>
+        $(function(){
+            //左边全部给右边
+            $('#add_all').click(function(){
+                $('#select1 option').appendTo('#select2');
+            });
+            //右边的全部给左边
+            $('#remove_all').click(function(){
+                $('#select2 option').appendTo('#select1');
+            });
+            //左边单个传给右边
+            $('#add').click(function(){
+                $('#select1 option:selected').appendTo('#select2');
+            });
+            //右边单个传给左边
+            $('#remove').click(function(){
+                $('#select2 option:selected').appendTo('#select1');
+            });
+            //鼠标双击左边给右边
+            $('#select1').dblclick(function(){
+                $('#select1 option:selected').appendTo('#select2');
+            });
+            // 鼠标双击右边给左边
+            $('#select2').dblclick(function(){
+                $('#select2 option:selected').appendTo('#select1');
+            })
+        });
+    </script>
+</body>
+</html>

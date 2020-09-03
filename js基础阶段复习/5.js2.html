@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数总结</title>
+</head>
+
+<body>
+    <button id="btn">点我</button>
+
+    <script>
+        fn1();
+        // 函数声明有函数提升
+        function fn1() {
+            console.log(fn1);
+        }
+        //15行打印结果
+        //ƒ fn1() {
+        //            console.log(fn1);
+        //         }
+
+        // 函数表达式
+        var fn2 = function () {
+            console.log(fn2);
+        }
+        fn2();
+        //26行打印结果
+        //ƒ () {
+        //            console.log(fn2);
+        //      }
+
+        // 一个函数作为另一个函数的返回值
+        function test() {
+            return function () {
+                console.log('haha');
+            }
+        }
+        test();  // =>返回的是一个函数
+        test()();  // =>返回函数的调用
+
+        function test2() {
+            console.log(a);  //undefined
+            var a = 5;
+
+            //相当于以下过程
+            var a;
+            console.log(a);
+            a = 5;
+        }
+        test2();
+
+        function test3(name, age) {
+            // arguments.length:只能用在函数内部，返回传入的是参个数
+            // arguments[i]：可以解决多传了实参问题
+            console.log(arguments.length);
+            console.log(name, age, arguments[2])
+        }
+        test3('lisi', 23, 'male');
+
+        // 如何得到函数的形参个数
+        console.log(test3.length);
+
+        function fac1(n) {
+            if (n <= 1) {
+                return 1;
+            }
+            //arguments.callee 属性包含当前正在执行的函数。
+            // callee 是 arguments 对象的一个属性。它可以用于引用该函数的函数体内当前正在执行的函数。
+            //        这在函数的名称是未知时很有用，例如在没有名称的函数表达式 (也称为“匿名函数”)内。
+            // arguments.callee相当于是当前函数名
+            // return n * arguments.callee(n - 1);     //递归调用
+            return n * fac1(n - 1);
+        }
+        var cc = fac1(4);
+        console.log(cc);
+
+        var fn5 = function fact(n) { //具名函数
+            if (n <= 1) {
+                return 1;
+            }
+            // return n * arguments.callee(n - 1);
+            return n*fact(n-1);
+        };
+
+       var dd= fn5(6);
+       console.log(dd);
+
+    //   ***this***
+    function fn6() {
+        console.log(this);  //window
+    }
+    fn6();
+
+    function fn7() {
+        console.log(this);  //fn7 {}
+    }
+    var aa = new fn7();
+    /*
+    var oBtn = document.getElementById('btn');
+    oBtn.onclick = function() {
+        console.log(this);    //当前对象：<button id="btn">点我</button>
+        setTimeout(function() {
+            // this：window    window 没有background属性，所以会报错
+            // this.style.background= 'red';
+        },2000)
+    } */
+
+    var oBtn = document.getElementById('btn');
+    oBtn.onclick = function() {
+        console.log(this);    //当前对象：<button id="btn">点我</button>
+        // var _this = this;
+        var that = this;
+        setTimeout(function() {
+            that.style.background= 'red';
+        },2000)
+    }
+    </script>
+</body>
+
+</html>

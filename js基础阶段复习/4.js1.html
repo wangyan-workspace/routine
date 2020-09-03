@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>块级作用域</title>
+</head>
+<body>
+    <ul id="ul1">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <script>
+        var a = 5;
+        let b = 6;    //let可以产生块级作用域
+
+        // var ：在script中定义是全局变量，可在全局使用，i循环之后不保存继续向下执行，
+        //       for循环结束之后，即跳出循环i => i+1
+        /*
+        for(var i = 0;i<5;i++) {
+            console.log(i);    //0 1 2 3 4
+        }
+        console.log(i + "...");  //5... */
+
+        //let可以产生块级作用域
+        for(let i = 0;i<5;i++) {
+            console.log(i);    //0 1 2 3 4
+        }
+        // console.log(i);   //i is not defined
+
+        var oUl1 = document.getElementById('ul1');
+        var aLi = oUl1.getElementsByTagName('li');  
+
+        /*
+        for(var i=0;i<aLi.length;i++) 
+        {
+            aLi[i].index = i;
+            aLi[i].onclick = function() {
+                // 这里必须用this.index,因为页面一加载for循环执行完了，var定义的变量i不保存，当点击aLi[i]时触发事件
+                // 但是i已不再是aLi[i]数组中的i，已经变成了i+1，超过了数组范围会报错
+                // this指向的是当前对象aLi
+                console.log( this.index );
+            }
+        }  */
+
+        // 用let定义变量类型，在for循环执行过程中，会把i每次都保存起来，存在块级作用域,只在作用域里好使，在全局不好使（找不到）
+        for(let i=0;i<aLi.length;i++) 
+        {
+            aLi[i].index = i;
+            aLi[i].onclick = function() {
+                // aLi[i].index => 可把之前保存的i（索引），通过点击事件显示出来
+                console.log( aLi[i].index );
+            }
+        }
+        
+        var a = "23.45";  //string
+        a=Number(a);  //将a转换为number类型，保存在变量a中
+        console.log(a);  //number类型：23.45
+
+        var a = "23.45";  //string
+        a=new Number(a);   //创建一个新对象
+        console.log(a);   //Number {23.45}
+
+        var now = new Date();
+        var now2 = Date();
+        console.log(typeof now);  //object
+        console.log(typeof now2);  //string
+        // 当打印对象now时，计算机底层会自动调用toString()函数，将object类型转换为string类型
+        console.log(now);               //Tue Aug 04 2020 10:33:47 GMT+0800 (中国标准时间)
+        console.log(now.toString());    //Tue Aug 04 2020 10:33:47 GMT+0800 (中国标准时间)
+        console.log(now2);              //Tue Aug 04 2020 10:33:47 GMT+0800 (中国标准时间)
+
+        function Person(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.toString = function() {
+            return this.name + ', ' + this.age;
+        };
+        var p1 = new Person('lisi',23);
+        alert(p1);         //字符串形式：lisi, 23  [object Object]
+        // console.log时，计算机底层会自动调用toString()函数，尽管自身定义了也不会调用自己定义的，而是调用计算机本身自带的toString函数
+        console.log(p1);   //对象形式：Person {name: "lisi", age: 23}
+
+       
+    </script>
+</body>
+</html>

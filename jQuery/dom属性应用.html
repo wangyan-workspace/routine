@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom属性应用</title>
+    <style>
+        #tab1 {
+            width: 400px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="tab1" border="1">
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>用户ID</td>
+            <td>
+                用户名
+            </td>
+            <td>
+                操作
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />
+
+            </td>
+            <td>11</td>
+            <td>zhangsan</td>
+            <td>
+                <input type="button" class="btn-del" value="删除" data-id="11">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />
+
+            </td>
+            <td>22</td>
+            <td>lisi</td>
+            <td>
+                <input type="button" class="btn-del" value="删除" data-id="22">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />
+
+            </td>
+            <td>33</td>
+            <td>wangwu</td>
+            <td>
+                <input type="button" class="btn-del" value="删除" data-id="33">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />
+
+            </td>
+            <td>44</td>
+            <td>zhaoliu</td>
+            <td>
+                <input type="button" class="btn-del" value="删除" data-id="44">
+
+            </td>
+        </tr>
+    </table>
+    <button id="btn">全部删除</button>
+    <script src="./jquery-1.11.3.min.js"></script>
+
+    <script>
+        var oBtnDel = document.getElementsByClassName('btn-del');
+        for (var i = 0; i < oBtnDel.length; i++) {
+            oBtnDel[i].onclick = function () {
+                // 通过点击删除按钮获取对应用户信息的name(dom遍历)
+                // console.log(this.parentNode.previousSibling.previousSibling.firstChild);
+
+                // 通过点击删除按钮获取对应用户信息的ID(dom遍历)
+                // console.log(this.parentNode.parentNode.children[1].firstChild);
+                
+                console.log(this.getAttribute('data-id'));
+            }
+        }
+        // jQuery对象的遍历  通过点击删除按钮获取对应用户信息的ID
+        /* $('.btn-del').click(function(){
+            console.log($(this).parent().prev().prev().text());
+        }) */
+    </script>
+</body>
+
+</html>

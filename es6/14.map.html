@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>map</title>
+</head>
+<body>
+    <script>
+        let m1 = new Map(); //对象属性以键值对的形式保存
+        console.log(m1);  //Map(0)
+
+        //添加成员 set()
+        m1.set('name','liuneng');
+        console.log(m1);    //Map(1) {"name" => "liuneng"}
+
+        //不允许有重名的key(属性名) 否则后面的值会覆盖前面的
+        m1.set('name','zhaosi');
+        m1.set('age','888');
+        console.log(m1);    //Map(2) {"name" => "zhaosi", "age" => "888"}
+
+        //获取长度 size
+        console.log(m1.size);   //2
+
+        //获取数据 get()
+        console.log(m1.get('age'));     //888
+
+        //判断是否有某个key(属性) => 返回boolean类型
+        console.log(m1.has('name'));  //true
+
+        //删除数据 delete() => 返回boolean类型
+        // console.log(m1.delete('age'));  //true
+
+        //清空 clear()
+        // m1.clear();
+        // console.log(m1);    //Map(0) {}
+
+        //循环
+        for(let [index,value] of m1.entries()) {
+            console.log(index,value);   //name zhaosi       age 888
+        }
+        console.log(m1);    //Map(2) {"name" => "zhaosi", "age" => "888"}
+
+        /* WeakMap() : 和map类似，但是只能添加对象 */
+        let wm1  = new WeakMap();
+        // wm1.set('name','wangwu');   //Invalid value used as weak map key  报错：键名只能用对象，别的类型的值都不可以
+        wm1.set({
+            name: 'wangwu'
+        },'666')
+        console.log(wm1);  //WeakMap {{…} => "666"}
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+$(function(){
+	$("tbody>tr:odd").addClass("odd");
+	$("tbody>tr:even").addClass("even");
+	//$("input:checkbox:checked").parents(tr).addClass("selected");
+	$("tbody>tr").click(function(){
+		if($(this).hasClass("selected")){
+			$(this).removeClass("selected")
+				.find(":checkbox").attr('checked',false);
+		}else{
+			$(this).addClass("selected")
+				.find(":checkbox").attr('checked',true);
+		}
+	});
+	$("input:checked").parents("tr").addClass("selected");
+	//$("tbody>tr:has(':checked')").addClass("selected");
+});

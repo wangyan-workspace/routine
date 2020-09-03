@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义对象</title>
+</head>
+<body>
+    <script>
+        // js中有三种类型的对象
+        // 1. 自定义对象
+        /* 
+         人到图书馆借书
+         
+         对象：
+            人：
+                属性：姓名、身份证
+
+            图书馆：
+                属性：馆名、地址
+
+            书：
+                属性：书名、ISBN
+
+            管理员：
+                属性：
+                方法：登记() 
+        */
+       // 类的定义：具有相同的属性和方法的对象的集合
+       function Person(name,idCard) {
+           this.name = name;
+           this.idCard = idCard;
+       }
+       var person1 = new Person('lisi','123456789');
+       var person2 = new Person('wangwu','aSDFGHJKL');
+
+       console.log(person1);
+       console.log(person2);
+
+       var library = {
+           libraryName:'学府书店',
+           adress:'南岗区学府路'
+       };
+
+       function Book(name,ISBN) {
+            this.bookName = name;
+            this.ISBN = ISBN;
+       }
+
+       var book1 = new Book('大学英语四级','1234567890');
+       var book2 = new Book('javascript高级程序设计', 'ksdkdkdk');
+
+       console.log(book1);
+       console.log(book2);
+
+       function Manager() {
+
+       }
+       Manager.prototype.regist = function (person,book) {
+           console.log('借书人：' + person.name +'，书名：' +book.bookName );
+       };
+
+       var manager1 = new Manager();
+       manager1.regist(person1,book1);
+
+       var manager2 = new Manager();
+       manager2.regist(person2,book2);
+
+       console.log(manager1);
+       console.log(manager2);
+    </script>
+</body>
+</html>

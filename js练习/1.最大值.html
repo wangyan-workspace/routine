@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最大值</title>
+</head>
+<body>
+     <!-- 随机生成两个小数给变量x.y，然后显示这两个数中的最大值。
+    （提示：语句“var x=Math.random();”可为变量生成一个随机小数：另外，使用条件运算符‘'?:") -->
+    <script>
+        //方法一
+        var x,y,max;
+        x = Math.random();  //调用库函数，生成随机数
+        y = Math.random();
+        max = x>y?x:y;
+        document.write("X=");document.write(x);
+        document.write("<br>");  //换行
+        document.write("Y=");document.write(y);
+        document.write("<br>");  //换行
+        document.write("最大值是：");document.write(max);
+    </script>
+
+    <script>
+        //方法二
+        var x = Math.random();
+        var y = Math.random();
+        console.log('x:' + x  , 'y:' + y);
+        x > y ? console.log(x) : console.log(y);
+    </script> 
+</body>
+</html>

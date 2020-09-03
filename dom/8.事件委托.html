@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件委托</title>
+</head>
+<body>
+    <!-- 
+        在加载一个页面时：代码由上到下顺序执行。绑定的事件也会加载出来，只是当没有触发时，不会产生任何效果
+        对于有for循环出现时=>在对象触发之前已经循环完了，在调用for循环就不太好使了
+     -->
+    <button id="btn1">添加</button>
+    <ul id="ul1">
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ul>
+
+    <script>
+        var oUl1 = document.getElementById('ul1');
+        var aLi = oUl1.getElementsByTagName('li');
+
+        /*
+        oUl1.onclick = function(e) {
+            //兼容IE浏览器
+            e= e || window.event;
+            // 可以获取到父元素中的子元素
+            var target = e.target || e.srcElement;
+            console.log(target.innerHTML);  //<li>111</li>      当点击ul里面的li，li中的内容也会打印出来=>111
+                                            //<li>222</li>      当点击ul里面的li，li中的内容也会打印出来=>222
+                                            //<li>333</li>      当点击ul里面的li，li中的内容也会打印出来=>333
+        }  */
+
+        var oBtn1 = document.getElementById('btn1');
+        oBtn1.onclick = function() {
+            //创建一个li对象
+            var oLi = document.createElement('li');
+            // 给对象里添加内容
+            oLi.innerHTML = Math.random();
+            // 把对象添加到父元素的中，排在其他兄弟元素后面
+            oUl1.appendChild(oLi);
+            // 打印aLi对象数组长度
+            console.log(aLi.length);
+            oLi.onclick = function() {
+                console.log(oLi.innerHTML);
+            }
+        }
+
+        for(var i=0;i<aLi.length;i++) {
+            aLi[i].onclick = function() {
+                // aLi[i].innerHTML不好使：因为console.log实现for循环之后，触发事件的时候才会执行，这时循环已经执行完了，i=3（超出了数组长度）
+                console.log(this.innerHTML);
+            }
+        }
+    </script>
+</body>
+</html>

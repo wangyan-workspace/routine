@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>element属性</title>
+    <style>
+        #box1 {
+        width: 100px;
+        height:200px;
+        padding: 50px;
+        border: 10px #000 solid;
+        margin: 50px;
+        background: red;
+        position: relative;
+        top: 50px;
+        left: 100px;
+    }
+    h1{
+        background: green;
+    }
+    </style>
+</head>
+<body>
+    <div>div</div>
+    111
+    <h1 class="haha lala xixi">
+        element属性 
+        <span>span</span>
+        <p>p</p>
+        <!-- 666 -->
+        这是一段文字
+    </h1>
+    99
+    <div id="box1" style="width:200px;padding:100px">
+        <div id="item1">item1</div>;
+        <div id="item2">item2</div>;
+    </div>
+    <div id="box2">box2</div>
+    <script>
+        var oH1 = document.querySelector('h1');
+        var oBox1 = document.querySelector('#box1');
+        var oItem1 = document.querySelector('#item1');
+
+        // 对象.style.属性 => 可以获取或设置（标签）对象的样式（内联样式:内联样式的优先级最高可覆盖其他样式）
+        oH1.style.background = 'yellow';
+        oH1.style.border = '2px solid #000';
+        //style  （他是加到了内联里，获取也只能获取内联里写过的属性）
+        console.log(oH1.style.background);   //yellow
+        console.log(oH1.style);
+
+        //className
+        // 对象.属性 => 可以更改或设置（标签）对象的属性
+        oH1.className = 'hehe';
+        console.log(oH1.className);     //hehe
+
+        //classList
+        // classList 属性返回元素的类名，作为 DOMTokenList 对象。
+        //该属性用于在元素中添加，移除及切换 CSS 类。
+        //classList 属性是只读的，但你可以使用 add() 和 remove() 方法修改它。
+        console.log(oH1.classList);     //DOMTokenList["hehe",value:"hehe"]
+
+        //nodeType(返回节点类型[元素节点：1 ，属性节点：2 ，文本节点：3 ，注释节点：8 ])
+        console.log(oH1.nodeType);          //元素节点：1
+        console.log(oH1.getAttributeNode('class').nodeType);     //属性节点：2
+        console.log(oH1.firstChild.nodeType);      //文本节点：3
+
+        // nodeValue:返回节点的值（如果是元素节点返回的是null[元素节点没有值]）
+        console.log(oH1.nodeValue);                                //null
+        console.log(oH1.getAttributeNode('class').nodeValue);     //属性节点返回的是属性值：hehe
+        console.log(oH1.firstChild.nodeValue);                  //文本节点返回的是文本值：element属性
+
+        //children :返回所有的子元素（标签） 
+        //childNodes ：返回所有的子节点
+        //属性节点不能通过该属性获取到，必须通过getAttributeNode
+        var oBody = document.querySelector('body');
+        console.log(oBody.children);   //HTMLCollection(5) [div, h1.hehe, div#box1, div#box2, script, box1: div#box1, box2: div#box2]
+        console.log(oBody.childNodes);  //NodeList(10) [text, div, text, h1.hehe, text, div#box1, text, div#box2, text, script]
+        console.log(oH1.childNodes);  //NodeList(7) [text, span, text, p, text, comment, text]
+
+        //firstChild :属性返回该元素的第一个子节点
+        //firstElementChild ：属性返回该元素第一个子元素（标签）
+        console.log(oH1.firstChild);    //" element属性"
+        console.log(oH1.firstElementChild);     //<span>span</span>
+
+        //lastChild :属性返回该元素的最后一个子节点
+        //lastElementChild ：属性返回该元素最后一个子元素（标签）
+        console.log(oH1.lastChild);    //" 这是一段文字"
+        console.log(oH1.lastElementChild);     //<p>p</p>
+
+        // nextSibling :属性返回紧挨着该元素的下一个兄弟节点
+        // nextElementSibling： 属性返回紧挨着该元素的下一个兄弟元素（标签）
+        console.log(oH1.nextSibling);  //" 99"
+        console.log(oH1.nextElementSibling);//  <div id="box1" style="width:200px;padding:100px"> <div id="item1">item1</div>; <div id="item2">item2</div>; </div>
+
+        // previousSibling :属性返回紧挨着的下一个兄弟节点
+        // previousElementSibling： 属性返回紧挨着的下一个兄弟元素（标签）
+        console.log(oH1.previousSibling);     //" 111"
+        console.log(oH1.previousElementSibling);     //<div>div</div>
+
+        //parentNode,parentElement:效果都用一样，返回的都是父元素，
+        //parentNode是w3c的标准写法，parentElement只能在IE中使用(历史遗留问题)
+        //对象.parentNode//更推荐使用这个
+        console.log(oItem1.parentNode);     //  <div id="box1" style="width:200px;padding:100px"> <div id="item1">item1</div>; <div id="item2">item2</div>; </div>
+        console.log(oItem1.parentElement);  //  <div id="box1" style="width:200px;padding:100px"> <div id="item1">item1</div>; <div id="item2">item2</div>; </div>
+        
+        //innerHTML:返回该元素中的所有内容
+        //textContent：返回该元素的所有文本
+        console.log(oH1.innerHTML);   //element属性   <span>span</span>  <p>p</p>  <!-- 666 -->  这是一段文字
+        console.log(oH1.textContent);   //element属性  span  p     这是一段文字
+        
+        //offsetWidth: 返回元素的宽度（内容宽度+padding+border），不算margin，数值型
+        //offsetHeight： 返回元素的高度（内容高度+padding+border），不算margin，数值型
+        // style里的样式没有生效，是因为被内联样式覆盖了
+        console.log(oBox1.offsetWidth);   //420   
+        console.log(oBox1.offsetHeight);   //420
+
+        //对象.style.属性： 获取的是content区域的宽度，字符型，带px
+        console.log(oBox1.style.width);    //200px
+        console.log(oBox1.style.height);    //啥都没有加载出一个空格：style  （他是加到了内联里，获取也只能获取内联里写过的属性）
+
+        //offsetParent:返回最近已定位父元素
+        console.log(oItem1.offsetParent);   //  <div id="box1" style="width:200px;padding:100px"> <div id="item1">item1</div>; <div id="item2">item2</div>; </div>
+        //offsetTop : 相对于最近已定位父元素距上的距离
+        //offsetLeft : 相对于最近已定位父元素距左的距离
+        console.log(oItem1.offsetTop);   //100
+        console.log(oItem1.offsetLeft);  //100
+    </script>
+</body>
+</html>

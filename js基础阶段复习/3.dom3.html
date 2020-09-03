@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态添加dom结构</title>
+</head>
+<body>
+    <button id="btn1">动态添加dom结构</button>
+
+    <!-- <div id="div1">
+        <h1>这是h1
+            <span>这是span</span>
+        </h1>
+    </div> -->
+
+    <script>
+        var oBtn1 = document.getElementById('btn1');
+        oBtn1.onclick = function() {
+            /*1.创建对象直接通过innerHTML添加dom结构
+            var oDiv1 = document.createElement('div');
+            // 给创建的对象增添属性
+            oDiv1.setAttribute('id','div1');
+            oDiv1.innerHTML = "<h1>这是h1<span>这是span</span></h1>";
+            //必须是document.body不能是body：因为在XML中对象都是自己创建的，没创建的话，body找不到 document.body可以解决这个问题
+            document.body.appendChild(oDiv1);
+            oDiv1.firstChild.style.background = 'red';  */
+
+            // 2.不断的插入元素
+            var oDiv1 = document.createElement('div');
+            var oH1 = document.createElement('h1');
+            var oH1Text = document.createTextNode('这是h1');
+            oH1.appendChild(oH1Text);
+
+            var oSpan = document.createElement('span');
+            var oSpanText = document.createTextNode("这是span");
+            oSpan.appendChild(oSpanText);
+            oH1.appendChild(oSpan);
+
+            oDiv1.appendChild(oH1);
+            document.body.appendChild(oDiv1);
+        }
+    </script>
+</body>
+</html>

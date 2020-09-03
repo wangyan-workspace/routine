@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加减法</title>
+</head>
+<body>
+    <input type="button" value="add" id="btn">
+    <ul>
+        <li>111</li>
+        <li>222</li>
+    </ul>
+    <script src="../jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('#btn').click(function(){
+                $('ul').append("<li>333</li>");
+            });
+            $('ul>li').click(function(){
+                alert(this.innerHTML);
+                // console.log(this.innerHTML);
+            })
+        });
+    </script>
+</body>
+</html>

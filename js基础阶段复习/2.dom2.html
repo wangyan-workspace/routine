@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态创建表格</title>
+    <style>
+        #tab1{
+            margin: 50px auto;
+            /* collapse:相邻的单元格共用同一条边框（采用 collapsed-border 表格渲染模型）。 */
+            border-collapse: collapse;
+            /* separate:默认值。每个单元格拥有独立的边框（采用 separated-border 表格渲染模型） */
+        }
+
+        #tab1,#tab1 td{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn1">添加新行</button>
+    <table id="tab1">
+        <tr>
+            <td>td 1</td>
+            <td>td 2</td>
+            <td>td 3</td>
+        </tr>
+        <tr>
+            <td>td 1</td>
+            <td>td 2</td>
+            <td>td 3</td>
+        </tr>
+    </table>
+
+    <script>
+        var oBtn1 = document.getElementById('btn1');
+        var oTab1 = document.getElementById('tab1');
+        oBtn1.onclick = function() {
+            /*1.人为手动创建 => 动态创建表格
+            // 创建tr(每一行)元素，插入到表格（table）里
+            var oTr = document.createElement('tr');
+            oTab1.appendChild(oTr);
+
+            // 创建td（每一列）元素，插入到每一行（tr）里
+            var oTd1 = document.createElement('td');
+            oTd1.innerHTML = 'tda';
+            oTr.appendChild(oTd1);
+            var oTd2 = document.createElement('td');
+            oTd2.innerHTML = 'tdb';
+            oTr.appendChild(oTd2);
+            var oTd3 = document.createElement('td');
+            oTd3.innerHTML = 'tdc';
+            oTr.appendChild(oTd3);  */
+
+            // 2.调用针对创建动态表格的函数实现
+            var oTr = oTab1.insertRow();   //在table中创建行
+            var oTd = oTr.insertCell();  //在tr中创建列
+            oTd.innerHTML = 'tda';
+            oTr.insertCell().innerHTML = 'tdb';
+            oTr.insertCell().innerHTML = 'tdc';
+        }
+    </script>
+</body>
+</html>

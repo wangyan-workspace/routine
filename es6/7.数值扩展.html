@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数值扩展</title>
+</head>
+
+<body>
+    <script>
+        //如果参数类型不是数值，Number.isFinite一律返回false
+        //Number.isFinite(): 判断是否是数值，返回boolean类型，不能自动将字符串的数字转化为数字（识别不了）
+        console.log(Number.isFinite(5));     //true
+        console.log(Number.isFinite('abc'));  //false
+        console.log(Number.isFinite('5'));    //false
+        console.log('---------------------------------');
+
+        //如果参数类型不是NaN，Number.isNaN一律返回false。
+        // Number.isNaN(): 判断是否不是一个数值，只有对于NaN才返回true，非NaN一律返回false，返回boolean类型
+        console.log(Number.isNaN(NaN));      //true
+        console.log(Number.isNaN(5));        //false
+        console.log(Number.isNaN('5'));      //false
+        console.log(Number.isNaN('abc'));    //false  将abc转化成了数字
+        console.log(Number.isNaN('abc' - 1)); //true  不能将abc转化为数字进行减法运算，所以是NaN
+        console.log('---------------------------------');
+
+        // Number.isInteger():判断是否是整数，返回boolean类型，不能自动将字符串的数字转化为数字（识别不了）
+        console.log(Number.isInteger(5));      //true
+        console.log(Number.isInteger('5'));     //false
+        console.log(Number.isInteger(5.56));    //false
+        console.log(Number.isInteger('5.56'));  //false
+        console.log('---------------------------------');
+
+        //Number.parseInt(): 将字符串转化成整型，转化成功正常输出，转化失败返回NaN，可以识别8进制和16进制
+        console.log(Number.parseInt(5.5));     //5
+        console.log(Number.parseInt('5.5'));    //5
+        console.log(Number.parseInt('a5.5'));   //NaN
+        console.log(Number.parseInt('5.5aa'));  //5
+        console.log(Number.parseInt('0xffffff'));   //16777215 
+        console.log('---------------------------------');
+
+        // Number.parseFloat():将字符串转化为浮点型，转化成功正常输出，转化失败返回NaN，不能识别8进制和16进制
+        console.log(Number.parseFloat('5'));        //5
+        console.log(Number.parseFloat('3.14'));     //3.14
+        console.log(Number.parseFloat('3.0'));      //3
+        console.log(Number.parseFloat('34abc'));    //34
+        console.log(Number.parseFloat('abc34abc')); //NaN
+        console.log(Number.parseFloat('0xffffff')); //0
+        console.log('---------------------------------');
+
+        // Math.trunc():去除一个数的小数部分，返回整数部分，可以识别字符串的数值，将字符串数字转化为数字，在返回整数部分
+        //对于非数值，Math.trunc内部使用Number方法将其先转为数值。
+        //对于空值和无法截取整数的值，返回NaN。
+        console.log(Math.trunc(3.14));    //3
+        console.log(Math.trunc('3.14'));    //3
+        console.log(Math.trunc('3.14aa'));  //NaN
+        console.log(Math.trunc('aa3.14'));  //NaN
+        console.log(Math.trunc(true)); //1
+        console.log(Math.trunc(false)); // 0
+        console.log(Math.trunc(null)); // 0
+        console.log(Math.trunc(NaN));      // NaN
+        console.log(Math.trunc('foo'));    // NaN
+        console.log(Math.trunc());         // NaN
+        console.log(Math.trunc(undefined)); // NaN
+        console.log('---------------------------------');
+
+        // Math.sign():判断数字是正数，负数还是0 ，正数返回1 ，负数返回-1，0返回0 对于非数值，会先将其转换为数值。
+        console.log(Math.sign(123));    //1
+        console.log(Math.sign(-123));   //-1
+        console.log(Math.sign(0));      //0
+        console.log(Math.sign(-0));     //-0
+        console.log(Math.sign(+0));     //0
+        //如果参数是非数值，会自动转为数值。对于那些无法转为数值的值，会返回NaN
+        console.log(Math.sign(''));  // 0
+        console.log(Math.sign(true));  // 1
+        console.log(Math.sign(false));  // 0
+        console.log(Math.sign(null));  // 0
+        console.log(Math.sign('9'));  // 1
+        console.log(Math.sign('foo'));  // NaN
+        console.log(Math.sign());  // NaN
+        console.log(Math.sign(undefined));  // NaN
+        console.log(Math.sign(NaN));  // NaN
+
+
+    </script>
+</body>
+
+</html>

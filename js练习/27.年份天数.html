@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>返回年份里的对应天数</title>
+</head>
+
+<body>
+    <!-- 
+        8.设计一个函数DayOfYear(d)，它接收一个日期参数d，返回一个该日期是所在年份的第几天，
+        如DayOfYear(2000,2,8)的返回值是39.
+       （提示：①定义一个数组months=new Array（31,28,31,30,31,30,31,31,30,31，30,31）记录每个月少天：
+       ②定义一个辅助函数IsLeapYear(y)判定某个年份是否闰年，以确定2月份的天数是28还是29。）
+     -->
+    <script>
+    //   定义一个辅助函数IsLeapYear(y)判定某个年份是否闰年
+    var day = prompt('请输入日期', '2000,2,8');
+    // 定义一个辅助函数IsLeapYear(y)判定某个年份是否闰年
+    function isLeapYear(year) {
+        if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
+            return true;
+        }
+        return false;
+    }
+
+    function dayOfYear(d) {
+        var result = 0;
+        var months = new
+        Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        var aDay = d.split(','),
+            year = parseInt(aDay[0]),
+            month = parseInt(aDay[1]),
+            day = parseInt(aDay[2]);
+
+        if (isLeapYear(year)) {
+            months[1] = 29;
+        }
+        for (var i = 0; i < month - 1; i++) {
+            result += months[i];
+        }
+        result += day;
+
+        return result;
+    }
+    alert(dayOfYear(day));
+    </script>
+
+    <script>
+        function IsLeapYear(y)
+    {//判断是否闰年
+        return (y%4==0 && y%100!=0)||(y%400==0);
+    }
+
+    function DayOfYear(d)
+    {//求某日期d在所有年份的第几天
+        var months=new Array(31,28,31,30,31,30,31,31,30,31,30,31),days,i;
+        if(IsLeapYear(d.getFullYear())) months[2]=29;
+        days=0;
+        for(i=d.getMonth()-1;i>=0;i--) days += months[i];
+        days += d.getDate();
+        return days;
+    }
+
+    var today=new Date();
+    alert("今天("+today.toLocaleDateString()+")是本年度的第"+DayOfYear(today)+"天");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class</title>
+</head>
+<body>
+    <script>
+        /* 1.定义一个类 class */
+        //es6
+        class Person {
+            //构造函数里定义属性
+            constructor(name,age) {
+                this.name = name;
+                this.age = age;
+            }
+            sleep() {
+                console.log(this.name + ' is sleeping...');
+            }
+            // 静态方法：不能通过对象.方法()的方式调用，只能通过 类名.方法()的方式调用
+            static fn() {
+                console.log(666);
+            }
+        }
+
+        let p1 = new Person('lisi',88);
+        console.log(p1.name);  //lisi
+        p1.sleep();         //lisi is sleeping...
+        // p1.fn();        // p1.fn is not a function  会报错
+        Person.fn();        //666
+        
+        /* 继承 */
+        //extends : 可以继承父类的方法
+        class Student extends Person {
+            //...param : 用来接收Student的实例化对象传的实参
+            constructor(...param) {
+                //继承父类的属性 => 使用super()
+                // super(...param)： 自动匹配Person里的属性，继承过来到Student的构造函数中
+                super(...param);
+                this.grade = param[2];  //其他Student类特有的属性，要自己定义，param[下标索引]接收到的实参赋给自定义的属性
+            }
+
+            code() {
+                console.log(this.name + ' is codeing...');
+            }
+        }
+
+        let s1 = new Student('wangwu',33,'19级');
+        s1.code();      //wangwu is codeing...
+        s1.sleep();     //wangwu is sleeping...
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用样式</title>
+    <style>
+        body {
+            width: 1200px;
+            height: 2000px;
+            border: solid;
+            /* 定义边框四个角的弧度，属性值越大，圆角边框越圆 */
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        /* 颜色表示方法 */
+        /* 固定单词表示 */
+        h1 {
+            color: red;
+        }
+
+        /* rgb/rgba */
+        h1 {
+            /* color: rgb(25, 168, 12); */
+            /* 0也要把%写上，否则不生效，显示为黑色 */
+            /* color: rgb(50%, 0%, 0%); */
+            /* alpha 表示透明度 范围0~1 */
+            color: rgba(123, 34, 6, 0.3);
+        }
+
+        /* 16进制表示【hex】 */
+        h1 {
+            color: #ff0000;
+            color: #000;
+            color: #fff;
+            color: #aabbcc;
+        }
+
+        html {
+            font-size: 100px;
+        }
+
+        /* 尺寸 */
+        #box1 {
+            width: 50%;
+            height: 50%;
+            background: cadetblue;
+            font-size: 2px;
+        }
+
+        #box1 .box {
+            /* %:是针对父元素计算的 */
+            width: 50%;
+            /* height: 50%; */
+            /* em是根据 父元素 的字体大小计算来的 */
+            height: 10em;
+            /* rem是根据 根元素 的字体大小计算来的 */
+            /* height: 10rem; */
+
+            /* vw/vh :根据可视窗口 */
+            /* vmin/vmax :可是窗口里的最小值/最大值 */
+            /* height: 10vmin; */
+            /* 高度的计算 */
+            /* height: calc(50% + 10em); */
+            background: rosybrown;
+        }
+
+        .wrapper {
+            font-size: 1em;
+            height: 200px;
+        }
+
+        div {
+            font-size: 1em;
+        }
+
+        .px {
+            width: 200px;
+            height: 50px;
+            background: blue;
+            border: cyan solid 5px;
+            text-align: center;
+        }
+
+        .vw {
+            width: 10vw;
+            background: blue;
+            border: cyan solid 5px;
+        }
+
+        div .em {
+            width: 10em;
+            background: blue;
+            border: cyan solid 5px;
+            font-size: 1.5em;
+        }
+
+        /*背景 */
+        #box2 {
+            width: 800px;
+            height: 500px;
+            border: aquamarine 2px solid;
+            /* background-color: chartreuse; */
+        }
+
+        .bg {
+            width: 200px;
+            height: 400px;
+            /* 设置背景颜色 */
+            background-color: coral;
+            /* 引用图片设置图片背景 */
+            background-image: url(../html/cat.png);
+            /* 背景重复  可以设置背景图片是否重复 */
+            background-repeat: no-repeat;
+            /* background-repeat: repeat; */
+            /* 设置背景图片X轴横坐标方向重复 */
+            /* background-repeat: repeat-x; */
+            /* 设置背景图片Y轴纵坐标方向重复 */
+            /* background-repeat: repeat-y; */
+
+            /* 背景（颜色）默认会占据内边距，背景图片在原位置保持不变，会将文本内容推开 */
+            /* padding: 100px; */
+            /* 背景（背景颜色和背景图片）默认不会占据外边距,会将整个元素向外推开 */
+            /* margin: 100px; */
+
+            /* border: blue solid 50px; */
+
+            /* 背景定位 */
+            /*  background-position 属性改变图像(背景图片)在背景中的位置 */
+            /* 为 background-position 属性提供值有很多方法。
+            1.首先，可以使用一些关键字：top、bottom、left、right 和 center。
+            2.百分数值同时应用于元素和图像。也就是说，图像中描述为 50% 50% 的点（中心点）与元素中描述为 50% 50% 的点（中心点）对齐。
+              如果图像位于 0% 0%，其左上角将放在元素内边距区的左上角。如果图像位置是 100% 100%，会使图像的右下角放在右边距的右下角。 
+              第一个值表示水平方向    第二个值表示垂直方向
+            3.用固定值表示方法，第一个值表示左右 ，第二个值表示上下 
+             比如，如果设置值为 50px 100px，图像（背景图片）在左上角向右 50 像素、向下 100 像素的位置上
+              */
+            /* background-position: center; */
+            /* background-position: 50% 50%; */
+            /* background-position: 10px 100px; */
+
+            /* 背景图片不随着文字的滚动而移动 */
+            overflow: scroll;
+            /* 背景关联 */
+            /* 前提是定义了background-image属性，然后用background-attachment来指明背景图的位置是固定于视口的，
+               还是随着包含块移动的。可简单理解为定义背景图片随滚动轴的移动方式。
+                取值（没有 overflow: scroll的情况下）：
+                scroll:默认值，背景图相对于元素固定，背景随页面滚动而移动，即背景和内容绑定。
+                fixed：背景图相对于视口固定，起始位置是相对与浏览器窗口（可是窗口）左上角而非父元素
+                       所以随页面滚动背景不动，相当于背景被设置在了body上。
+                local：背景图相对于元素内容固定，
+                inhert:继承，没什么说的。
+                该属性可以应用于任何元素。 */
+                /* 要在 overflow: scroll;的基础上设置background-attachment属性值，否则background-attachment: scroll;
+                   和background-attachment: local;效果一样 
+                   background-attachment: scroll;   背景图片不会随着文本的滚动而滚动 
+                   background-attachment: fixed;    起始位置是相对与浏览器窗口（可视窗口）左上角而非父元素
+                   background-attachment: local;    背景图片会和文本内容绑定一起滚动
+                   */
+            /* background-attachment: scroll; */
+            /* background-attachment: fixed; */
+            /* background-attachment: local; */
+
+             /* 规定背景图片的绘制区域  background-origin 属性规定背景图片的定位区域。
+                背景图片可以放置于 content-box、padding-box 或 border-box 区域。
+                background-origin: content-box;   背景图片从文本内容区域开始定位
+                background-origin: padding-box;   背景图片从内边距区域开始定位
+                background-origin: border-box;    背景图片从边框区域开始定位
+                 */
+
+            /* background-origin: content-box; */
+            /* background-origin: padding-box; */
+            /* background-origin: border-box; */
+
+            /* 规定背景图片的尺寸 */
+            /* 以父元素的百分比来设置背景图像的宽度和高度。第一个值设置宽度，第二个值设置高度。
+               如果只设置一个值，则第二个值会被设置为 "auto"。 */
+            /* background-size: 30% 30%; */
+            /* 把背景图像扩展至足够大，以使背景图像完全覆盖背景区域。背景图像的某些部分也许无法显示在背景定位区域中。 */
+            /* background-size: cover; */
+            /* 把图像图像扩展至最大尺寸，以使其宽度和高度完全适应内容区域。 */
+            /* background-size: contain; */
+
+            /* 裁切背景的显示区域（从设置值以外的背景全都不要） */
+            /* 从content区域开始向外裁剪背景 背景被裁剪到内边距框*/
+            /* background-clip: content-box; */
+            /* 从内边距区域开始向外裁剪背景 背景被裁剪到内边距框*/
+            /* background-clip: padding-box; */
+            /* 从边框区域开始向外裁剪背景 背景被裁剪到边框盒。 */
+            /* background-clip: border-box; */
+            /* background是一个总属性 可设置多种不同属性的值 与background-color是有区别的，background在后面的话会覆盖background-color，background-image的属性值 */
+            /* background: aquamarine  url(../html/猫.png); */
+        }
+        /* font */
+        #font{
+            background: rgb(248, 175, 172);
+            height: 50px;
+            /* color设置字的颜色 */
+            color: blue;
+            /* text-align：规定文本的水平对齐方式 值 left、right 和 center 会导致元素中的文本分别左对齐、右对齐和居中 */
+            text-align: center;
+            /* 当line-height:属性值与文本内容设置高度一致时，文本会垂直居中 line-height 属性设置行间的距离（行高） */
+            line-height: 50px;
+            /* 规定添加到文本的装饰效果
+            text-decoration 有 5 个值：none  underline  overline  line-through  blink
+            underline 会对元素加下划线，就像 HTML 中的 U 元素一样。
+            overline 的作用恰好相反，会在文本的顶端画一个上划线。
+            值 line-through 则在文本中间画一个贯穿线，等价于 HTML 中的 S 和 strike 元素。
+            blink 会让文本闪烁，类似于 Netscape 支持的颇招非议的 blink 标记。
+            none 值会关闭原本应用到一个元素上的所有装饰。通常，无装饰的文本是默认外观，但也不总是这样。
+            例如，链接默认地会有下划线。如果您希望去掉超链接的下划线，可以使用以下 CSS 来做到这一点： text-decoration: none */
+            text-decoration: black line-through;
+            
+            /* font-style字体风格：  normal - 文本正常显示 
+                                    italic - 文本斜体显示
+                                    oblique -文本倾斜显示 */
+            font-style: italic;
+            /* font-weight：字体的加粗展示 使用 bold 关键字可以将文本设置为粗体。
+               关键字 100 ~ 900 为字体指定了 9 级加粗度。如果一个字体内置了这些加粗级别，那么这些数字就直接映射到预定义的级别，
+               100 对应最细的字体变形，900 对应最粗的字体变形。数字 400 等价于 normal，而 700 等价于 bold。
+               如果将元素的加粗设置为 bolder，浏览器会设置比所继承值更粗的一个字体加粗。*/
+            font-weight:400;
+            /* font-size：设置字的大小 */
+            font-size: 20px;
+            /* font-family：通用字体系列 */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            /* opacity：不透明度 表示范围0~1 应用于整个元素 而不同于rgba里的alpha，alpha只应用于背景颜色，调节透明度 */
+            opacity: 0.5;
+            }
+    </style>
+</head>
+
+<body>
+    <h1>同学们回去要看<a
+            href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance">优先级与继承</a>的内容，加深理解
+    </h1>
+    <div id="box1">
+        <div class="box">今天学了好多知识</div>
+    </div>
+    <div class="wrapper">
+        <div class="px">I am 200px wide</div>
+        <br>
+        <div class="vw">I am 10vw wide</div>
+        <br>
+        <div class="em">I am 10em wide</div>
+    </div>
+    <div id="box2">
+        <div class="bg">
+            这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......这里事关于背景的很多事......
+        </div>
+    </div>
+    <div id="font">
+        By default we span 100% of the width of our parent element, and we are as tall as our child content.
+    </div>
+</body>
+
+</html>

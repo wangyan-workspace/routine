@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数计算</title>
+</head>
+<body>
+    <!-- 
+        编写一个函数 f(x) = 4x2+3x+2，使用户通过提示对话框输入x的值，能得到相应的计算结果
+     -->
+     <script>
+        function f(x)
+        {
+            return 4*x*x + 3*x + 2;
+        }
+
+        var x;
+        x = prompt("x=","0");
+        //x两边的+号，可以把用户输入的值显示在括号内
+        alert("f("+x+")=" + f(x));
+     </script>
+
+    <script>
+        function f(x) {
+            return 4 * x * x + 3 * x + 2;
+        }
+        var x = prompt('请输入x:');
+        alert(f(x));
+    </script>
+</body>
+</html>

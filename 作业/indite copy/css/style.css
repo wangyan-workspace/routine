@@ -1,0 +1,983 @@
+/* ------------------------------------------------------------------------- *
+ *  基本 Styles
+/* ------------------------------------------------------------------------- */
+body {
+	font-family: "Roboto", Arial, sans-serif;
+	background: #f5f5f5;
+	font-size: 15px;
+	line-height: 1.5em;
+	color: #444;
+	font-weight: 300;
+	height: 2000px;
+}
+
+::selection {
+	background: #333;
+	color: #fff;
+}
+
+::-moz-selection {
+	background: #333;
+	color: #fff;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+	outline: 0;
+}
+
+a:hover {
+	color: #333;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+a,
+a:before,
+a:after {
+	transition-property: background color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease;
+}
+
+a img {
+	transition: opacity 0.2s ease;
+}
+
+#container{
+	background: #f5f5f5;
+    box-shadow: 0 0 60px rgba(0,0,0,0.18);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 40px auto;
+	max-width: 1200px;
+	display: flex;
+}
+
+/* ------------------------------------------------------------------------- *
+ *  header开始
+/* ------------------------------------------------------------------------- */
+
+/* 网站介绍开始 */
+header{
+	background: #fff;
+    border-top: 10px solid #32c1fb;
+    width: 320px;
+    padding: 20px 50px;
+    box-sizing: border-box;
+	box-shadow: 0 0 10px rgba(0,0,0,0.05), 1px 0 rgba(0,0,0,0.05);
+}
+
+header .site-title{
+	padding: 20px 0;
+	font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+	line-height: 1.2em;
+}
+
+header .site-img{
+	display: block;
+	width: 100%;
+	max-height: 60px;
+}
+
+header .site-img img{
+	max-height: 60px;
+}
+
+header .site-description{
+	font-size: 16px;
+    line-height: 1.6em;
+    font-weight: 300;
+    color: #888888;
+    padding-bottom: 20px;
+}
+/* 网站介绍结束 */
+
+/* header导航栏开始 */
+#nav-header ul{
+	width: 100%;
+    margin: 0 auto;
+}
+
+#nav-header ul .nav-toggle{
+	display: none;
+}
+
+#nav-header .menu-item a{
+	width: 220px;
+	height: 20px;
+	color: #666666;
+	font-weight: 600;
+	font-size: 18px;
+	padding: 16px 50px;
+	display: inline-block;
+	line-height: 20px;
+	margin: 0 -50px;
+}
+
+#nav-header .menu-item a:hover{
+	background: #f5f5f5;
+	color: #333;
+}
+
+#nav-header .menu-item>a.active{
+	color: #333;
+}
+
+#nav-header .menu-item>a.sub::after{
+	content: "\f0d7";
+	font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+	display: inline-block;
+    margin-left: 6px;
+    font-size: 14px;
+	line-height: 1.2em;
+	opacity: 0.35;
+}
+#nav-header .menu-item .sub-menu{
+	display: none;
+	padding: 10px 0;
+	width: 220px;
+	background: #ffffff;
+	border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.05);
+	position: absolute;
+	z-index: 1;
+}
+
+#nav-header .menu-item .sub-menu::before {
+	content: '';
+	display: inline-block;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	top: -6px;
+	left: 20px;
+	background: #ffffff;
+	transform: rotate(45deg);
+}
+
+#nav-header .menu-item .sub-menu .last-menu{
+	display: none;
+	padding: 10px 0;
+	width: 220px;
+	background: #ffffff;
+	border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.05);
+	position: absolute;
+	top: 140px;
+	left: 220px;
+	z-index: 1;
+}
+
+#nav-header .menu-item .sub-menu a,
+#nav-header .menu-item .sub-menu .last-menu a
+{
+	font-size: 16px;
+	padding: 8px 20px;
+	font-weight: 400;
+	margin: 0;
+}
+#nav-header .menu-item .sub-menu .last::after{
+	font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+	display: inline-block;
+	content: "\f0da";
+	opacity: 0.35;
+	position: relative;
+	left: 80px;
+}
+
+
+
+
+#nav-header .menu-item>a.sub:hover+.sub-menu {
+	display: block;
+}
+
+#nav-header .menu-item .sub-menu:hover {
+	display: block;
+}
+
+#nav-header .menu-item .sub-menu-item>a.last:hover+.last-menu {
+	display: block;
+}
+
+#nav-header .menu-item .sub-menu .last:hover {
+	display: block;
+}
+/* header导航栏结束 */
+
+/* profile开始 */
+#profile {
+	margin: 30px 0 40px;
+}
+
+#profile .profile-img {
+	border: 10px solid #8c53ff;
+	border-top-color: #32c1fb;
+	border-bottom-color: #ddd;
+	border-left: 0;
+	border-radius: 0 150px 150px 0;
+	width: 260px;
+	height: 270px;
+	margin-left: -50px;
+	margin-bottom: 10px;
+}
+
+#profile .profile-img img {
+	border: 10px solid #fff;
+	border-left: 0;
+	border-radius: 0 240px 240px 0;
+	width: 250px;
+	height: 250px;
+}
+
+#profile .profile-name {
+	color: #333;
+	font-size: 22px;
+	font-weight: 600;
+	line-height: 1.2em;
+	padding: 20px 0;
+}
+
+#profile .profile-description {
+	font-size: 16px;
+	line-height: 1.6em;
+	font-weight: 300;
+	color: #888;
+}
+/* profile结束 */
+
+/* sidebar开始 */
+#sidebar{
+	/* 将文本内容扩大到整个容器宽度 既要向左移动50px又要向右移动50px，元素大小被迫撑开*/
+	margin: 0 -50px;
+}
+#sidebar .sidebar-item{
+	padding: 30px 50px;
+	border-top: 1px solid #eee;
+	font-size: 14px;
+}
+#sidebar h3{
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+#sidebar li{
+	padding: 7px 0;
+	color: #999;
+}
+/* a标签（固执）要特别设置一遍 */
+#sidebar a{
+	color: #999999;
+	font-size: 14px;
+}
+#sidebar a:hover{
+	color: #333;
+}
+/* sidebar小图标的共有样式 */
+#sidebar  li::before{
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 12px;
+	margin-right: 6px;
+	color: #cccccc;
+	display: inline-block;
+	width: 1em;
+	text-align: center;
+}
+/* comment前的小图标 */
+#sidebar .comment li::before{
+	content: "\f075";
+}
+/* post前的小图标 */
+#sidebar .post li::before{
+	content: "\f017";
+}
+/* 滑入li，li前小图标的变化 */
+#sidebar .post li:hover::before{
+	color: #999999;
+	transition: all ease 0.2s;
+}
+
+#sidebar .search input{
+	border: 2px solid #e5e5e5;
+	padding: 9px 8px 9px 26px;
+	width: 100%;
+	box-sizing: border-box;
+	/* 
+	outline 与 border 的区别：
+						border 可应用于几乎所有有形的html元素，而 outline 是针对链接、表单控件和ImageMap等元素设计。
+						从而另一个区别也可以推理出，那就是： outline 的效果将随元素的 focus 而自动出现，
+						相应的由 blur 而自动消失。这些都是浏览器的默认行为，无需JavaScript配合CSS来控制。 
+						outline 不会像border那样影响元素的尺寸或者位置。
+    去除焦点虚线：
+            style="outline:medium none;" hidefocus="true"
+	*/
+	outline: none;
+}
+/* 输入框聚焦 */
+#sidebar .search input:focus{
+	border-color: #dddddd;
+	color: #333333;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+#sidebar .search .form-item {
+	position: relative;
+}
+/* 输入框内加入搜索小图标样式 */
+#sidebar .search .form-item::before{
+	font-size: 14px;
+	line-height: 24px;
+	color: #cccccc;
+	content: "\f002";
+	/* 相对于父元素进行绝对定位 */
+	position: absolute;
+	left: 10px;
+	top: 6px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+/* sidebar结束 */
+
+/* ------------------------------------------------------------------------- *
+ *  header结束
+/* ------------------------------------------------------------------------- */
+
+
+
+/* move-sidebar开始 */
+#move-sidebar {
+	background: #fff;
+	border-top: 10px solid #8c53ff;
+	width: 80px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* 对引入的（搜索）小图标设置样式 */
+#move-sidebar .toggle-search {
+	background: #fff;
+	border: 1px solid #eee;
+	color: #333;
+	text-align: center;
+	font-size: 20px;
+	line-height: 24px;
+	border-radius: 10px;
+	padding: 18px 0;
+	margin: 10px;
+	display: block;
+}
+
+#move-sidebar .social-links {
+	margin-top: 30px;
+}
+
+/* 对引入小图标设置共同样式 */
+#move-sidebar .social-tooltip {
+	font-size: 20px;
+	padding: 18px 10px;
+	margin: 0 20px;
+	color: rgba(0, 0, 0, 0.7);
+	display: block;
+	position: relative;
+}
+
+/* 滑入小图标时变化的样式 */
+#move-sidebar .social-tooltip:hover {
+	background: rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	color: #333;
+}
+
+
+/* 气泡小三角 */
+#move-sidebar .social-tooltip:hover::before {
+	content: '';
+	display: block;
+	border: solid;
+	border-width: 5px 5px 5px 0;
+	border-color: transparent #333;
+	position: absolute;
+	left: 45px;
+	top: 24px;
+}
+
+/* 气泡小正方形*/
+#move-sidebar .social-tooltip:hover::after {
+	/* 小正方形里的内容为a标签里的标题（title），
+	   这样可以同时设置多个不同的有相同含义的title样式 */
+	content: attr(title);
+	display: block;
+	background: #333;
+	color: #fff;
+	padding: 8px 10px;
+	font-size: 14px;
+	line-height: 14px;
+	border-radius: 3px;
+	position: absolute;
+	top: 14px;
+	left: 50px;
+}
+
+#move-sidebar .social-links-item {
+	position: relative;
+	text-align: center;
+	padding: 3px 0;
+}
+
+/* 短横线 */
+#move-sidebar .social-links-item::before {
+	content: "";
+	height: 1px;
+	background: rgba(0, 0, 0, 0.06);
+	position: absolute;
+	left: 30px;
+	right: 30px;
+	top: 0;
+}
+
+#move-sidebar .social-links-item:first-child::before {
+	display: none;
+}
+
+/* move-sidebar结束 */
+
+/* ------------------------------------------------------------------------- *
+ *  main开始
+/* ------------------------------------------------------------------------- */
+main {
+	padding: 40px;
+	/* 弹性盒模型 自适应 */
+	flex: 1;
+	border-top: 10px solid #eee;
+}
+
+main section{
+	width: 100%;
+	background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+main img{
+	max-width: 1920px;
+    margin-bottom: 40px;
+}
+main .content-box{
+	margin: 40px auto 20px;
+	width: 640px;
+	padding: 0 40px;
+	position: relative;
+	top: -46px;
+}
+
+main .content-box .content-title{
+	font-weight: 600;
+    font-size: 38px;
+    line-height: 1.3em;
+    letter-spacing: -1px;
+	color: #333;
+	margin: 40px 0 20px;
+}
+
+main .content-box .content-meta{
+	height: 33px;
+	font-weight: 300;
+    font-size: 15px;
+	color: #999;
+	padding-left: 1px;
+}
+
+main .content-box .content-meta span{
+	margin-right: 10px;
+}
+
+main .content-box .content-meta  i{
+	margin-right: 8px;
+}
+
+main .content-box .content-meta .meta-category a{
+	display: inline-block;
+    background: #eee;
+    padding: 4px 10px;
+    margin-bottom: 3px;
+	color: #999;
+	border-radius: 10px;
+}
+
+main .content-box .content-meta .meta-author a{
+	color: #999;
+}
+
+main .content-box .content-meta .meta-category a:hover{
+	background: #e5e5e5;
+	color: #777;
+	border-radius: 10px;
+}
+
+/* 文章文字部分开始 */
+main .content{
+	font-size: 19px;
+	line-height: 1.6em;
+	margin: 0 40px 80px;
+	position: relative;
+	top: -45px;
+	overflow: hidden;
+}
+
+main .content .content-description{
+	width: 640px;
+	margin-bottom: 32px;
+    box-sizing: border-box;
+}
+
+main .content .content-title{
+	max-width: 640px;
+    margin: 32px auto;
+	box-sizing: border-box;
+	font-size: 34px;
+	letter-spacing: -0.7px;
+	font-weight: 600;
+	line-height: 1.3em;
+	color: #333;
+}
+blockquote::before{
+	content: "\f10d";
+    color: #ccc;
+    font-size: 32px;
+    font-style: normal;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 1625px;
+}
+
+blockquote p{
+	font-weight: 400;
+    color: #444;
+	margin-bottom: 0.75em;
+	margin: 0 0 20px 0;
+	padding-left: 50px;
+	transform: skewX(-5deg);
+}
+
+main .content ul{
+	max-width: 640px;
+	margin: 32px auto;
+	box-sizing: border-box;
+}
+main .content ul li{
+	font-size: 19px;
+	list-style: square;
+	margin: 0 auto;
+	margin-left: 30px;
+}
+/* 文字部分结束 */
+
+/* 作者信息开始 */
+main article .author{
+	margin: 40px 0;
+	max-width: 640px;
+	padding: 0 40px;
+}
+
+main article .author .author-bio{
+	background: #f5f5f5;
+    padding: 0 20px 20px;
+    border-radius: 10px;
+    position: relative;
+    color: #777;
+    margin: 40px 0;
+	text-align: center;
+}
+
+main article .author .author-bio .author-img{
+	width: 64px;
+    height: auto;
+    position: relative;
+    display: inline-block;
+	margin-top: -32px;
+}
+
+main article .author .author-bio .author-img img{
+	display: block;
+    width: 100%;
+	height: auto;
+	/* 图片变圆 */
+	border-radius: 100%;
+	margin: 0;
+}
+
+main article .author .author-bio .author-img::after{
+	content: "\f303";
+    color: #fff;
+    font-size: 10px;
+    line-height: 12px;
+	width: 12px;
+	height: 12px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    text-align: center;
+    border-radius: 100%;
+	background: #333;
+    position: absolute;
+	top: 44px;
+	left: 44px;
+    padding: 4px 4px;
+}
+
+main article .author .author-bio .author-name{
+	color: #333;
+    font-size: 19px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+main article .author .author-bio .author-description{
+	color: #777;
+    font-size: 16px;
+	line-height: 1.5em;
+	width: 600px;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 8px;
+}
+/* 作者信息结束 */
+
+/* 分享框开始 */
+main article .container-share{
+	width: 640px;
+	height:66px;
+	border: 1px solid #eee;
+	border-radius: 10px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	display: flex;
+}
+
+main article .container-share .box{
+	display: inline-block;
+	height: 64px;
+	display: flex;
+	margin: 0;
+}
+
+main article .container-share .box .box-group div{
+	display: inline-block;
+}
+
+main article .container-share .box .fas{
+	font-weight: 900;
+	font-family: "Font Awesome 5 Free";
+	width: 1em;
+	text-align: center;
+	content: "\f067";
+}
+
+main article .container-share .share-first .fa-plus{
+	color: #24a5db;
+}
+
+main article .container-share .share-second .fa-plus{
+	color: #0077b5;
+
+}
+
+main article .container-share .box .fab{
+	font-weight: 400;
+	font-family: "Font Awesome 5 Brands";
+	display: inline-block;
+	width: 1em;
+	text-align: center;
+	font-style: normal;
+	font-variant: normal;
+	font-size: 25px;
+	margin-left: 20px;
+	position: relative;
+	top: 3px;
+	
+}
+
+main article .container-share .box .fa-twitter{
+	color: #24a5db;
+	content: "\f099";
+}
+
+main article .container-share .box .fa-linkedin{
+	color: #0077b5;
+	content: "\f08c";
+}
+
+main article .container-share .box .box-group{
+	display: block;
+    padding: 16px 20px;
+}
+
+main article .container-share .box .box-group .count{
+    background: #eee;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 30px;
+    text-align: center;
+	border-radius: 6px;
+	padding: 0 30px;
+}
+main article .container-share .share-first .box-group::after{
+	display: none;
+	content: '';
+    width: 6px;
+	height: 6px;
+	background: #24a5db;
+	border-top: 1px solid #eee;
+	border-right: 1px solid #eee;
+	transform: rotate(45deg);
+	position: relative;
+	left: 72px;
+	top: -20px;
+}
+
+main article .container-share .share-second .box-group::after{
+	display: none;
+	content: '';
+    width: 6px;
+	height: 6px;
+	background: #0077b5;
+	border-top: 1px solid #eee;
+	border-right: 1px solid #eee;
+	transform: rotate(45deg);
+	position: relative;
+	left: 72px;
+	top: -20px;
+}
+
+
+main article .container-share .share-first .box-group:hover>.count{
+	background: #24a5db;
+}
+
+main article .container-share .share-first .box-group:hover>.count>.fa-plus{
+	color: #eee;
+}
+
+main article .container-share .share-first .box-group:hover:last-child::after{
+	display: block;
+}
+
+main article .container-share .share-second .box-group:hover>.count{
+	background: #0077b5;
+}
+
+main article .container-share .share-second .box-group:hover>.count>.fa-plus{
+	color: #eee;
+}
+
+main article .container-share .share-second .box-group:hover:last-child::after{
+	display: block;
+}
+/* 分享框结束 */
+
+/* 阅读开始 */
+main article .heading{
+	font-size: 18px;
+	font-weight: 600;
+	width: 640px;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+
+main article .heading .fa-hand-point-right{
+	font-size: 22px;
+	margin-right: 6px;
+	font-weight: 900;
+	font-family: "Font Awesome 5 Free";
+	width: 1em;
+	text-align: center;
+	content: "\f0a4";
+}
+/* 阅读结束 */
+
+/* 推荐开始 */
+main article .recommend{
+	width: 640px;
+	margin: 0 auto;
+	list-style: none;
+	display: flex;
+	margin-bottom: 40px;
+}
+
+main article .recommend .recommend-item{
+	display: inline;
+	border-right: 1px solid transparent;
+	display: block;
+}
+
+main article .recommend a{
+	color: #333;
+	outline: none;
+	text-decoration: underline;
+}
+
+main article .recommend img{
+	display: block;
+    width: 100%;
+	height: auto;
+	margin-bottom: 0;
+}
+
+main article .recommend span{
+	width: 24px;
+    height: 24px;
+    margin: 0 0 -12px -12px;
+	border-radius: 3px;
+	background: rgba(0,0,0,0.7);
+    color: #fff;
+    text-align: center;
+	display: block;
+	transform: rotate(-45deg);
+	position: relative;
+	top: -73px;
+	left: 105px;
+}
+
+main article .recommend span:hover{
+	background:rgba(255, 255, 255, 0.9);
+	color: #000;
+}
+
+main article .recommend .fa-play{
+	font-size: 12px;
+    line-height: 16px;
+	padding: 5px 0;
+	margin-left: 2px;
+	font-weight: 900;
+	font-family: "Font Awesome 5 Free";
+	width: 1em;
+	text-align: center;
+	content: "\f04b";
+	transform: rotate(45deg);
+}
+
+main article .recommend img:hover+span{
+	background:rgba(255, 255, 255, 0.9);
+	color: #000;
+	transition: all 0.8s ease;
+}
+
+main article .recommend .recommend-title{
+	margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.4em;
+    letter-spacing: 0;
+	display: block;
+	margin-top: 20px;
+}
+
+main article .post-nav{
+	width: 640px;
+	background: #f5f5f5;
+	border-radius: 10px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	display: flex;
+}
+
+main article .post-nav .skip{
+	display: inline-block;
+}
+
+main article .post-nav .skip .fa-chevron-left{
+	color: #ccc;
+    font-size: 18px;
+	font-weight: 900;
+	font-family: "Font Awesome 5 Free";
+	width: 1em;
+	text-align: center;
+	content: "\f053";
+	padding-top: 10px;
+	margin-right: 10px;
+}
+
+main article .post-nav .skip .fa-chevron-left:hover{
+	color: rgba(0, 0, 0, 0.7);
+}
+
+main article .post-nav .skip span{
+	display: block;
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 0.5px;
+}
+
+main article .post-nav .skip .strong{
+	font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+
+}
+
+main article .report .heading{
+	font-size: 18px;
+    font-weight: 600;
+	margin-bottom: 1em;
+	color: #333;
+	margin-left: 30px;
+}
+
+main article .report .report-way{
+	display: flex;
+}
+
+main article .report .report-way li{
+	display: inline-block;
+}
+
+main article .report .report-way a{
+	color: #333;
+	border-bottom-color: #333;
+	margin-right: 4px;
+	background: #f5f5f5;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 10px 14px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+main article .report .fa-comments{
+	margin-right: 6px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 400;
+	width: 1em;
+	text-align: center;
+	color: #333;
+	content: "\f086";
+}
+
+main article .report .fa-share{
+	margin-right: 6px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 400;
+	width: 1em;
+	text-align: center;
+	color: #aaa;
+	content: "\f064";
+}
+/* 推荐结束 */
