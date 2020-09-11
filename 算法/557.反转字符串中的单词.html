@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反转字符串中的单词</title>
+</head>
+
+<body>
+    <!-- 给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。 -->
+    <script>
+        var reverseWords = function (s) {
+            /* let arr = s.split(' ');  //将字符串通过空格换分，返回一个数组
+            // console.log(arr);  //["Let's", "take", "LeetCode", "contest"]
+            let arr2 = arr.map((item) => {  //map方法遍历arr数组
+                // reserve():用来实现每个英文字母的翻转 join():实现将数组元素通过空字符串连接到一起
+                return item.split('').reverse().join('');
+            })
+            console.log(arr2)
+            return arr2.join(' ') */
+            return s.split(' ').map((item) => {  
+                return item.split('').reverse().join('');
+            }).join(' ')
+        };
+        console.log(reverseWords("Let's take LeetCode contest"));
+    </script>
+</body>
+
+</html>

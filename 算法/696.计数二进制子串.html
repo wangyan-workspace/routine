@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数二进制子串</title>
+</head>
+
+<body>
+    <script>
+        /*
+        给定一个字符串 s，计算具有相同数量0和1的非空(连续)子字符串的数量，并且这些子字符串中的所有0和所有1都是组合在一起的。
+        重复出现的子串要计算它们出现的次数。
+        */
+        //方法一：截取字符串，寻找符合条件的字符串
+        // 找符合规则的字符串
+        /*function fn(str){
+         let i = str.match(/^(0+|1+)/)[0];  //00
+         let j = (i[0]^1).toString().repeat(i.length)  //异或^ : 0^1=1  1^1=0   重复后的数字11
+         // console.log(i[0]^1)  //repeat方法，是字符串的方法，数字异或之后，要将数字型转换为字符型，才能实现重复
+         let reg = new RegExp(`^(${i}${j})`)  //正则表达式：以i,j变量开头的字符串
+         if(reg.test(str)) {
+             // return i+j;
+             return RegExp.$1  //23,24行等价
+         }else {
+             return ''
+         }
+ 
+         // console.log(i)
+        }
+         var countBinarySubstrings = function (s) {
+             // 截取s，把截取后的s传给fn
+             let res = [];
+             for (let i = 0; i < s.length - 1; i++) {
+                 let str1 = fn(s.slice(i))  //slice(i)从第几个位置开始截取字符串,调用fn方法寻找符合条件的字符串
+                 if(str1) {
+                     res.push(str1); //将符合条件的字符串保存到数组中
+                 }
+             }
+             console.log(res);
+             return res.length;  //返回数组的长度，即为符合条件的字符串的个数
+         }; */
+
+        var countBinarySubstrings = function (s) {
+            let counts = s.match(/0+|1+/g);
+            console.log(counts);
+            let res = 0;
+            for (let i = 1; i < counts.length; i++) {
+                res += Math.min(counts[i].length, counts[i - 1].length)
+            }
+            return res;
+        };
+        console.log(countBinarySubstrings("00110011"));
+    </script>
+</body>
+
+</html>
