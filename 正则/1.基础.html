@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,4 +38,45 @@
     </script>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式</title>
+</head>
+
+<body>
+    <script>
+        // 直接量的方式
+        let reg1 = /abc/
+        let str1 = 'abchcsdcjczjxkcvhlz'
+        console.log('str1', reg1.exec(str1));  //str1 ["abc", index: 0, input: "abchcsdcjczjxkcvhlz", groups: undefined]
+        // 创建RegExp对象
+        let reg2 = new RegExp('abc')
+        let str2 = 'shdshabcklbnmn'
+        let str3 = 'shdshatbyclvnklbnmn'
+
+        /**
+         * 正则表达式匹配字符串
+         * 正则表达式的exec方法简介
+            reg.exec(str);
+            语法：
+            其中str为要执行正则表达式的目标字符串。
+
+         */
+        console.log('str1', reg2.exec(str1));  //str1 ["abc", index: 0, input: "abchcsdcjczjxkcvhlz", groups: undefined]
+
+        console.log('str2', reg1.exec(str2));  //str2 ["abc", index: 5, input: "shdshabcklbnmn", groups: undefined]
+        console.log('str3', reg1.exec(str3));  //str3 null
+
+        console.log('str1', reg1.test(str1));  //str1 true
+        console.log('str2', reg1.test(str2));  //str2 true
+        console.log('str3', reg1.test(str3));  //str3 false
+    </script>
+</body>
+
+>>>>>>> 66bb3160060176838c7b86b1d59003071410ad2b
 </html>
