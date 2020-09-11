@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>规则</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * c{n}
+       {1}表示一个的意思。
+       /c{1}/只能匹配一个c。
+       /c{2}/则会匹配两个连续的c。
+       以此类推,
+       /c{n}/则会匹配n个连续的c。
+     */
+    let reg1 = /c{1}/
+    let str1 = 'cainiao'
+    console.log(reg1.exec(str1));  //["c", index: 0, input: "cainiao", groups: undefined]
+
+    let reg2 = /c{2}/
+    let str2 = 'ccainiao'
+    console.log(reg2.exec(str1));  //null
+    console.log(reg2.exec(str2));  //["cc", index: 0, input: "ccainiao", groups: undefined]
+
+    /**
+     * c{m,n}会匹配到m到n个连续的c,且m小于等于n,匹配时尽可能多的匹配（如果字符串连续均满足m,n的个数，按n的个数匹配）
+     * 如果字符串中有多个连续的字符超过匹配的最大值，也只会按最大值匹配字符，不会把所有连续的字符匹配出来
+     */
+    let reg3 = /c{1,3}/
+    // let str3 = 'aacc'
+    // let str3 = 'aaccccc'
+    let str3 = 'aac'
+    console.log(reg3.exec(str3));
+
+    /**
+     * c{n,}
+     * c{1,}表示1个以上的c
+     * c{2,}表示2个以上的c
+     * c{n,}表示n个以上的c
+     * c{n,}表示最少n个c，最多则不限个数。
+     */
+    let reg4 = /a{1,}/
+    let str4 = 'aaaagjhfldkrgj;o'
+    console.log(reg4.exec(str4));  //["aaaa", index: 0, input: "aaaagjhfldkrgj;o", groups: undefined]
+
+    /**
+     * 贪心(贪婪)与非贪心(非贪婪)
+     * *,+,?    尽可能多的匹配
+     *表示0次或者多次，等同于{0,}，即c* 和 c{0,} 是一个意思。
+     +表示一次或者多次，等同于{1,}，即c+ 和 c{1,} 是一个意思。
+     ?表示0次或者1次，等同于{0,1}，即c? 和 c{0,1} 是一个意思。
+     */
+
+    let reg5 = /b*/
+    let str5 = 'bbbbgdhsdghjnzxc'
+    console.log(reg5.exec(str5));  //["bbbb", index: 0, input: "bbbbgdhsdghjnzxc", groups: undefined]
+
+    let reg6 = /b+/
+    let str6 = 'gdhsdghjbbbbnzxc'
+    console.log(reg6.exec(str6)); //["bbbb", index: 8, input: "gdhsdghjbnzxc", groups: undefined]
+
+    let reg7 = /b?/
+    let str7 = 'bbbbbbbbbgdhsdghjbbbbnzxc'
+    console.log(reg7.exec(str7));  //["b", index: 0, input: "bbbbbbbbbgdhsdghjbbbbnzxc", groups: undefined]
+
+    /**
+     * 如果我们希望正则尽量少地匹配字符，那么就可以在表示数字的符号后面加上一个?。组成如下的形式：
+       {n,}?, *?, +?, ??, {m,n}?
+     */
+    //  let reg8 = /d*?/ 
+    let reg8 = /d??/
+    let str8 = 'ddddddddddddfjskuejr'
+    //  console.log(reg8.exec(str8));  //["d", index: 0, input: "ddddddddddddfjskuejr", groups: undefined]
+    console.log(reg8.exec(str8));  //["", index: 0, input: "ddddddddddddfjskuejr", groups: undefined]
+
+    let reg9 = /c{1,}?/;
+    let str9 = 'ccccc';
+    console.log(reg9.exec(str9))  //["c", index: 0, input: "ccccc", groups: undefined]
+
+    /**
+     * /^开头,结尾$/
+     ^表示只匹配字符串的开头
+     $则只匹配字符串结尾的字符
+     */
+    let reg10 = /^e/
+    //  let str10 = '维生素e'
+    let str10 = 'ejfzjdf'
+    //  console.log(reg10.exec(str10))  //null
+    console.log(reg10.exec(str10))  //["e", index: 0, input: "ejfzjdf", groups: undefined]
+
+    let reg11 = /f$/
+    //  let str11 = 'fDfzgffsff'
+    let str11 = 'sjahdjhjd'
+    //  console.log(reg11.exec(str11))  //["f", index: 9, input: "fDfzgffsff", groups: undefined]
+    console.log(reg11.exec(str11))  //null
+
+    /**
+     * ‘.’会匹配字符串中除了换行符\n之外的所有字符
+     */
+    let reg12 = /./
+    let str12 = '维生素c'
+    console.log(reg12.exec(str12))  //["维", index: 0, input: "维生素c", groups: undefined]
+
+    let reg13 = /.*/
+    let str13 = '维生素c'
+    console.log(reg13.exec(str13))  //["维生素c", index: 0, input: "维生素c", groups: undefined]
+
+    /**
+     * 二选一，正则表达式中的或，“|“
+       b|c表示，匹配b或者c。
+     */
+    let reg14 = /b|c/
+    let str14 = 'blueidea'
+    console.log(reg14.exec(str14)) //["b", index: 0, input: "blueidea", groups: undefined]
+
+    let reg15 = /b|c/
+    let str15 = 'catblueidea'
+    console.log(reg15.exec(str15)) //["c", index: 0, input: "catblueidea", groups: undefined]
+
+    let reg16 = /^b|c.+/  //  | 的优先级高
+    let str16 = 'blueidea'
+    console.log(reg16.exec(str16))  //["b", index: 0, input: "blueidea", groups: undefined]
+
+    let reg17 = /^(b|c).+/  //  ()的优先级最高
+    let str17 = 'blueidea'
+    //  如果你也实验了的话，会发现返回的结果后面多出来一个“,b“，这是()内的b|c所匹配的内容。
+    //我们在正则表达式内括号里写的内容会被认为是子正则表达式，所匹配的结果也会被记录下来供后面使用。
+    console.log(reg17.exec(str17))  //["blueidea", "b", index: 0, input: "blueidea", groups: undefined]
+
+    /**
+     * [abc]表示a或者b或者c中的任意一个字符
+     */
+    let reg18 = /^[abc]/;
+    let str18 = 'bbs.blueidea.com';
+    console.log(reg18.exec(str18))  //["b", index: 0, input: "bbs.blueidea.com", groups: undefined]
+
+    let reg19 = /^[abc]/;
+    let str19 = 'test';
+    console.log(reg19.exec(str19))  //null
+
+    // 我们在字字符集合中使用如下的表示方式:[a-z],[A-Z],[0-9]，分别表示小写字母，大写字母，数字。
+    // let reg20 = /^[a-zA-Z_][a-zA-Z0-9]+/
+    let reg20 = /^[A-z][A-z0-9]+/  //根据ASCII大小，146行和147行等价
+    let str20 = '_test'
+    console.log(reg20.exec(str20)); //["_test", index: 0, input: "_test", groups: undefined]
+
+    /**
+     * 反字符集合[^abc]
+     ^在正则表达式开始部分的时候表示开头的意思，例如/^c/表示开头是c；
+     但是在字符集和中，它表示的是类似“非“的意思，例如[^abc]就表示不能是a，b或者c中的任何一个。
+     由此我们可知：[^0-9]表示非数字，[^a-z]表示非小写字母
+     */
+    let reg21 = /[^abc]/
+    let str21 = 'blueidea'
+    console.log(reg21.exec(str21))  //["l", index: 1, input: "blueidea", groups: undefined]
+
+    /**
+     * 边界与非边界
+     *  /\bc/ 左边界是c
+     *  /c\b/ 右边界是c
+     */
+    let reg22 = /\bc/
+    //  let str22 = 'hjkulc'
+    let str22 = 'chjkul'
+    //  console.log(reg22.exec(str22))  //null
+    console.log(reg22.exec(str22))  //["c", index: 0, input: "chjkul", groups: undefined]
+
+    let reg23 = /c\b/
+    //  let str23 = 'hjkulc'
+    let str23 = 'chjkul'
+    //  console.log(reg23.exec(str23))  //["c", index: 5, input: "hjkulc", groups: undefined]
+    console.log(reg23.exec(str23))   //null
+
+    /**
+     * 与\b对应\B表示非边界
+     */
+    let reg24 = /\Bc/;
+    let str24 = 'bcb';
+    console.log(reg24.exec(str24))  //["c", index: 1, input: "bcb", groups: undefined]
+
+    let reg25 = /\Bc/;
+    let str25 = 'cainiao';
+    console.log(reg25.exec(str25))  //null   因为\B告诉正则，只匹配非边界的c。
+
+    /**
+     * 数字与非数字
+     \d表示数字的意思   [0-9]
+     \D表示非数字       [^0-9]
+     */
+    let reg26 = /\d/;
+    let str26 = 'cainiao8';
+    console.log(reg26.exec(str26))  //["8", index: 7, input: "cainiao8", groups: undefined]
+
+    let reg27 = /\D/;
+    let str27 = 'cainiao8';
+    console.log(reg27.exec(str27))  //["c", index: 0, input: "cainiao8", groups: undefined]
+
+    /**
+     *  空白
+     *  \n匹配换行符
+     *  \s匹配单个空格 等同于[\f\n\r\t\v] 
+     * 
+     *  \f匹配换页符
+     *  \r匹配回车 
+     *  \t匹配制表符 
+     *  \v匹配垂直制表符
+     * 
+     *  \S表示非空格字符
+     */
+    let reg28 = /\s.+/
+    // let str28 = 'This is a test String.'
+    let str28 = 'This         is a test String.'
+    // console.log(reg28.exec(str28));  //[" is a test String.", index: 4, input: "This is a test String.", groups: undefined]
+    console.log(reg28.exec(str28));  //["         is a test String.", index: 4, input: "This         is a test String.", groups: undefined]
+
+    let reg29 = /\S+/;
+    let str29 = 'This is a test String.';
+    console.log(reg29.exec(str29))  //["This", index: 0, input: "This is a test String.", groups: undefined]  匹配结果为This，当遇到第一个空格之后，正则就停止匹配了
+
+    /**
+     * 单词字符
+     \w表示单词字符，等同于字符集合[a-zA-Z0-9_]。
+     \W表示非单词字符,等同于字符集合[^a-zA-Z0-9_]
+     */
+    let reg30 = /\w+/;
+    let str30 = '.className';
+    console.log(reg30.exec(str30))  //["className", index: 1, input: ".className", groups: undefined]  只有第一个“.”——唯一的非单词字符没有匹配。
+
+    let reg31 = /\w+/;
+    let str31 = '中文如何？';
+    console.log(reg31.exec(str31)) //null
+
+    let reg32 = /\W+/;
+    let str32 = '中文如何？';
+    console.log(reg32.exec(str32)) //["中文如何？", index: 0, input: "中文如何？", groups: undefined]
+    console.clear()
+    /**
+     * 反向引用
+     形式如下：/(子正则表达式)\1/  “\1”是等同于“第1个括号匹配的内容”，而不是“第一个括号的内容”。
+     */
+    let reg33 = /(\w)(\w)/
+    let str33 = 'woow'
+    console.log(reg33.exec(str33))  // ["wo", "w", "o", index: 0, input: "woow", groups: undefined] wo是整个正则匹配的内容，w是第一个括号里的子正则表达式匹配的内容，o是第二个括号匹配的内容。
+
+    let reg34 = /(\w)\1/;
+    let str34 = 'blueidea';
+    console.log(reg34.exec(str34))  //null 这里的“\1”就叫做反向引用，它表示的是第一个括号内的字正则表达式匹配的内容。在上面的例子中，第一个括号里的(\w)匹配了b，因此“\1”就同样表示b了，在余下的字符串里自然找不到b了。
+
+    let reg35 = /(\w)\1/;
+    let str35 = 'bbbbblueidea';
+    console.log(reg35.exec(str35)) //["bb", "b", index: 0, input: "bbbbblueidea", groups: undefined]
+
+    let reg36 = /(\w)(\w)\2\1/
+    let str36 = 'woow'
+    console.log(reg36.exec(str36));  //["woow", "w", "o", index: 0, input: "woow", groups: undefined]  因为第一个括号匹配到w，第二个括号匹配到o，而\2\1则表示ow，恰好匹配了字符串的最后两个字符。
+
+    /**
+     * 不记录子正则表达式的匹配结果
+     使用形如(?:pattern)的正则就可以避免保存括号内的匹配结果
+     */
+    let reg37 = /^(b|c).+/
+    let str37 = 'bbs.blueidea.com'
+    console.log(reg37.exec(str37)); //["bbs.blueidea.com", "b", index: 0, input: "bbs.blueidea.com", groups: undefined]
+
+    let reg39 = /^(?:b|c).+/
+    let str39 = 'bbs.blueidea.com'
+    console.log(reg39.exec(str39)); //["bbs.blueidea.com", index: 0, input: "bbs.blueidea.com", groups: undefined]
+
+    let reg38 = /^(b|c)\1/
+    let str38 = 'bbs.blueidea.com'
+    console.log(reg38.exec(str38)); // ["bb", "b", index: 0, input: "bbs.blueidea.com", groups: undefined]
+
+    let reg40 = /^(?:b|c)\1/
+    let str40 = 'bbs.blueidea.com'
+    console.log(reg40.exec(str40));  //null 因为不记录子正则表达式的匹配结果，没办法反向引用，固为null
+
+    /**
+     * 正向预查
+     形式：(?=pattern)
+     所谓正向预查，意思就是：要匹配的字符串，后面必须紧跟着pattern！
+     我们知道正则表达式/cainiao/会匹配cainiao。同样，也会匹配cainiao9中的cainiao。但是我们可能希望，cainiao只能匹配cainiao8中的菜鸟。
+     需要注意的是，括号里的内容并不参与真正的匹配，只是检查一下后面的字符是否符合要求而已，例如下面的正则，返回的是cainiao，而不是cainiao8。
+     */
+    let reg41 = /cainiao(?=8)/;
+    let str41 = 'cainiao9';
+    console.log(reg41.exec(str41));  //null
+
+    let reg42 = /cainiao(?=8)/;
+    let str42 = 'cainiao8';
+    console.log(reg42.exec(str42));  //["cainiao", index: 0, input: "cainiao8", groups: undefined]
+
+    /**
+     * 匹配元字符
+     我们之前用过*,+,?之类的符号，它们在正则表达式中都有一定的特殊含义，
+     类似这些有特殊功能的字符都叫做元字符。
+     若想匹配元字符可以通过转义字符转义
+     */
+    let reg43 = /c\*/;
+    let str43 = 'c*';
+    console.log(reg43.exec(str43));  //["c*", index: 0, input: "c*", groups: undefined]
+    console.clear()
+    /**
+     *  全局匹配，修饰符g  形式：/pattern/g
+     *  不区分大小写，修饰符i  形式：/pattern/i
+     *  行首行尾，修饰符m  /pattern/m  m修饰符的作用是修改^和$在正则表达式中的作用，让它们分别表示行首和行尾。例
+     */
+    let reg44 = /b/g
+    let str44 = 'bbs.blueidea.com'
+    console.log(reg44.lastIndex);    //0
+    console.log(reg44.exec(str44));  //["b", index: 0, input: "bbs.blueidea.com", groups: undefined]
+    console.log(reg44.lastIndex);    //1
+    console.log(reg44.exec(str44));  //["b", index: 1, input: "bbs.blueidea.com", groups: undefined]
+    console.log(reg44.lastIndex);    //2
+    console.log(reg44.exec(str44));  //["b", index: 4, input: "bbs.blueidea.com", groups: undefined]
+    console.log(reg44.lastIndex);    //5
+    console.log(reg44.exec(str44));  //null
+
+    let reg45 = /b/;
+    let str45 = 'BBS';
+    console.log(reg45.exec(str45));  //null
+
+    let reg46 = /b/i;
+    let str46 = 'BBS';
+    console.log(reg46.exec(str46));  //["B", index: 0, input: "BBS", groups: undefined]
+
+    let reg47 = /^b/;
+    let str47 = 'test\nbbs';
+    console.log(reg47.exec(str47)); //null 匹配失败，因为字符串的开头没有b字符。
+
+    let reg48 = /^b/m;
+    let str48 = 'test\nbbs';
+    console.log(reg48.exec(str48));  //["b", index: 5, input: "test↵bbs", groups: undefined] 因为加了m修饰符之后，^已经表示行首，由于bbs在字符串第二行的行首，所以可以成功地匹配
+    console.clear()
+    /**
+     *  使用字符串的方法执行正则表达式
+     *  search    形式： str.search(reg);
+     *  match     形式：str.match(reg);
+     *  replace   形式：str. replace (reg,’new str’);
+     *  split     形式： str.split(reg);
+     */
+    let str = 'hello world'
+    console.log(str.search('o'));        // 4
+    console.log(str.search(/o/));      //4
+    console.log(str.match(/o/g));      // ["o", "o"]
+    console.log(str.replace(/o/g, '666'));  //hell666 w666rld
+    console.log(str.split('l'));    //["he", "", "o wor", "d"]
+    console.log(str.split(/\s/));  //["hello", "world"]
+  </script>
+</body>
+
+</html>
