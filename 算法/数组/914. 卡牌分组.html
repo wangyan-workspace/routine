@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>914. 卡牌分组</title>
+</head>
+
+<body>
+    <img src="./欧几里得算法求最大公约数.jpg" alt="">
+    <script>
+        // 求最大公约数
+        /*let max = Math.min(a,b);
+        let res = 1;
+        for(let i=2;i<=max;i++) {
+            if(a%i==0 && b%i == 0) {
+                res = i;
+            }
+        }
+        return res; 
+        */
+
+        /*a,b (5,2)
+        a = c*b + d   //d = a%b   5%2 = 2...1
+        d == 0;  b
+        d>0; b=e*d+g   //g=b%d
+             g==0; d   a= c*e*d + b = (c*e+1)d
+        */
+
+        function fn(a,b) {
+            if(a % b == 0) {
+                return b
+            } else {
+                return fn(b,a%b)
+            }
+        }
+        var hasGroupsSizeX = function (deck) {
+            // 得到都是个数的数组  [2,2,2,2]
+            let obj = {};
+            for (let num of deck) {
+                // obj[num]:定义obj对象的属性
+                obj[num] = obj[num] ? ++obj[num] : 1
+            }
+            console.log(obj);
+            let arr = Object.values(obj);  //Object.values(obj) :调用object的values方法，取出obj的属性值
+            console.log(arr);   //[2, 2, 2, 2]
+            let res = arr[0];
+            //every():用来判断数组成员是否符合某种条件。接受一个函数作为参数，所有数组成员依次执行该函数，
+            //返回一个布尔值。该函数接受三个参数，依次是当前位置的成员、当前位置的序号和整个数组。
+            //所有数组成员的返回值都是true，才返回true，否则false。
+            return arr.every(i => (res = fn(res, i)) > 1)   //i:arr数组中的每个元素
+        };
+        console.log(hasGroupsSizeX([1, 2, 3, 4, 4, 3, 2, 1]));
+    </script>
+</body>
+
+</html>

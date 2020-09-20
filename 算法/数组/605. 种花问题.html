@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>605. 种花问题</title>
+</head>
+
+<body>
+    <script>
+        var canPlaceFlowers = function (flowerbed, n) {
+            let count = 0;
+            for (let i = 0; i < flowerbed.length; i++) {
+                if (flowerbed[i] === 0 && flowerbed[i - 1] !== 1 && flowerbed[i + 1] !== 1) {
+                    count++;
+                    // 如果通过for循环i自加的话，会出现count加多的情况（[1,0,1,1,0,1]这种结果打破了种花的规则）
+                    // 所以自己手动 自加一次，i就相当于自加两次，很好的解决了以上的问题
+                    i++;
+                }
+            }
+            // console.log(count)
+            return count >= n
+        };
+        console.log(canPlaceFlowers([1, 0, 0, 0, 0, 1], 1))
+    </script>
+</body>
+
+</html>
