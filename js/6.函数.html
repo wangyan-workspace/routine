@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-        fun1();  //定以前调用该函数
+        fun1();  //定义以前调用该函数
         //函数声明：可以在定义函数前调用该函数（函数提升）
         function fun1 () {
             console.log('fun1');
@@ -30,7 +30,7 @@
             // console.log(y);
 
             //想让函数结果对外界造成影响（外界可以通过调用函数给变量赋值的方式获取结果），使用return
-            return x +y
+            return x +y;
         }
         // 实参
        // add(1,5);  //函数调用

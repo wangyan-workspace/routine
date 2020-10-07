@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型原型链</title>
+</head>
+
+<body>
+    <script>
+        // 创建对象有哪些方式
+        // 1.new Object();
+        var o1 = new Object();
+        o1.name = 'lisi';
+        o1.age = 12;
+        o1.sayHello = function () {
+            console.log('……');
+        }
+        console.log(o1);
+        // console.log(o1.__proto__ == Object.prototype);  //true
+        // 2.{} 对象直接量
+        var o2 = {
+            name: 'lisi',
+            age: 12,
+            sayHello: function () {
+                console.log('...');
+            }
+        }
+        // console.log(o2);
+        // 3.Object.create()
+        // 该方法创建一个新对象，使用现有的对象来提供新创建对象的__proto__
+        // 创建了新对象o3,使用o1来提供o3的__proto__
+        var o3 = Object.create(o1);
+        console.log(o3.__proto__ == o1);  //true
+        console.log(o3);
+        // o3.__proto__ = o1;
+        // console.log(o3);  //{}
+        // 可理解为（不太准确）：更改父对象的属性会影响子对象的属性，更改子对象的属性不会影响父对象的属性
+        // 修改o1现有属性
+        o1.name = 'wangwu';
+        console.log(o3.name);  //wangwu
+
+        // 给实例化对象o3添加属性而不是修改先有对象o1的属性
+        o3.name = 'tianqi';
+        // console.log(o3.name);   //tianqi
+        // console.log(o1.name);   //wangwu
+
+        var o4 = {};
+        var o5 = Object.create({});
+        // o5.__proto__ = {};
+        console.log(o4);  //{}
+        console.log(o5);  //{}
+        console.log(o4 == o5);  //false
+        // Object.create()方法：用现有的对象创建一个新的对象，现有的对象本身有一个__proto__属性,属性值是一个对象
+        //                      创建的新对象会把从现有对象的属性继承过来（其实不是继承，但是目前可以这么理解），
+        //                      放到自身的__proto__属性中，属性值是一个对象
+
+
+        // 原型：
+        // 1.所有对象都有一个__proto__（隐式原型）属性，属性值是一个普通对象
+        // 2.所有函数都有prototype（原型）属性，属性值是一个普通的对象
+        // 3.所有对象的__proto__属性指向它构造函数的prototype
+
+        function Person(name){
+            this.name = name;
+            this.brother = {
+                name:'lala'
+            }
+        }
+        // 属性值最好不要放到原型里
+        Person.prototype.age = 12;
+        // Person.prototype.brother = {
+        //     name:'xiaoli'
+        // }
+        var p1 = new Person("xiaohua");
+        console.log(p1.age,p1.name);   //12 xiaohua
+        // 相当于给实例化对象p1增加了age属性，并不是更改原型里的属性值
+        p1.age = 23;
+        console.log(p1);      //Person {name: "xiaohua", age: 23}
+        console.log(p1.age);  //23
+
+        p1.brother.name = 'haha';
+        // p1.__proto__.brother = 'haha';
+
+        var p2 = new Person('john');
+        // 当把brother属性（是一个对象）放到原型里时
+        // console.log(p2.brother.name);  //haha
+        // 当把brother属性（是一个对象）放到Person类中时
+        // console.log(p2.brother.name);  //lala
+
+        // 原型链：
+        // 当访问一个对象的某个属性时，会先在这个对象本身属性上查找，如果没有找到
+        // 则会去它的__proto__隐式原型上查找，即它的构造函数的prototype，
+        // 如果还没有找到就会再在构造函数的prototype的__proto__中查找，
+        // 这样一层一层向上查找就会形成一个链式结构，我们成为原型链
+
+        // p1.__proto__:是私有的，不会被用户看到，也不会且不允许被其他人更改的属性
+        // 为了这解决这一问题，Person.prototype相当于是p1.__proto__，可以使用 Person.prototype.属性 来添加或更改实例化对象的属性
+        console.log(p1.__proto__ == Person.prototype);  //true
+        // p1.name => p1.__proto__ => p1.__proto__.__proto__
+
+        // var o6 = {
+        //     name: 'bob',
+        //     age: 18
+        // };
+
+        var o6 = new Object();
+        o6.name = 'bob';
+        o6.age = 18;
+
+        // Object.prototype.sayHello = function(){
+
+        // }
+
+        var o7 = Object.create(o6);
+        o7.name = 'john';
+
+        var o8 = Object.create(o7);
+
+        console.log(o8);
+    </script>
+</body>
+
+</html>

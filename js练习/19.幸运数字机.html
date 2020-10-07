@@ -23,6 +23,7 @@
              numStr = '';
              isWin = false;
              for(var i=0;i<3;i++) {
+                //  Math.floor()作用是取整
                  num = Math.floor(Math.random()*9+1);
                  numStr += num;
                  if(num ==8) {
@@ -39,6 +40,7 @@
 
          while (true) {
              lucky();
+            //  如果点击取消按钮，终止执行
              if(!confirm(numStr + '\n' +(isWin ? '赢了' : '输了') + '\n胜率:' + winRate + '继续吗')) {
                  break;
              }

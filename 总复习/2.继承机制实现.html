@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继承机制实现</title>
+</head>
+
+<body>
+    <script>
+        var fn = function () {  //new Fuction();
+            console.log(this.name, this.age);
+        }
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            // this.sayHello = fn;
+        }
+        Person.prototype.sayHello = function () {  //new Function()
+            console.log(this.name, this.age);
+        }
+        Person.prototype.eat = function () {  //new Function()
+            console.log('eating...');
+        }
+        var p1 = new Person('lisi', 23);
+        console.log(p1);
+        console.log(p1.sayHello);
+        console.log(p1.sayHello());
+        var p2 = new Person('wangwu', 12);
+        console.log(p2);
+        console.log(p2.sayHello);
+        console.log(p2.sayHello());
+
+        function Student(name, age, school) {
+            // 继承Person类的属性
+            Person.call(this, name, age);  //call和apply
+            this.school = school;  //定义自身的属性
+        }
+        /* Student.prototype = new Person();   //会继承Person类的属性和方法
+        Student.prototype.constructor = Student;  //将Student继承Person的构造函数改变为Student的构造函数 */
+
+        // 寄生组合方式
+        Student.prototype = Object.create(Person.prototype);  //用Object.create()方法可以只继承Person的方法
+        Student.prototype.constructor = Student;
+        var s1 = new Student('zhaoliu', 46, 'nongda');
+        console.log(s1);
+        s1.sayHello();
+    </script>
+</body>
+
+</html>

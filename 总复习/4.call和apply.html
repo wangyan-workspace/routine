@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call和apply</title>
+</head>
+<body>
+    <script>
+        function test(name,age){
+            this.name = name;
+            this.age = age;
+            console.log(this);
+        }
+        // test();  //window
+        test.call({a:1,b:2},'lisi',16);   //{a: 1, b: 2, name: "lisi", age: 16}
+        test.apply({c:3,d:4},['wangwu',18]); //{c: 3, d: 4, name: "wangwu", age: 18}
+
+        var o1 = {
+            name:'zhaoliu',
+            age:78,
+            sayHello: function(){
+                console.log(this.name);
+            }
+        }
+        // o1.sayHello();  //zhaoliu
+        o1.sayHello.call(o1);  //zhaoliu
+    </script>
+</body>
+</html>

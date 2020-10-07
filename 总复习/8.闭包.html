@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包</title>
+</head>
+<body>
+    <!-- 
+        什么是闭包：
+            函数嵌套函数
+            内部函数可以引用外部函数的变量和参数
+        闭包的好处、应用：
+            希望一个变量长期的驻扎在内存中
+            避免全局变量的污染（代码模块化）
+        闭包的用法：
+            代码模块化，避免全局污染
+            循环中找到对应元素的索引，不需要加索引了
+     -->
+     <ul id="ul">
+        <li>001</li>
+        <li>002</li>
+        <li>003</li>
+      </ul>
+      <script>
+          /* function fn1(val) {
+              var a = 10;
+              function fn2(){
+                  a++;
+                  console.log(a,val);
+              }
+              fn2();  //手动自己调用
+          }
+          fn1('hello'); */
+
+          /* function fn1(val){
+            var a = 10;
+            return function fn2(){
+                a++;
+                console.log(a,val);
+            }
+          }
+          var f = fn1('hello'); //fn2函数
+        //   a,val保存在内存中，空间不会被释放
+          f();  //11 "hello"  
+          f();  //12 "hello"
+          f();  //13 "hello"
+          f();  //14 "hello" */
+
+        // 函数的立即调用
+        var f = (function fn1(val){
+            var a = 10;
+            return function fn2(){
+                a++;
+                console.log(a,val);
+            }
+        })('world')
+         //   a,val保存在内存中，空间不会被释放
+        f();  //11 "world" 
+        f();  //12 "world"
+        f();  //13 "world"
+
+        var aLi = document.getElementsByTagName('li');
+        /* for(var i =0;i<aLi.length;i++){
+            aLi[i].onclick = function(){
+                console.log(i);  //3
+            }
+        } */
+
+        /* for(let i =0;i<aLi.length;i++){
+            aLi[i].onclick = function(){
+                console.log(i);  //0 1 2
+            }
+        } */
+
+        for(var i=0;i<aLi.length;i++){
+            // 函数的立即调用
+            (function(i){
+                aLi[i].onclick = function(){
+                    console.log(i);  // 0 1 2
+                }
+            })(i)
+        }
+
+      </script>
+</body>
+</html>

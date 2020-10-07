@@ -17,10 +17,13 @@
      -->
      <script>
          function fn(n) {
+            //  确定星星打多少行
              for(var i=1;i<=n;i++) {
+                //  每行的空格
                  for(var k=0;k<n-i;k++) {
                      document.write('&nbsp');
                  }
+                //  每行的星星
                  for(var j=1;j<=i;j++) {
                      document.write("* ");
                  }
